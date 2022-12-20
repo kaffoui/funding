@@ -140,14 +140,14 @@ if (! function_exists('send_sms'))
 {
     function send_sms($telephone, $message)
     {
-        $sid = "AC0eb1f3ee29c7daca888c18ee0cd0958e"; //"AC3d2d2372864d1443bfe49913f631ea69"; // Your Account SID from www.twilio.com/console
-        $token = "a173587e2b4cbd2640bde0690737a4b5"; //"8892bb69e27ad4b729a28f5454e27dcd"; // Your Auth Token from www.twilio.com/console
-        
+        $sid = env("TWILIO_SID"); //"AC3d2d2372864d1443bfe49913f631ea69"; // Your Account SID from www.twilio.com/console
+        $token = env("TWILIO_AUTH_TOKEN"); // "a173587e2b4cbd2640bde0690737a4b5"; //"8892bb69e27ad4b729a28f5454e27dcd"; // Your Auth Token from www.twilio.com/console
+         
         $client = new Twilio\Rest\Client($sid, $token);
         $message = $client->messages->create(
             $telephone, // Text this number
             [
-                'from' => 'Baxe', // From a valid Twilio number
+                'from' => 'Lisocash', // From a valid Twilio number
                 'body' => $message
             ]
         );
@@ -184,7 +184,7 @@ if (! function_exists('send_code'))
 
         if($type === "mail") {
             $message = "Veuillez valider votre compte en cliquant sur le lien : \n\n".
-            "<a class='btn btn-primary' href='https://baxe-moneytransfer.com/api/validation/code?email=$to&emailCode=$code'>Valider mon compte</a>";
+            "<a class='btn btn-primary' href='https://lisocash.com/api/validation/code?email=$to&emailCode=$code'>Valider mon compte</a>";
             return send_mail($to, $title, $message);
         } else {
             return send_sms($to, $message);
