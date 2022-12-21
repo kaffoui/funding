@@ -394,7 +394,7 @@ class AuthenticationController extends Controller
         return response(['user' => auth()->user(), 'pays' => auth()->user()->pays]);
     }
 
-    public function resend_code(Request $request)
+    public function resend_code(Request $request) 
     {
         return response()->json([
             "status" => send_code($request->type, $request->to, $request->code, $request->for),
