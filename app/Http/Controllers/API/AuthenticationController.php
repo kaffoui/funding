@@ -349,7 +349,6 @@ class AuthenticationController extends Controller
                 return response([
                     "success" => false,
                     "message" => "Nous rencontrons un problème à renvoyer le code.",
-                    "t" => $th
                 ],400);
             }
         }

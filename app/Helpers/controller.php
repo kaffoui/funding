@@ -142,7 +142,6 @@ if (! function_exists('send_sms'))
     {
         $sid = env("TWILIO_SID"); //"AC3d2d2372864d1443bfe49913f631ea69"; // Your Account SID from www.twilio.com/console
         $token = env("TWILIO_AUTH_TOKEN"); // "a173587e2b4cbd2640bde0690737a4b5"; //"8892bb69e27ad4b729a28f5454e27dcd"; // Your Auth Token from www.twilio.com/console
-         
         $client = new Twilio\Rest\Client($sid, $token);
         $message = $client->messages->create(
             $telephone, // Text this number
