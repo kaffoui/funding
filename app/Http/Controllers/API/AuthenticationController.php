@@ -348,13 +348,14 @@ class AuthenticationController extends Controller
             } catch (\Throwable $th) {
                 return response([
                     "success" => false,
-                    "message" => "Nous rencontrons un problème à renvoyer le code."
+                    "message" => "Nous rencontrons un problème à renvoyer le code.",
+                    "t" => $th
                 ],400);
             }
         }
         return response([
             "success" => true,
-            "message" => "Un nouveau code a été envoyé sur votre adresse email"
+            "message" => "Un nouveau code a été envoyé au + " . "_ _ _ _ .." . substr($telephone, -3) 
         ],200);
     }
 
