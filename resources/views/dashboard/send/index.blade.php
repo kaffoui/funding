@@ -210,7 +210,7 @@
             console.log(url);
             $.ajax({
                 url: url,
-                type: 'POST',
+                type: 'POST', 
                 data : data,
                 success: function(resp) {
                     if(resp.success){
