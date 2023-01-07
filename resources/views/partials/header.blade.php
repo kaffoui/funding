@@ -7,7 +7,7 @@
                   <!-- Logo
           ============================= -->
                   <div class="logo mr-2"> <a class="d-flex" href="/" title="Lisocache logo" style="height: 85px; width : 150px"><img
-                              src="{{ asset('images/logo.png') }}" alt="Baxe" /></a> </div>
+                              src="{{ asset('images/logo.png') }}" alt="Lisocash" /></a> </div>
                   <!-- Logo end -->
                   <!-- Collapse Button
           ============================== -->

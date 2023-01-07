@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pays;
 use Illuminate\Http\Request;
 use App\Models\UserPaymentMethod;
 use App\Models\UserPaymentAccount;
@@ -66,7 +67,12 @@ class HomeController extends Controller
 
     public function send(Request $request)
     {
-        return view('dashboard.send.index');
+        $countries = Pays::orderBy('nom')->get();
+        // dd($countries);
+        return view('dashboard.send.index',[
+            "countries" => $countries,
+            "current_devise" => auth()->user()->pays->symbole_monnaie
+        ]);
     }
 
     public function sendConfirm(Request $request)
@@ -84,4 +90,6 @@ class HomeController extends Controller
         // dd(auth()->user());
         return view('dashboard.deposit.index');
     }
+
+
 }

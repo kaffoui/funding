@@ -54,7 +54,7 @@
       <section class="section">
         <div class="container">
           <h2 class="text-9 text-center">Ce que disent nos abonnés</h2>
-          <p class="text-4 text-center mb-4">Nos abonnés aiment parler du bien que Baxe leur apporte</p>
+          <p class="text-4 text-center mb-4">Nos abonnés aiment parler du bien que Lisocash leur apporte</p>
           <div class="owl-carousel owl-theme" data-autoplay="true" data-nav="true" data-loop="true" data-margin="30" data-slideby="2" data-stagepadding="5" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="2">
             <div class="item">
               <div class="testimonial rounded text-center p-4">

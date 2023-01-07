@@ -50,7 +50,7 @@
                     <div class="featured-box text-center">
                         <div class="featured-box-icon text-primary mt-4"> <i class="fas fa-envelope"></i> </div>
                         <h3>Email</h3>
-                        <p>contact@baxe-moneytransfer.com</p>
+                        <p>contact@Lisocash-moneytransfer.com</p>
                     </div>
                 </div>
             </div>

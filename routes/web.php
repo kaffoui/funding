@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\TransfertController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserPaymentMethodController;
 use App\Http\Controllers\UserPaymentAccountController;
@@ -63,7 +64,18 @@ Route::post('/deleteBankAccount', [UserPaymentAccountController::class, 'deleteB
 //UPDATE PASSWORD
 Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
 
+//TRANSFERTS
 
+
+
+
+
+
+
+
+
+
+// ----------------------------------------
     /**
      * * Route concernant les clients
      */

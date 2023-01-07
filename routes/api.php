@@ -36,7 +36,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('clients',ClientController::class);
 Route::apiResource('agences',AgenceController::class);
-Route::apiResource('pays',PaysController::class);
+// Route::apiResource('pays',PaysController::class);
+Route::get('/pays', [PaysController::class, 'index'])->name('getAllCountries');
+Route::get('/pays/{name}', [PaysController::class, 'show'])->name('getCountryInfos');
+
 Route::apiResource('distributeurs',DistributeurController::class);
 Route::post('open-distributeur-client-session', [AuthenticationController::class, 'openUserDistributeurSession']);
 
@@ -74,6 +77,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['middleware' => ['can:is-client']], function () {
         Route::prefix('transferts')->name('transfert.')->group(function () {
             Route::post('/', [TransfertController::class, 'store2'])->name('store');
+            // Route::get('/', [TransfertController::class, 'index'])->name('getTransfertHistory');
         });
 
         Route::prefix('rechargement')->name('rechargement.')->group(function () {

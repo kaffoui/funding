@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transfert;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Traits\TauxTrait;
+use Illuminate\Support\Facades\Http;
 use App\Http\Traits\LocalisationTrait;
 use App\Http\Requests\StoreTransfertRequest;
 use App\Http\Requests\UpdateTransfertRequest;
-use App\Http\Traits\TauxTrait;
-use Illuminate\Support\Str;
 
 class TransfertController extends Controller
 {
@@ -52,7 +54,7 @@ class TransfertController extends Controller
     */
     public function store(StoreTransfertRequest $request)
     {
-        //
+        
     }
 
     /**

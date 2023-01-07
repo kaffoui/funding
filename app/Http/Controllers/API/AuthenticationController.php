@@ -159,7 +159,7 @@ class AuthenticationController extends Controller
 
         auth()->user()->informations = Gate::allows('is-client') ? auth()->user()->client : auth()->user()->distributeur;
 
-        return response(['user' => auth()->user(), 'pays' => auth()->user()->pays, 'token' => $token], 200);
+        return response(['user' => auth()->user(), 'pays' => auth()->user()->pays, 'token' => $token, "success" => true], 200);
     }
 
     public function register_client(Request $request)

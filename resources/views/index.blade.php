@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title',"Acceuil | Baxe")
+@section('title',"Acceuil | Lisocash")
 @section('content')
         <!-- Slideshow
     ============================================= -->
