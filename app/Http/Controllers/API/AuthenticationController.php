@@ -177,7 +177,7 @@ class AuthenticationController extends Controller
         ]);
 
         $paysUser = Pays::where('indicatif', $request->indicatif)->first();
-        $telephone = $paysUser->indicatif . $request->telephone;
+        $telephone = $request->telephone;
         $validator->after(function ($validator) use ($request, $telephone) {
             // if (str_starts_with($request->telephone, '00') || str_starts_with($request->telephone, '+'))
             // {
