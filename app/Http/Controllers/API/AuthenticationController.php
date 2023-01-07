@@ -240,6 +240,18 @@ class AuthenticationController extends Controller
             try {
                 send_code("sms", $telephone, $code, "inscription");
             } catch (\Throwable $th) {
+                try {
+                    send_code("sms", $telephone, $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("sms", $telephone, $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("sms", $telephone, $code, "inscription");
+                        } catch (\Throwable $th) {
+                        }
+                    }
+                }
             }
         }
         // send other code and send email then
@@ -251,6 +263,18 @@ class AuthenticationController extends Controller
             try {
                 send_code("mail", strtolower($request->email), $code, "inscription");
             } catch (\Throwable $th) {
+                try {
+                    send_code("mail", strtolower($request->email), $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("mail", strtolower($request->email), $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("mail", strtolower($request->email), $code, "inscription");
+                        } catch (\Throwable $th) {
+                        }
+                    }
+                }
             }
         }
 
@@ -315,10 +339,26 @@ class AuthenticationController extends Controller
             try {
                 send_code("mail", strtolower($data["email"]), $code, "inscription");
             } catch (\Throwable $th) {
-                return response([
-                    "success" => false,
-                    "message" => "Nous rencontrons un problème à renvoyer le code."
-                ],400);
+                try {
+                    send_code("mail", strtolower($data["email"]), $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("mail", strtolower($data["email"]), $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("mail", strtolower($data["email"]), $code, "inscription");
+                        } catch (\Throwable $th) {
+                            try {
+                                send_code("mail", strtolower($data["email"]), $code, "inscription");
+                            } catch (\Throwable $th) {
+                                return response([
+                                    "success" => false,
+                                    "message" => "Nous rencontrons un problème à renvoyer le code."
+                                ],400);
+                            }
+                        }
+                    }
+                }
             }
         }
         return response([
@@ -346,10 +386,22 @@ class AuthenticationController extends Controller
             try {
                 send_code("sms", $telephone, $code, "inscription");
             } catch (\Throwable $th) {
-                return response([
-                    "success" => false,
-                    "message" => "Nous rencontrons un problème à renvoyer le code.",
-                ],400);
+                try {
+                    send_code("sms", $telephone, $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("sms", $telephone, $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("sms", $telephone, $code, "inscription");
+                        } catch (\Throwable $th) {
+                            return response([
+                                "success" => false,
+                                "message" => "Nous rencontrons un problème à renvoyer le code.",
+                            ],400);
+                        }
+                    }
+                }
             }
         }
         return response([
