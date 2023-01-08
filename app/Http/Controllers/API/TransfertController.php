@@ -132,7 +132,7 @@ class TransfertController extends Controller
             $montant_envoyer = $request->montant;
 
             //check if could send money with fees
-            if ($this->not_required_solde($montant_envoyer + $montant_frais)) {
+            if ( $request->$paymentMethod != "CB" && $this->not_required_solde($montant_envoyer + $montant_frais)) {
                 $validator->errors()->add('montant', 'Solde insuffisant');
                 return response()->json(['errors' => $validator->errors()], 422);
             }
