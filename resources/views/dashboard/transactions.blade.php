@@ -29,12 +29,11 @@
                 </div>
                 <!-- All Filters Link
                 ========================= -->
-                <div class="col-auto d-flex align-items-center mr-auto form-group" data-toggle="collapse"> <a class="btn-link" data-toggle="collapse" href="#allFilters" aria-expanded="false" aria-controls="allFilters">Filtres<i class="fas fa-sliders-h text-3 ml-1"></i></a> </div>
-              
+                {{-- <div class="col-auto d-flex align-items-center mr-auto form-group" data-toggle="collapse"> <a class="btn-link" data-toggle="collapse" href="#allFilters" aria-expanded="false" aria-controls="allFilters">Filtres<i class="fas fa-sliders-h text-1 ml-1"></i></a> </div> --}}
                 
                 <!-- All Filters collapse
                 ================================ -->
-                <div class="col-12 collapse mb-3" id="allFilters">
+                {{-- <div class="col-12 collapse mb-3" id="allFilters">
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="allTransactions" name="allFilters" class="custom-control-input" checked>
                     <label class="custom-control-label" for="allTransactions">Toutes les transactions</label>
@@ -47,10 +46,6 @@
                     <input type="radio" id="paymentsReceived" name="allFilters" class="custom-control-input">
                     <label class="custom-control-label" for="paymentsReceived">Transactons reçues</label>
                   </div>
-                  {{-- <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="refunds" name="allFilters" class="custom-control-input">
-                    <label class="custom-control-label" for="refunds">Refunds</label>
-                  </div> --}}
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="withdrawal" name="allFilters" class="custom-control-input">
                     <label class="custom-control-label" for="withdrawal">Retrait</label>
@@ -59,7 +54,7 @@
                     <input type="radio" id="deposit" name="allFilters" class="custom-control-input">
                     <label class="custom-control-label" for="deposit">Dépot</label>
                   </div>
-                </div>
+                </div> --}}
                 <!-- All Filters collapse End -->
               </div>
             </form>
@@ -87,19 +82,19 @@
           =============================== -->
           <div class="transaction-list">
             @foreach ($transactionsContent as $key => $item)
-              <div class="transaction-item px-4 py-3" data-toggle="modal" data-target="#transaction-detail{{$key}}">
+              <div class="transaction-item px-4 py-1" data-toggle="modal" data-target="#transaction-detail{{$key}}">
                 <div class="row align-items-center flex-row">
-                  <div class="col-auto col-sm-3 d-none d-sm-block text-center text-3"> <span class="text-success"
+                  <div class="col-auto col-sm-3 d-none d-sm-block text-center text-1"> <span class="text-success"
                     data-toggle="tooltip" data-original-title="Date de transaction">{{$item['created_at']}}</span>
                   </div>
                   <div class="col col-sm-5"> 
-                    <span class="d-block text-4">{{$item['user']}} </span> 
+                    <span class="d-block text-1">{{$item['user']}} </span> 
                   </div>
                   <div class="col-2 col-sm-2 text-center"> 
-                    <span class="d-block text-4 font-weight-300"><i class="{{$item["icon"]}}"></i></span> <span
+                    <span class="d-block text-1 font-weight-300"><i class="{{$item["icon"]}}"></i></span> <span
                       class="d-block text-1 font-weight-300 text-uppercase">{{$item['type']}}</span> 
                   </div>
-                  <div class="col-3 col-sm-2 text-right text-4"> <span class="text-nowrap">{{number_format($item['montant'], 2)}} </span> <span
+                  <div class="col-3 col-sm-2 text-right text-1"> <span class="text-nowrap">{{number_format($item['montant'], 2)}} </span> <span
                     class="text-2 text-uppercase">({{$data["devise"]}})</span> 
                   </div>                  
 
@@ -119,7 +114,7 @@
                     <div class="col-sm-5 d-flex justify-content-center bg-primary rounded-left py-4">
                       <div class="my-auto text-center">
                         <div class="text-17 text-white my-3"><i class="fas fa-building"></i></div>
-                        <h3 class="text-4 text-white font-weight-400 my-3">Envato Pty Ltd</h3>
+                        <h3 class="text-1 text-white font-weight-400 my-3">Envato Pty Ltd</h3>
                         <div class="text-8 font-weight-500 text-white my-4">$557.20</div>
                         <p class="text-white">15 March 2019</p>
                       </div>
@@ -131,11 +126,11 @@
                       <hr>
                       <div class="px-3">
                         <ul class="list-unstyled">
-                          <li class="mb-2">Payment Amount <span class="float-right text-3">$562.00</span></li>
-                          <li class="mb-2">Fee <span class="float-right text-3">-$4.80</span></li>
+                          <li class="mb-2">Payment Amount <span class="float-right text-1">$562.00</span></li>
+                          <li class="mb-2">Fee <span class="float-right text-1">-$4.80</span></li>
                         </ul>
                         <hr class="mb-2">
-                        <p class="d-flex align-items-center font-weight-500 mb-4">Total Amount <span class="text-3 ml-auto">$557.20</span></p>
+                        <p class="d-flex align-items-center font-weight-500 mb-4">Total Amount <span class="text-1 ml-auto">$557.20</span></p>
                         <ul class="list-unstyled">
                           <li class="font-weight-500">Paid By:</li>
                           <li class="text-muted">Envato Pty Ltd</li>

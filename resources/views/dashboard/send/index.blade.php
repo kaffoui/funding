@@ -8,7 +8,7 @@
 
 @section('content')
     <div id="main-wrapper" class="h-100">
-        <form id="form-send-money"  >
+        <form id="form-send-money"  action="{{route('transferts')}}" method="post">
             @csrf
         <div class="container-fluid px-0 h-100">
             <div class="row no-gutters h-100">
@@ -33,9 +33,9 @@
                                     </h6>
                                     <select name="receptionMethod" id="" class="form-control">
                                         <option value="Lisocash" selected>Lisocash</option>
-                                        <option value="Airtel">Airtel Money</option>
+                                        {{-- <option value="Airtel">Airtel Money</option>
                                         <option value="Mtn">MTN Mobile Money</option>
-                                        <option value="Orange">Orange Money</option>
+                                        <option value="Orange">Orange Money</option> --}}
                                     </select>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                                 class="text-3 float-right">1,000.00 USD</span>
                                         </p>
                                         <button  type="submit"
-                                            class="btn btn-primary btn-bloc²k" id="sendtrans" onclick="sendTransaction()" >Continuer</button>
+                                            class="btn btn-primary btn-block">Continuer</button>
                                   
                                     <!-- Send Money Form end -->
                                 </div>

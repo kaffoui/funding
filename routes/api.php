@@ -92,6 +92,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::get('solde', [SoldeController::class, 'index']);
+    Route::get('historique', [TransfertController::class, 'history']);
+
 
     Route::post('logout', [AuthenticationController::class, 'logout']);
 });

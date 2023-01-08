@@ -105,19 +105,19 @@
           =============================== -->
           <div class="transaction-list">
             @forelse ($transactionsContent as $key => $item)
-              <div class="transaction-item px-4 py-3" data-toggle="modal" data-target="#transaction-detail{{$key}}">
+              <div class="transaction-item px-4 py-" data-toggle="modal" data-target="#transaction-detail{{$key}}">
                 <div class="row align-items-center flex-row">
-                  <div class="col-auto col-sm-3 d-none d-sm-block text-center text-3"> <span class="text-success"
+                  <div class="col-auto col-sm-3 d-none d-sm-block text-center text-1"> <span class="text-success"
                     data-toggle="tooltip" data-original-title="Date de transaction">{{$item['created_at']}}</span>
                   </div>
                   <div class="col col-sm-5"> 
-                    <span class="d-block text-4">{{$item['user']}} </span> 
+                    <span class="d-block text-1">{{$item['user']}} </span> 
                   </div>
                   <div class="col-2 col-sm-2 text-center"> 
-                    <span class="d-block text-4 font-weight-300"><i class="{{$item["icon"]}}"></i></span> <span
+                    <span class="d-block text-1 font-weight-300"><i class="{{$item["icon"]}}"></i></span> <span
                       class="d-block text-1 font-weight-300 text-uppercase">{{$item['type']}}</span> 
                   </div>
-                  <div class="col-3 col-sm-2 text-right text-4"> <span class="text-nowrap">{{number_format($item['montant'], 2)}} </span> <span
+                  <div class="col-3 col-sm-2 text-right text-1"> <span class="text-nowrap">{{number_format($item['montant'], 2)}} </span> <span
                     class="text-2 text-uppercase">({{$data["devise"]}})</span> 
                   </div>                  
 
