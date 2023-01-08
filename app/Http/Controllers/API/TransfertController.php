@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
+// require $path = base_path('vendor/guzzlehttp/guzzle/src/Client.php');
+
 class TransfertController extends Controller
 {
     use FraisTrait, TauxTrait, SoldesTrait;
@@ -59,7 +61,7 @@ class TransfertController extends Controller
             $request->merge([
                 'destinataire' => $request->pays . $request->destinataire,
             ]);
-            $allowedPaymentMethods = ['Lisocash', 'Carte', 'Orange', 'MTN', 'Airtel'];
+            $allowedPaymentMethods = ['Lisocash', 'CB', 'Orange', 'MTN', 'Airtel'];
 
             $regles = [
                 "pays" => ['required', 'exists:pays,indicatif'],
@@ -86,17 +88,17 @@ class TransfertController extends Controller
 
                     // On check le type de transfert lorsqu'il n'est pas entrain de demandé le resumé
                     if (!$request->resume) {
-                        $allowedPaymentMethods = ['Lisocash', 'Carte', 'Orange', 'MTN', 'Airtel'];
+                        $allowedPaymentMethods = ['Lisocash', 'Carte', 'Orange', 'MTN', 'Airtel', 'CB'];
 
                         if (!in_array($request->paymentMethod, $allowedPaymentMethods)) {
                             $validator->errors()->add('paymentMethod', 'Méthode de paiement invalide');
                         }
 
-                        if ($request->paymentMethod == 'Carte') {
-                            if (!$request->paymentMethodId) {
-                                $validator->errors()->add('paymentMethodId', 'Impossible de faire cette transaction sans carte de paiement');
-                            }
-                        }
+                        // if ($request->paymentMethod == 'CB') {
+                        //     if (!$request->paymentMethodId) {
+                        //         $validator->errors()->add('paymentMethodId', 'Impossible de faire cette transaction sans carte de paiement');
+                        //     }
+                        // }
                     }
 
                     /**
@@ -160,7 +162,7 @@ class TransfertController extends Controller
                 ], 200);
             }
 
-            if ($request->paymentMethod == 'Carte') {
+            if ($request->paymentMethod == 'CB') {
                 $transfert_par_solde = false;
             }
 
@@ -180,11 +182,11 @@ class TransfertController extends Controller
 
                     $montant = round($montant, 2);
 
-                    $stripeCharge = $request->user()->charge($montant, $request->paymentMethodId, [
-                        'currency' => auth()->user()->pays->symbole_monnaie,
-                        'description' => 'Transfert de ' . format_number_french($request->montant) . ' ' . auth()->user()->pays->symbole_monnaie . ' à ' . $destinataire->noms(),
-                        'receipt_email' => $request->user()->email,
-                    ]);
+                    // $stripeCharge = $request->user()->charge($montant, $request->paymentMethodId, [
+                    //     'currency' => auth()->user()->pays->symbole_monnaie,
+                    //     'description' => 'Transfert de ' . format_number_french($request->montant) . ' ' . auth()->user()->pays->symbole_monnaie . ' à ' . $destinataire->noms(),
+                    //     'receipt_email' => $request->user()->email,
+                    // ]);
                 } catch (\Throwable $th) {
                     // dd($th);
                     return response([
@@ -338,7 +340,7 @@ class TransfertController extends Controller
                     'receipt_email' => $request->user()->email,
                 ]);
             } catch (\Throwable $th) {
-                dd($th);
+                // dd($th);
                 return response([
                     'message' => "Transfert échoué. Veuillez réessayer plus tard.",
                 ], 403);
@@ -406,6 +408,10 @@ class TransfertController extends Controller
      */
     protected function transfert(User $user_from, User $user_to, $montant_envoyer, $frais, $taux_to, $montant_recu, $taux_from = 1, $transfert_par_solde = true, $paymentMethod, $receptionMethod)
     {
+
+        if ($paymentMethod == "CB") {
+
+        } else {
         switch ($receptionMethod) {
             case 'Lisocash':
                 $transfert = Transfert::create([
@@ -425,7 +431,9 @@ class TransfertController extends Controller
                 // TODO Recuperation des beneficies liés aux frais et aux taux
 
                 if ($transfert) {
-                    $this->set_solde($user_from, $transfert->id, Transfert::class, $transfert_par_solde ? $this->new_solde_user_is_from($montant_envoyer + $frais) : ($this->get_solde() ? $this->get_solde()->actuel : 0));
+                    if ($paymentMethod != "CB") {
+                        $this->set_solde($user_from, $transfert->id, Transfert::class, $transfert_par_solde ? $this->new_solde_user_is_from($montant_envoyer + $frais) : ($this->get_solde() ? $this->get_solde()->actuel : 0));
+                    }
 
                     $this->set_solde($user_to, $transfert->id, Transfert::class, $this->new_solde_user_is_to($user_to, $montant_recu));
 
@@ -459,8 +467,12 @@ class TransfertController extends Controller
 
                 break;
 
+            case "CB":
+
+                break;
+
             case 'Airtel':
-                // require 'vendor/autoload.php';
+                require 'vendor/autoload.php';
                 $headers = array(
                     'Content-Type' => 'application/json',
                     'Accept' => '*/*',
@@ -468,7 +480,7 @@ class TransfertController extends Controller
                     'X-Currency' => 'UGX',
                     'Authorization' => 'Bearer  UCLcp1oeq44KPXr8X*******xCzki2w',
                 );
-                $client = new GuzzleHttpClient();
+                $client = \GuzzleHttpClient();
 
                 $body = [
                     "subscriber" => [
@@ -495,10 +507,10 @@ class TransfertController extends Controller
                         'headers' => $headers,
                         'json' => $request_body,
                     ));
-                    return($response->getBody()->getContents());
+                    return ($response->getBody()->getContents());
                 } catch (GuzzleHttpExceptionBadResponseException $e) {
                     // handle exception or api errors.
-                    return($e->getMessage());
+                    return ($e->getMessage());
                 }
 // ...
 
@@ -507,6 +519,8 @@ class TransfertController extends Controller
                 # code...
                 break;
         }
+        }
+
 
     }
 
