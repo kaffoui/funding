@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Pays;
-use App\Models\User;
-use App\Models\Transfert;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Http\Traits\TauxTrait;
-use App\Http\Traits\FraisTrait;
-use Illuminate\Validation\Rule;
-use App\Http\Traits\SoldesTrait;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
+use App\Http\Traits\FraisTrait;
+use App\Http\Traits\SoldesTrait;
+use App\Http\Traits\TauxTrait;
+use App\Models\Pays;
+use App\Models\Transfert;
+use App\Models\User;
 use App\Notifications\TransfertCreate;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class TransfertController extends Controller
 {
@@ -455,8 +455,54 @@ class TransfertController extends Controller
                 }
                 break;
 
-            case 'orange':
+            case 'Orange':
 
+                break;
+
+            case 'Airtel':
+                // require 'vendor/autoload.php';
+                $headers = array(
+                    'Content-Type' => 'application/json',
+                    'Accept' => '*/*',
+                    'X-Country' => 'UG',
+                    'X-Currency' => 'UGX',
+                    'Authorization' => 'Bearer  UCLcp1oeq44KPXr8X*******xCzki2w',
+                );
+                $client = new GuzzleHttpClient();
+
+                $body = [
+                    "subscriber" => [
+                        "msisdn" => 702698414,
+                    ],
+                    "transaction" => [
+                        "amount" => 12345,
+                        "id" => 12968801260,
+                    ],
+                    "additional_info" => [
+                        [
+                            "key" => "remark",
+                            "value" => "AIRTXXXXXX",
+                        ],
+                    ],
+                    "reference" => 123456,
+                    "pin" => "KYJExln8rZwb14G1K5UE5YF/lD7KheNUM171MUEG3/f/QD8nmNKRsa44UZkh6A4cR8+fV31D6A4LSwJ4Bz84T29ZDQlunqf/5J+peJ5YO8d5xFIA14pK1rU897WMS0m/D21qsju7w9uT/eab//BzkWkrDOpw5RumI4cxb0YD+o8=",
+                ];
+
+                $request_body = $body;
+
+                try {
+                    $response = $client->request('POST', 'https://openapiuat.airtel.africa/standard/v1/cashin/', array(
+                        'headers' => $headers,
+                        'json' => $request_body,
+                    ));
+                    return($response->getBody()->getContents());
+                } catch (GuzzleHttpExceptionBadResponseException $e) {
+                    // handle exception or api errors.
+                    return($e->getMessage());
+                }
+// ...
+
+                break;
             default:
                 # code...
                 break;
@@ -501,206 +547,176 @@ class TransfertController extends Controller
         ]], 200);
     }
 
-
-    public function history(Request $request){
+    public function history(Request $request)
+    {
 
         try {
             $transactions = auth()->user()->soldes->sortByDesc('created_at');
 
-            if (request()->limite == "*")
-            {
+            if (request()->limite == "*") {
                 $limite = $transactions->count();
-            }
-            elseif (is_numeric(request()->limite))
-            {
+            } elseif (is_numeric(request()->limite)) {
                 $limite = request()->limite;
-            }
-            else
-            {
+            } else {
                 $limite = 10;
             }
-    
+
             $historiques = collect();
-    
-            foreach ($transactions as $transaction)
-            {
-                if ($transaction->operation_type == 'App\Models\Depot')
-                {
+
+            foreach ($transactions as $transaction) {
+                if ($transaction->operation_type == 'App\Models\Depot') {
                     $depot = $transaction->depot;
-    
+
                     $acteur = null;
-    
+
                     $montant = $depot->montant;
-    
+
                     if (auth()->id() == $depot->user_id_from) // Montant du distributeur
                     {
                         $montant = $transaction->ancien - $transaction->actuel;
-                    }
-                    elseif (auth()->id() == $depot->user_id_to) // Montant du client
+                    } elseif (auth()->id() == $depot->user_id_to) // Montant du client
                     {
                         $montant = $transaction->actuel - $transaction->ancien;
                     }
-    
+
                     if ($depot->user_id_from == $depot->user_id_to) // Affiche le texte rechargement par carte de crédit
                     {
                         $acteur = "Par carte de crédit";
-    
+
                         $montant = $depot->montant; // On prends le montant du depot
-                    }
-                    elseif (auth()->id() == $depot->user_id_from) // Affiche le client pour le distributeur
+                    } elseif (auth()->id() == $depot->user_id_from) // Affiche le client pour le distributeur
                     {
-                        $acteur = 'À '.$depot->user_to->noms();
-                    }
-                    elseif (auth()->id() == $depot->user_id_to) // Affiche le distributeur pour le client
+                        $acteur = 'À ' . $depot->user_to->noms();
+                    } elseif (auth()->id() == $depot->user_id_to) // Affiche le distributeur pour le client
                     {
-                        $acteur = 'Chez '.$depot->user_from->distributeur->entreprise_nom;
-                    }
-                    else {}
-    
+                        $acteur = 'Chez ' . $depot->user_from->distributeur->entreprise_nom;
+                    } else {}
+
                     $historiques->push([
-                        'type'       => 'depot',
-                        'user_from'  => $depot->user_id_from,
-                        'user_to'    => $depot->user_id_to,
+                        'type' => 'depot',
+                        'user_from' => $depot->user_id_from,
+                        'user_to' => $depot->user_id_to,
                         'created_at' => $depot->created_at->format('d-m-Y à H:i'),
-                        'user'       => $acteur,
-                        'frais'      => $depot->frais,
-                        'montant'    => $montant,
-                        'total'      => $montant + $depot->frais,
+                        'user' => $acteur,
+                        'frais' => $depot->frais,
+                        'montant' => $montant,
+                        'total' => $montant + $depot->frais,
                     ]);
-                }
-                elseif ($transaction->operation_type == 'App\Models\Retrait')
-                {
+                } elseif ($transaction->operation_type == 'App\Models\Retrait') {
                     $retrait = $transaction->retrait;
-    
+
                     $montant = $retrait->montant;
-    
-                    if (auth()->id() == $retrait->user_id_from)
-                    {
-                        $acteur = 'Chez '.$retrait->distributeur->distributeur->entreprise_nom;
-                    }
-                    elseif (auth()->id() == $retrait->user_id_to)
-                    {
-                        $acteur = 'De '.$retrait->client->noms();
-                    }
-                    else {}
-    
+
+                    if (auth()->id() == $retrait->user_id_from) {
+                        $acteur = 'Chez ' . $retrait->distributeur->distributeur->entreprise_nom;
+                    } elseif (auth()->id() == $retrait->user_id_to) {
+                        $acteur = 'De ' . $retrait->client->noms();
+                    } else {}
+
                     if (auth()->id() == $retrait->user_id_from) // Le montant du client
                     {
                         $montant = $transaction->ancien - $transaction->actuel;
-                    }
-                    elseif (auth()->id() == $retrait->user_id_to) // Le montant du distributeur
+                    } elseif (auth()->id() == $retrait->user_id_to) // Le montant du distributeur
                     {
                         $montant = $transaction->actuel - $transaction->ancien;
-                    }
-                    else {}
-    
+                    } else {}
+
                     $historiques->push([
-                        'type'       => 'retrait',
-                        'user_from'  => $retrait->user_id_from,
-                        'user_to'    => $retrait->user_id_to,
+                        'type' => 'retrait',
+                        'user_from' => $retrait->user_id_from,
+                        'user_to' => $retrait->user_id_to,
                         'created_at' => $retrait->created_at->format('d-m-Y à H:i'),
-                        'user'       => $acteur,
-                        'frais'      => $retrait->frais,
-                        'montant'    => $montant,
-                        'total'      => $montant + $retrait->frais,
+                        'user' => $acteur,
+                        'frais' => $retrait->frais,
+                        'montant' => $montant,
+                        'total' => $montant + $retrait->frais,
                     ]);
-                }
-                elseif ($transaction->operation_type == 'App\Models\Transfert')
-                {
+                } elseif ($transaction->operation_type == 'App\Models\Transfert') {
                     $transfert = $transaction->transfert;
-    
+
                     $montant = $transfert->montant;
-    
+
                     if (auth()->id() == $transfert->user_id_from) // Le nom du destinataire
                     {
-                        $acteur = 'À '.$transfert->user_to->noms();
-                    }
-                    elseif (auth()->id() == $transfert->user_id_to) // Le nom de l'expediteur
+                        $acteur = 'À ' . $transfert->user_to->noms();
+                    } elseif (auth()->id() == $transfert->user_id_to) // Le nom de l'expediteur
                     {
-                        $acteur = 'De '.$transfert->user_from->noms();
+                        $acteur = 'De ' . $transfert->user_from->noms();
                     }
-    
+
                     if (auth()->id() == $transfert->user_id_from) // Le montant de l'expediteur
                     {
                         $montant = $transfert->montant;
-    
+
                         $total = $montant + $transfert->frais;
-                    }
-                    elseif (auth()->id() == $transfert->user_id_to) // Le montant du destinataire
+                    } elseif (auth()->id() == $transfert->user_id_to) // Le montant du destinataire
                     {
                         $montant = $transaction->actuel - $transaction->ancien;
-    
+
                         $total = $montant;
-                    }
-                    else {}
-    
+                    } else {}
+
                     $historiques->push([
-                        'type'       => 'transfert',
-                        'user_from'  => $transfert->user_id_from,
-    
+                        'type' => 'transfert',
+                        'user_from' => $transfert->user_id_from,
+
                         'created_at' => $transfert->created_at->format('d-m-Y à H:i'),
-                        'user'       => $acteur,
-                        'frais'      => auth()->id() == $transfert->user_id_from ? format_number_french($transfert->frais, 2) : '--',
-                        'montant'    => $montant,
-                        'total'      => $total,
+                        'user' => $acteur,
+                        'frais' => auth()->id() == $transfert->user_id_from ? format_number_french($transfert->frais, 2) : '--',
+                        'montant' => $montant,
+                        'total' => $total,
                     ]);
-                }
-                elseif ($transaction->operation_type == 'App\Models\PaiementCommercant')
-                {
+                } elseif ($transaction->operation_type == 'App\Models\PaiementCommercant') {
                     $paiementCommercant = $transaction->paiement_commercant;
                     $montant = 0;
                     $acteur = '';
                     $frais = 0;
-    
-                    if (auth()->id() == $paiementCommercant->user_id_from) 
-                    {
-                        $acteur = 'Au commercant '.$paiementCommercant->commercant->noms();
+
+                    if (auth()->id() == $paiementCommercant->user_id_from) {
+                        $acteur = 'Au commercant ' . $paiementCommercant->commercant->noms();
                         $montant = $paiementCommercant->montant;
-                    }
-                    elseif (auth()->id() == $paiementCommercant->user_id_to) 
-                    {
-                        $acteur = 'Du client '.$paiementCommercant->commercant->noms();
+                    } elseif (auth()->id() == $paiementCommercant->user_id_to) {
+                        $acteur = 'Du client ' . $paiementCommercant->commercant->noms();
                         $montant = $transaction->actuel - $transaction->ancien;
                         $frais = $paiementCommercant->frais; //convert this to the shopkeeper change when payment can be made between different countries
                     }
-    
+
                     $total = $montant;
-    
+
                     $historiques->push([
-                        'type'       => 'transfert',
-                        'user_from'  => $paiementCommercant->client->noms(),
-                        'user_to'    => $paiementCommercant->commercant->noms(),
+                        'type' => 'transfert',
+                        'user_from' => $paiementCommercant->client->noms(),
+                        'user_to' => $paiementCommercant->commercant->noms(),
                         'created_at' => $paiementCommercant->created_at->format('d-m-Y à H:i'),
-                        'user'       => $acteur,
-                        'frais'      => $frais, 
-                        'montant'    => $montant,
-                        'icon'       => 'fas fa-paper-plane text-primary fs-4',
-                        'total'      => $total,
+                        'user' => $acteur,
+                        'frais' => $frais,
+                        'montant' => $montant,
+                        'icon' => 'fas fa-paper-plane text-primary fs-4',
+                        'total' => $total,
                     ]);
                 }
             }
-            
+
             $transactions = $historiques;
-    
+
             $transactions = create_pagination_with_collection($transactions, $limite);
-    
+
             $transactions->withPath('solde');
-    
+
             $commission_depot = null;
             $commission_retrait = null;
             $commission_total = null;
-    
-            if (Gate::allows('is-distributeur'))
-            {
+
+            if (Gate::allows('is-distributeur')) {
                 $commission_depot = auth()->user()->commissions->where('operation_type', Depot::class)->where('statut', false)->sum('commission');
-    
+
                 $commission_reste_retirer = auth()->user()->commissions->where('operation_type', CommissionRetire::class)->where('statut', false)->sum('commission');
-    
+
                 $commission_retrait = auth()->user()->commissions->where('operation_type', Retrait::class)->where('statut', false)->sum('commission');
-    
+
                 $commission_total = $commission_depot + $commission_retrait + $commission_reste_retirer;
             }
-          
+
             return response()->json([
                 "success" => true,
                 'commissions' => [
@@ -717,7 +733,6 @@ class TransfertController extends Controller
             ], 400);
         }
 
-        
     }
 
 }
