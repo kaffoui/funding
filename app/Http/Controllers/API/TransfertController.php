@@ -408,7 +408,6 @@ class TransfertController extends Controller
      */
     protected function transfert(User $user_from, User $user_to, $montant_envoyer, $frais, $taux_to, $montant_recu, $taux_from = 1, $transfert_par_solde = true, $paymentMethod, $receptionMethod)
     {
-
         if ($paymentMethod == "CB") {
 
         } else {
