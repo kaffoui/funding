@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\FraisTrait;
+use Ibracilinks\OrangeMoney\OrangeMoney;
 use App\Http\Traits\SoldesTrait;
 use App\Http\Traits\TauxTrait;
 use App\Models\Pays;

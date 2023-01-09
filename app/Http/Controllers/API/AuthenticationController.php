@@ -297,10 +297,12 @@ class AuthenticationController extends Controller
                         "is_email_valid" => true,
                     ]);
 
-                    return "Votre adresse email a bien été vérifiée";
-                } else {
-                    return "Echec de la validation de l'adresse mail";
-                }
+                        // return "Votre adresse email a bien été vérifiée";
+                        return Redirect::route('emails.mailverification')->with('message', 'Votre adresse email a bien été vérifiée.');
+                        } else {
+                        // return "Echec de la validation de l'adresse mail";
+                        return Redirect::route('emails.mailverification')->with('message', 'Echec de la validation de l\'adresse mail.');
+                        }
             } else {
                 return "URL Invalide..";
             }

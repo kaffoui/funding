@@ -11,7 +11,19 @@
     <h4>{{ $details['title'] }}</h4>
     <p>{!! $details['body'] !!}</p>
     <p style="color: #888">
-        Merci d'avoir choisi LISOCASH Transfer !
+        
+
+    @if(session()->has('error'))
+		<div class="alert alert-danger" role="alert">
+			{{ session()->get('error') }}
+		</div>
+	@elseif(session()->has('message'))
+		<div class="alert alert-success" role="alert">
+			{{ session()->get('message') }}
+		</div>
+	@endif
+
+
 
         Cordialement, <br>
         TEL France : 06 05 93 90 08 <br>
@@ -20,5 +32,4 @@
     </p>
 </body>
 </html>
-
 

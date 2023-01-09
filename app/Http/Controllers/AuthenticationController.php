@@ -185,9 +185,11 @@ class AuthenticationController extends Controller
                         "is_email_valid" => true,
                     ]);
                     //revoir page de validation 
-                    return "Votre adresse email a bien été vérifiée";
+                    // return "Votre adresse email a bien été vérifiée";
+                  return Redirect::route('emails.mailverification')->with('message', 'Votre adresse email a bien été vérifiée.');
                 } else {
-                    return "Echec de la validation de l'adresse mail";
+                // return "Echec de la validation de l'adresse mail";
+                return Redirect::route('emails.mailverification')->with('message', 'Echec de la validation de l\'adresse mail.');
                 }
             } else {
                 return "URL Invalide..";
