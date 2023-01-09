@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\FraisTrait;
+use Ibracilinks\OrangeMoney\OrangeMoney;
 use App\Http\Traits\SoldesTrait;
 use App\Http\Traits\TauxTrait;
 use App\Models\Pays;
@@ -451,7 +452,88 @@ class TransfertController extends Controller
                 }
                 break;
 
-            case 'orange':
+            case 'Orange':
+
+                $transfert = Transfert::create([
+                    'reference' => Str::random(10),
+                    'user_id_from' => $user_from->id,
+                    'user_id_to' => $user_to->id,
+                    'montant' => $montant_envoyer,
+                    'frais' => $frais,
+                    'taux_from' => $taux_from,
+                    'taux_to' => $taux_to,
+                    'pays_from' => env('APP_ENV') == 'production' ? $this->get_geolocation()['country_code2'] : $user_from->pays->code,
+                    'pays_to' => $user_to->pays->code,
+                    'ip_from' => env('APP_ENV') == 'production' ? request()->ip() : $user_from->ip_register,
+                    'ip_to' => $user_to->recent_ip,
+                ]);
+
+                $payment = new OrangeMoney();
+
+                $data = [
+                    "merchant_key"=> '*********',
+                    "currency"=> "XOF",
+                    "order_id"=> "".time()."",
+                    "amount" => 5000,
+                    "return_url"=> 'http://www.your-website.com/callback/return',
+                    "cancel_url"=> 'http://www.your-website.com/callback/cancel',
+                    "notif_url"=>'http://www.your-website.com/callback/notif',
+                    "lang"=> "fr",
+                    "reference"=> "Lisocash"
+                ];
+
+                $result = $payment->webPayment($data);
+
+                $payment = $result['payment_url'];
+
+                // $transfert = Transfert::create([
+                //     'reference' => Str::random(10),
+                //     'user_id_from' => $user_from->id,
+                //     'user_id_to' => $user_to->id,
+                //     'montant' => $montant_envoyer,
+                //     'frais' => $frais,
+                //     'taux_from' => $taux_from,
+                //     'taux_to' => $taux_to,
+                //     'pays_from' => env('APP_ENV') == 'production' ? $this->get_geolocation()['country_code2'] : $user_from->pays->code,
+                //     'pays_to' => $user_to->pays->code,
+                //     'ip_from' => env('APP_ENV') == 'production' ? request()->ip() : $user_from->ip_register,
+                //     'ip_to' => $user_to->recent_ip,
+                // ]);
+
+                // TODO Recuperation des beneficies liés aux frais et aux taux
+
+                if ($transfert) {
+                    $this->set_solde($user_from, $transfert->id, Transfert::class, $transfert_par_solde ? $this->new_solde_user_is_from($montant_envoyer + $frais) : ($this->get_solde() ? $this->get_solde()->actuel : 0));
+
+                    $this->set_solde($user_to, $transfert->id, Transfert::class, $this->new_solde_user_is_to($user_to, $montant_recu));
+
+                    $libelle_user_from = 'Transfert à ' . $user_to->noms() . '.';
+
+                    $message_user_from = 'Vous avez transféré ' . format_number_french($montant_envoyer, 2) . ' ' . $user_from->pays->symbole_monnaie . ' à ' . $user_to->noms() . ' via ' . env('APP_NAME') . '.<br><br> Votre nouveau  solde : ' . format_number_french($user_from->soldes->last()->actuel) . ' ' . $user_from->pays->symbole_monnaie . '.';
+
+                    /**
+                     * user_from à true pour affiché la facture
+                     * user_to à false pour ne pas afficher la facture et affiché que le mail markdown de laravel
+                     */
+                    $params = ['transfert_mode' => $transfert_par_solde ? 'Solde ' . env('APP_NAME') : '', 'montant_recu' => $montant_recu, 'user_from' => true, 'user_to' => false];
+
+                    $user_from->notify(new TransfertCreate($transfert, $user_from, $user_to, $libelle_user_from, $message_user_from, $params));
+
+                    $libelle_user_to = 'Transfert de ' . $user_from->noms() . '.';
+
+                    $message_user_to = 'Vous avez reçu ' . format_number_french($montant_recu, 2) . ' ' . $user_to->pays->symbole_monnaie . ' de ' . $user_from->noms() . ' via ' . env('APP_NAME') . '.<br><br> Votre nouveau  solde : ' . format_number_french($user_to->soldes->last()->actuel) . ' ' . $user_to->pays->symbole_monnaie . '.';
+
+                    /**
+                     * user_to a true pour afficher le mail markdown de laravel ainsi
+                     * user_from false pour ne pas afficher la facture pour le destinataire
+                     */
+                    $params = ['user_to' => true, 'user_from' => false];
+
+                    $user_to->notify(new TransfertCreate($transfert, $user_from, $user_to, $libelle_user_to, $message_user_to, $params));
+                }
+                break;
+
+                
 
             default:
                 # code...

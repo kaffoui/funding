@@ -159,7 +159,7 @@ class AuthenticationController extends Controller
 
         auth()->user()->informations = Gate::allows('is-client') ? auth()->user()->client : auth()->user()->distributeur;
 
-        return response(['user' => auth()->user(), 'pays' => auth()->user()->pays, 'token' => $token], 200);
+        return response(['user' => auth()->user(), 'pays' => auth()->user()->pays, 'token' => $token, "success" => true], 200);
     }
 
     public function register_client(Request $request)
@@ -177,7 +177,7 @@ class AuthenticationController extends Controller
         ]);
 
         $paysUser = Pays::where('indicatif', $request->indicatif)->first();
-        $telephone = $paysUser->indicatif . $request->telephone;
+        $telephone = $request->telephone;
         $validator->after(function ($validator) use ($request, $telephone) {
             // if (str_starts_with($request->telephone, '00') || str_starts_with($request->telephone, '+'))
             // {
@@ -240,6 +240,18 @@ class AuthenticationController extends Controller
             try {
                 send_code("sms", $telephone, $code, "inscription");
             } catch (\Throwable $th) {
+                try {
+                    send_code("sms", $telephone, $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("sms", $telephone, $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("sms", $telephone, $code, "inscription");
+                        } catch (\Throwable $th) {
+                        }
+                    }
+                }
             }
         }
         // send other code and send email then
@@ -251,6 +263,18 @@ class AuthenticationController extends Controller
             try {
                 send_code("mail", strtolower($request->email), $code, "inscription");
             } catch (\Throwable $th) {
+                try {
+                    send_code("mail", strtolower($request->email), $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("mail", strtolower($request->email), $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("mail", strtolower($request->email), $code, "inscription");
+                        } catch (\Throwable $th) {
+                        }
+                    }
+                }
             }
         }
 
@@ -273,10 +297,12 @@ class AuthenticationController extends Controller
                         "is_email_valid" => true,
                     ]);
 
-                    return "Votre adresse email a bien été vérifiée";
-                } else {
-                    return "Echec de la validation de l'adresse mail";
-                }
+                        // return "Votre adresse email a bien été vérifiée";
+                        return Redirect::route('emails.mailverification')->with('message', 'Votre adresse email a bien été vérifiée.');
+                        } else {
+                        // return "Echec de la validation de l'adresse mail";
+                        return Redirect::route('emails.mailverification')->with('message', 'Echec de la validation de l\'adresse mail.');
+                        }
             } else {
                 return "URL Invalide..";
             }
@@ -315,10 +341,26 @@ class AuthenticationController extends Controller
             try {
                 send_code("mail", strtolower($data["email"]), $code, "inscription");
             } catch (\Throwable $th) {
-                return response([
-                    "success" => false,
-                    "message" => "Nous rencontrons un problème à renvoyer le code."
-                ],400);
+                try {
+                    send_code("mail", strtolower($data["email"]), $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("mail", strtolower($data["email"]), $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("mail", strtolower($data["email"]), $code, "inscription");
+                        } catch (\Throwable $th) {
+                            try {
+                                send_code("mail", strtolower($data["email"]), $code, "inscription");
+                            } catch (\Throwable $th) {
+                                return response([
+                                    "success" => false,
+                                    "message" => "Nous rencontrons un problème à renvoyer le code."
+                                ],400);
+                            }
+                        }
+                    }
+                }
             }
         }
         return response([
@@ -346,15 +388,27 @@ class AuthenticationController extends Controller
             try {
                 send_code("sms", $telephone, $code, "inscription");
             } catch (\Throwable $th) {
-                return response([
-                    "success" => false,
-                    "message" => "Nous rencontrons un problème à renvoyer le code."
-                ],400);
+                try {
+                    send_code("sms", $telephone, $code, "inscription");
+                } catch (\Throwable $th) {
+                    try {
+                        send_code("sms", $telephone, $code, "inscription");
+                    } catch (\Throwable $th) {
+                        try {
+                            send_code("sms", $telephone, $code, "inscription");
+                        } catch (\Throwable $th) {
+                            return response([
+                                "success" => false,
+                                "message" => "Nous rencontrons un problème à renvoyer le code.",
+                            ],400);
+                        }
+                    }
+                }
             }
         }
         return response([
             "success" => true,
-            "message" => "Un nouveau code a été envoyé sur votre adresse email"
+            "message" => "Un nouveau code a été envoyé au + " . "_ _ _ _ .." . substr($telephone, -3) 
         ],200);
     }
 
@@ -393,7 +447,7 @@ class AuthenticationController extends Controller
         return response(['user' => auth()->user(), 'pays' => auth()->user()->pays]);
     }
 
-    public function resend_code(Request $request)
+    public function resend_code(Request $request) 
     {
         return response()->json([
             "status" => send_code($request->type, $request->to, $request->code, $request->for),
