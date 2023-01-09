@@ -58,13 +58,10 @@ class TransfertController extends Controller
     public function store2(Request $request)
     {
         try {
-            $request->merge([
-                'destinataire' => $request->pays . $request->destinataire,
-            ]);
+         
             $allowedPaymentMethods = ['Lisocash', 'CB', 'Orange', 'MTN', 'Airtel'];
 
             $regles = [
-                "pays" => ['required', 'exists:pays,indicatif'],
                 "destinataire" => ['required', 'exists:users,telephone'],
                 "montant" => ['required', 'numeric', 'integer', 'min:1'],
                 "paymentMethod" => ['required', Rule::in($allowedPaymentMethods)],
