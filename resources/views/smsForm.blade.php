@@ -33,7 +33,7 @@
     ============================================= -->
     <div class="row no-gutters h-100">
       <div class="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4 m-auto">
-        <div class="logo mb-4 text-center"> <a href="/" title="Baxe"><img src="images/logo.png" alt="Baxe"></a> </div>
+        <div class="logo mb-4 text-center"> <a href="/" title="Lisocash"><img src="images/logo.png" alt="Lisocash"></a> </div>
         <form id="smsVerificationForm" method="post">
           <div class="vertical-input-group">
             <div class="input-group">

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transfert;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Traits\TauxTrait;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 use App\Http\Traits\LocalisationTrait;
 use App\Http\Requests\StoreTransfertRequest;
 use App\Http\Requests\UpdateTransfertRequest;
-use App\Http\Traits\TauxTrait;
-use Illuminate\Support\Str;
 
 class TransfertController extends Controller
 {
@@ -52,7 +55,7 @@ class TransfertController extends Controller
     */
     public function store(StoreTransfertRequest $request)
     {
-        //
+        
     }
 
     /**
@@ -98,5 +101,49 @@ class TransfertController extends Controller
     public function destroy(Transfert $transfert)
     {
         //
+    }
+
+
+    public function send(Request $request){
+         
+        try {
+            $apiUrl = request()->getHttpHost() . "/api";
+            $request->merge([
+                'paymentMethod' => "Lisocash",
+            ]);
+            $data = $request->all();
+            // dd($data);
+            $req = Request::create('/api/transferts','POST',$data);
+    
+            $response = Route::dispatch($req);
+            $response = json_decode($response->getContent(),true);
+            // dd($req,$response,$data);
+            if($response["success"]){
+                return redirect()->back()->with([
+                    "success" => true,
+                    "message" => "Transfert réussi",
+                ]);
+            }else if(!$response["success"]){
+                return redirect()->back()->with([
+                    "success" => false,
+                    "message" => $response["message"],
+                ]);
+            }
+            else{
+                return redirect()->back()->with([
+                    "success" => false,
+                    "message" => "Impossible d'effectuer le transfert. Assurez-vous que le destinataire spécifié est un client Lisocash ou réessayez plus tard.",
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with([
+                "success" => false,
+                "message" => "Impossible d'effectuer le transfert. Assurez-vous que le destinataire spécifié est un client Lisocash ou réessayez plus tard.",
+            ]);
+        }
+        
+      
+        // return $response;
+        // dd($request->all());
     }
 }

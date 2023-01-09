@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\TransfertController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserPaymentMethodController;
 use App\Http\Controllers\UserPaymentAccountController;
@@ -63,19 +64,31 @@ Route::post('/deleteBankAccount', [UserPaymentAccountController::class, 'deleteB
 //UPDATE PASSWORD
 Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
 
+//TRANSFERTS
+Route::post('/transferts', [TransfertController::class, 'send'])->name('transferts');
 
+
+
+
+
+
+
+
+
+
+// ----------------------------------------
     /**
      * * Route concernant les clients
      */
     Route::middleware(['can:is-client'])->prefix('client')->name('client.')->group(function () {
         Route::get('paiement-commercant', [PaiementCommercantController::class, 'formPaiement'])->name('paiement-commercant.form-paiement');
-        Route::prefix('transfert')->name('transfert.')->group(function () {
-            Route::get('/', [TransfertController::class, 'index'])->name('index');
+        // Route::prefix('transfert')->name('transfert.')->group(function () {
+        //     Route::get('/', [TransfertController::class, 'index'])->name('index');
 
-            Route::get('nouveau', [TransfertController::class, 'create'])->name('create');
+        //     Route::get('nouveau', [TransfertController::class, 'create'])->name('create');
 
-            Route::post('transferer', [TransfertController::class, 'store'])->name('store');
-        });
+        //     Route::post('transferer', [TransfertController::class, 'store'])->name('store');
+        // });
 
         Route::prefix('rechargement')->name('rechargement.')->group(function () {
             Route::get('/', [RechargementController::class, 'index'])->name('index');

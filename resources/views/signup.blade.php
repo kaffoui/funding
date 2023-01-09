@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
     <link href="images/favicon.png" rel="icon" />
-    <title>Baxe | Inscription</title>
-    <meta name="description" content="Baxe website">
+    <title>Lisocash | Inscription</title>
+    <meta name="description" content="Lisocash website">
     <meta name="author" content="harnishdesign.net">
 
     <!-- Web Fonts
