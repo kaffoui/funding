@@ -430,6 +430,9 @@ class TransfertController extends Controller
                     if ($paymentMethod != "CB") {
                         $this->set_solde($user_from, $transfert->id, Transfert::class, $transfert_par_solde ? $this->new_solde_user_is_from($montant_envoyer + $frais) : ($this->get_solde() ? $this->get_solde()->actuel : 0));
                     }
+                    else{
+                        $this->set_solde($user_from, $transfert->id, Transfert::class, 0);
+                    }
 
                     $this->set_solde($user_to, $transfert->id, Transfert::class, $this->new_solde_user_is_to($user_to, $montant_recu));
 
