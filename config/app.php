@@ -169,6 +169,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Ibracilinks\OrangeMoney\Providers\OrangeMoneyServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -218,6 +219,7 @@ return [
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'RateLimiter' => Illuminate\Support\Facades\RateLimiter::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
+        'OrangeMoney' => Ibracilinks\OrangeMoney\Facades\OrangeMoney::class,
         // 'Redis' => Illuminate\Support\Facades\Redis::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
