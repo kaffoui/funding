@@ -9,14 +9,22 @@
           <div class="row">
             <div class="col-lg-6 d-flex">
               <div class="my-auto px-0 px-lg-5 mx-2">
-                <h2 class="text-9">Qui sommes-nous ?</h2>
-                <p class="text-4">Quidam lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. lisque persius interesset his et, in quot quidam mea essent possim iriure.</p>
+                <h2 class="text-9">À propos de nous</h2>
+                <p class="text-4">Nous savons que vous êtes très occupé à travailler. 
+                Nous vous facilitons donc l'envoi d'argent à votre famille et à vos amis. 
+                Nous ferons parvenir votre argent à ceux qui en ont besoin de manière pratique,
+                 rapide, sécurisée et aux meilleurs taux de change possible 
+                 pour que vous puissiez tirer le maximum de votre argent. </p>
+                 <p class="text-3">Nous vous  facilitons l'envoi d'argent à votre famille et à
+                  vos amis. En le faisant parvenir de manière pratique,
+                   rapide et sécurisée aux meilleurs taux de change possible 
+                   afin que vous puissiez en tirer le maximum.</p>
               </div>
             </div>
-            <div class="col-lg-6 my-auto text-center"> <img class="img-fluid shadow-lg rounded-lg" src="images/who-we-are.jpg" alt=""> </div>
+            <div class="col-lg-6 my-auto text-center"> <img class="img-fluid shadow-lg rounded-lg" src="images/thinking.jpg" alt=""> </div>
           </div>
         </div>
-      </section>
+    </section>
       <!-- Who we are end -->
       
       <!-- Our Values
@@ -26,19 +34,36 @@
           <div class="row no-gutters">
             <div class="col-lg-6 order-2 order-lg-1">
               <div class="row">
-                <div class="col-6 col-lg-7 ml-auto mb-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images/our-values-vision.jpg" alt="banner"> </div>
-                <div class="col-6 col-lg-8 mt-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images/our-values-mission.jpg" alt="banner"> </div>
+                <div class="col-6 col-lg-7 ml-auto mb-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images/pexels.jpg" alt="banner"> </div>
+                <div class="col-6 col-lg-8 mt-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images/receptionists.jpg" alt="banner"> </div>
               </div>
             </div>
             <div class="col-lg-6 d-flex order-1 order-lg-2">
               <div class="my-auto px-0 px-lg-5">
-                <h2 class="text-9 mb-4">Nos valeurs</h2>
-                <h4 class="text-4 font-weight-500">Notre mission</h4>
-                <p class="tex-3" >Quidam lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. lisque persius interesset his et, in quot quidam mea essent possim iriure.</p>
-                <h4 class="text-4 font-weight-500 mb-2">Notre vision</h4>
-                <p class="tex-3" >Persequeris quidam lisque persius interesset his et, in quot quidam vim, ad mea essent possim iriure. Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. lisque persius interesset his et, in quot quidam.</p>
-                <h4 class="text-4 font-weight-500 mb-2">Notre objectif</h4>
-                <p class="tex-3" >Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. lisque persius interesset his et, in quot quidam mea essent possim iriure.</p>
+                <h2 class="text-9 mb-4">Devenir un agent Lisocash</h2>
+                <h4 class="text-4 font-weight-500">Comment le devenir?</h4>
+                <p class="tex-3" >Rejoindre le réseau Lisocash offre plusieurs avantages
+                    Augmentation de trafic et revenus additionnels
+                    Attirer une nouvelle clientèle
+                    Offrir un service complémentaire
+                    Générer du revenu additionnel
+                    Une marque forte et international
+                    Rejoindre une entreprise  de transferts de fonds
+                    Appartenir à un réseau de plusieurs agences
+                    Une présence dans plusieurs pays et territoires
+                    Soutien continu.
+                </p>
+                {{-- <h4 class="text-4 font-weight-500 mb-2">Notre vision</h4> --}}
+                <p class="tex-3" >Formation, matériel pour point de vente et logiciel
+                    Technologie de pointe combinée à un centre d’appel 24/24
+                    Soutien marketing pour générer du trafic et des ventes
+                    Conformité.
+                </p>
+                {{-- <h4 class="text-4 font-weight-500 mb-2">Notre objectif</h4> --}}
+                <p class="tex-3" >Un fort accent mis sur la prévention du blanchiment de fonds et de la fraudee
+                  Une aide sur les obligations de rapports et de la tenue des comptes
+                  Une qualité assurée pour les clients à tout moments.
+                </p>
               </div>
             </div>
           </div>
@@ -46,7 +71,30 @@
       </section>
       <!-- Our Values end -->
       
-      
+             <!-- Who we are
+    ============================================= -->
+    <section class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 d-flex">
+              <div class="my-auto px-0 px-lg-5 mx-2">
+                <h2 class="text-9">Comment ça marche ?</h2>
+                <p class="text-4">Avec Baxe money, finie la galère pour envoyer 
+                de l'argent à vos amis. Un simple numéro de téléphone vous suffit. 
+                Votre bénéficiaire est informé par SMS et reçoit directement 
+                l'argent sur son compte bancaire, facile n'est-ce pas !.</p>
+
+                <p class="text-4">Vous pouvez également utiliser Baxe pour :
+                      picto qui présente le paiement mobile en magasin, payer en magasin.
+                      Je paye avec mon mobile, chez tous les commerçants qui acceptent
+                       le paiement qr code, même au-delà de.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6 my-auto text-center"> <img class="img-fluid shadow-lg rounded-lg" src="images/who-we-are.jpg" alt=""> </div>
+          </div>
+        </div>
+    </section>
     
       
       <!-- Testimonial
@@ -92,6 +140,35 @@
       </section>
       <!-- Testimonial end -->
       
+       <!-- Our Values
+      ============================================= -->
+      <section class="section bg-white">
+        <div class="container">
+          <div class="row no-gutters">
+            <div class="col-lg-6 order-2 order-lg-1">
+              <div class="row">
+                <div class="col-6 col-lg-7 ml-auto mb-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images/our-values-vision.jpg" alt="banner"> </div>
+                <div class="col-6 col-lg-8 mt-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images/our-values-mission.jpg" alt="banner"> </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex order-1 order-lg-2">
+              <div class="my-auto px-0 px-lg-5">
+                <h2 class="text-9 mb-4">CE QUE NOUS APPRÉCIONS</h2>
+                {{-- <h4 class="text-4 font-weight-500">Comment le devenir?</h4> --}}
+                <p class="tex-3" >Depuis nos débuts, nous avons mis la technologie au 
+                    service de la connexion des personnes. Au fur et à mesure que la technologie a
+                 progressé, nous aussi, 
+                    mais toujours en nous concentrant sur la
+                     connexion des personnes avec les lieux et les êtres chers qui comptent le plus pour elles, dans les bons comme dans les mauvais moments.
+                </p>
+       
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Our Values end -->
+
       <!-- JOIN US
       ============================================= -->
       <section class="section bg-primary py-5">
