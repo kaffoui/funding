@@ -56,8 +56,9 @@ trait FraisTrait
      */
     public function frais_get_commission_depot_distributeur($operation, User $distributeur, int $montant) // C'est la commission
     {
+        // dd($montant,$distributeur,$operation);
         $all_commissions = CommissionModalite::get();
-
+        // dd($all_commissions);
         return $all_commissions->first(function ($item) use ($distributeur, $montant, $operation) {
             return false !== stripos($item->continent, $distributeur->pays->continent) && $item->operation == $operation && (($montant >= $item->from) && ($montant <= $item->to));
         });

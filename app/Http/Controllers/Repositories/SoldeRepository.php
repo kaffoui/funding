@@ -26,8 +26,6 @@ class SoldeRepository
             {
                 $depot = $transaction->depot;
 
-
-
                 $montant = $depot->montant;
 
                 if (auth()->id() == $depot->user_id_from) // Montant du distributeur
@@ -77,7 +75,7 @@ class SoldeRepository
             elseif ($transaction->operation_type == 'App\Models\Retrait')
             {
                 $retrait = $transaction->retrait;
-
+                
                 $montant = $retrait->montant;
 
                 if (auth()->id() == $retrait->user_id_from)
@@ -119,7 +117,7 @@ class SoldeRepository
             elseif ($transaction->operation_type == 'App\Models\Transfert')
             {
                 $transfert = $transaction->transfert;
-
+                // dd($transaction);
                 $montant = $transfert->montant;
 
                 if (auth()->id() == $transfert->user_id_from) // Le nom du destinataire

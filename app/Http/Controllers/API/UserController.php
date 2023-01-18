@@ -199,4 +199,22 @@ class UserController extends Controller
     }
 
 
+    public function checkIfUserIsValid(Request $request){
+        $data = $request->all();
+        $user = User::where("telephone",$data['telephone'])->get();
+        if(sizeof($user) > 0){
+            return response([
+                "success" => true,
+                "message" => "User exists"
+            ]);
+        }
+        else{
+            return response([
+                "success" => false,
+                "message" => "User doesn't exist"
+            ]);
+        }
+    }
+
+
 }
