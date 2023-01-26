@@ -30,7 +30,7 @@
           <h3 class="text-6 font-weight-400">{{$data["devise"]}} {{$data["solde"]}}</h3>
           <p class="mb-2 text-muted opacity-8">Solde disponible</p>
           <hr class="mx-n3">
-          <div class="d-flex"><a href="#" class="btn-link mr-auto">Retrait</a> <a href="{{route("deposit")}}" class="btn-link ml-auto">Dépot</a></div>
+          <div class="d-flex"><a href="{{route("retrait")}}" class="btn-link mr-auto">Retrait</a> <a href="{{route("deposit")}}" class="btn-link ml-auto">Dépot</a></div>
         </div>
         <!-- Available Balance End -->
         

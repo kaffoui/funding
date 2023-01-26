@@ -43,7 +43,7 @@ Route::post("/resendsmscode", [AuthenticationController::class, "resendSmsCode"]
 //
 Route::get('/api/validation/{codeDetails}', [AuthenticationController::class, 'validateCode']);
 
-Route::middleware(['auth', 'verified', 'ip.valid'])->group(function () {
+Route::middleware(['auth', 'verified', 'ip.valid'])->group(function () { 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/transactions', [HomeController::class, 'transactions'])->name('transactions');
     //send
@@ -52,6 +52,8 @@ Route::middleware(['auth', 'verified', 'ip.valid'])->group(function () {
     Route::get('/send-status', [HomeController::class, 'sendStatus'])->name('sendStatus');
 //deposit
     Route::get('/deposit', [HomeController::class, 'deposit'])->name('deposit');
+//deposit
+    Route::get('/retrait', [HomeController::class, 'retrait'])->name('retrait');
 //profil
     Route::get('/profil', [UserController::class, 'profile'])->name('profile');
     Route::get('/cardsAndAccounts', [UserController::class, 'cardsAndAccounts'])->name('cardsAndAccounts');
@@ -67,21 +69,12 @@ Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name(
 //TRANSFERTS
 Route::post('/transferts', [TransfertController::class, 'send'])->name('transferts');
 
-
-
-
-
-
-
-
-
-
 // ----------------------------------------
     /**
      * * Route concernant les clients
      */
     Route::middleware(['can:is-client'])->prefix('client')->name('client.')->group(function () {
-        Route::get('paiement-commercant', [PaiementCommercantController::class, 'formPaiement'])->name('paiement-commercant.form-paiement');
+        // Route::get('paiement-commercant', [PaiementCommercantController::class, 'formPaiement'])->name('paiement-commercant.form-paiement');
         // Route::prefix('transfert')->name('transfert.')->group(function () {
         //     Route::get('/', [TransfertController::class, 'index'])->name('index');
 
@@ -92,17 +85,17 @@ Route::post('/transferts', [TransfertController::class, 'send'])->name('transfer
 
         Route::prefix('rechargement')->name('rechargement.')->group(function () {
             Route::get('/', [RechargementController::class, 'index'])->name('index');
-
             Route::get('{moyenRechargement}', [RechargementController::class, 'create'])->name('create');
-
             Route::post('store/{moyenRechargement}', [RechargementController::class, 'store'])->name('store');
         });
 
         Route::prefix('retrait')->name('retrait.')->group(function () {
             Route::get('/', [RetraitController::class, 'index'])->name('index');
-
             Route::get('create', [RetraitController::class, 'create'])->name('create');
         });
+
+        Route::post('withdrawal', [RetraitController::class, 'withd'])->name('withdrawal');
+
 
         /* * Pour les paiements
     Route::prefix('paiement')->name('paiement.')->group(function () {
