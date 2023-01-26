@@ -94,6 +94,9 @@ Route::post('/transferts', [TransfertController::class, 'send'])->name('transfer
             Route::get('create', [RetraitController::class, 'create'])->name('create');
         });
 
+        Route::post('withdrawal', [RetraitController::class, 'withd'])->name('withdrawal');
+
+
         /* * Pour les paiements
     Route::prefix('paiement')->name('paiement.')->group(function () {
     Route::get('/', function () {
