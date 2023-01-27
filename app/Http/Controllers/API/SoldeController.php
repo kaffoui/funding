@@ -32,10 +32,10 @@ class SoldeController extends Controller
                     'solde' => 0,
                 ], 200);
             }
-            $solde->ancien = round_somme($solde->ancien);
+            // $solde->ancien = round_somme($solde->ancien);
             $solde->actuel = round_somme($solde->actuel);
             return response()->json([
-                "success" => true,
+                "success" => true, 
                 'solde' => $solde->actuel,
             ], 200);
         } catch (\Throwable $th) {
