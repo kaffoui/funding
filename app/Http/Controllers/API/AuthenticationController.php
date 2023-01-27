@@ -135,12 +135,20 @@ class AuthenticationController extends Controller
         }
 
         if (!auth()->user()->is_email_valid) {
-            auth()->user()->tokens()->delete();
+            try {
+                auth()->user()->tokens()->delete();
+
+            } catch (\Throwable $th) {
+            }
             return response(["success" => false, "message" => "Vous devez valider votre email"], 403);
             // abort(403, 'Vous devez valider votre email.');
         }
         if (!auth()->user()->is_phone_valid) {
-            auth()->user()->tokens()->delete();
+            try {
+                auth()->user()->tokens()->delete();
+
+            } catch (\Throwable $th) {
+            }
             return response(["success" => false, "message" => "Vous devez valider votre numéro de téléphone"], 403);
 
             // abort(403, 'Vous devez valider votre numéro de téléphone.');
