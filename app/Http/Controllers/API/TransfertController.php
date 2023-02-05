@@ -194,6 +194,7 @@ class TransfertController extends Controller
                 }
             }
 
+
             $this->transfert(auth()->user(), $destinataire, $montant_envoyer, $montant_frais, $taux_to, $montant_recu, 1, $transfert_par_solde, $request->paymentMethod, $request->receptionMethod);
 
             $message = 'Vous venez d’envoyer ' . format_number_french($request->montant, 2) . ' ' . auth()->user()->pays->symbole_monnaie . ' à ' . $destinataire->noms() . ' via ' . env('APP_NAME') . '. Votre nouveau  solde : ' . format_number_french(auth()->user()->soldes->last()->actuel) . ' ' . auth()->user()->pays->symbole_monnaie . '. ' . env('APP_NAME') . ' vous remercie pour votre fidélité.';
@@ -406,9 +407,7 @@ class TransfertController extends Controller
      */
     protected function transfert(User $user_from, User $user_to, $montant_envoyer, $frais, $taux_to, $montant_recu, $taux_from = 1, $transfert_par_solde = true, $paymentMethod, $receptionMethod)
     {
-        if ($paymentMethod == "CB") {
-
-        } else {
+       
         switch ($receptionMethod) {
             case 'Lisocash':
                 $transfert = Transfert::create([
@@ -519,7 +518,7 @@ class TransfertController extends Controller
                 # code...
                 break;
         }
-        }
+        
 
 
     }

@@ -91,5 +91,11 @@ class HomeController extends Controller
         return view('dashboard.deposit.index');
     }
 
+    public function retrait(Request $request)
+    {
+        // dd(auth()->user());
+        return view('dashboard.retrait.index');
+    }
+
 
 }

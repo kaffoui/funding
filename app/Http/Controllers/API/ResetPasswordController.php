@@ -31,41 +31,43 @@ class ResetPasswordController extends Controller
         $user = User::where('id', $request->id)->first();
 
         if($user) {
-            $token = $user->createToken('API Token Login')->plainTextToken;
+            // $token = $user->createToken('API Token Login')->plainTextToken;
 
             User::where('id', $request->id)->update([
                 'password' => Hash::make($request->password)
             ]);
 
-            $user = User::where('id', $request->id)->first();
+            // $user = User::where('id', $request->id)->first();
 
             $credentials = [
                 'email' => $user->email,
                 'password' => $request->password,
             ];
 
-            auth()->attempt($credentials);
+            // auth()->attempt($credentials);
 
-            $token = auth()->user()->createToken('API Token Login')->plainTextToken;
+            // $token = auth()->user()->createToken('API Token Login')->plainTextToken;
 
-            $ip_register = auth()->user()->ip_register == '127.0.0.1' ? (env('APP_ENV') == 'production' ? request()->ip() : auth()->user()->ip_register) : auth()->user()->ip_register;
+            // $ip_register = auth()->user()->ip_register == '127.0.0.1' ? (env('APP_ENV') == 'production' ? request()->ip() : auth()->user()->ip_register) : auth()->user()->ip_register;
 
-            $recent_ip = env('APP_ENV') == 'production' || auth()->user()->recent_ip == '127.0.0.1' ? request()->ip() : auth()->user()->ip_register;
+            // $recent_ip = env('APP_ENV') == 'production' || auth()->user()->recent_ip == '127.0.0.1' ? request()->ip() : auth()->user()->ip_register;
 
-            auth()->user()->update([
-                'ip_register' => $ip_register,
-                'recent_ip'   => $recent_ip,
-            ]);
+            // auth()->user()->update([
+            //     'ip_register' => $ip_register,
+            //     'recent_ip'   => $recent_ip,
+            // ]);
 
-            auth()->user()->informations = Gate::allows('is-client') ? auth()->user()->client : auth()->user()->distributeur;
+            // auth()->user()->informations = Gate::allows('is-client') ? auth()->user()->client : auth()->user()->distributeur;
 
-            return response(['user' => auth()->user(), 'pays' => auth()->user()->pays, 'token' => $token], 200);
+            return response()->json([
+                "success" => true,
+                'message' =>  "Votre mot de passe a bien été mis à jour"
+            ], 200);
 
         }else{
             return response()->json([
-                'errors' => [
-                    'email' => "Aucun utilisateur n'est trouver avec cette email"
-                ]
+                "success" => false,
+                'message' =>  "Aucun utilisateur n'est trouver avec cette email"
             ], 401);
         }
     }

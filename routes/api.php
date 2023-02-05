@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('paiement-commercant', [PaiementCommercantController::class, 'store']);
     Route::post('verif_password', [UserController::class, 'verif_password'])->name('verification-password');
     Route::put('user-update', [UserController::class, 'update'])->name('user-update');
+    Route::post('checkUser', [UserController::class, 'checkIfUserIsValid'])->name('checkUser');
+
 
     Route::post('code-validation', [AuthenticationController::class, 'code_validation']);
 
@@ -84,11 +86,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('carte-credit', [DepotController::class, 'carte_credit']);
         });
     });
-
+    
+    Route::post('retrait', [RetraitController::class, 'store']);
     Route::middleware(['can:is-distributeur'])->group(function () {
         Route::post('depot', [DepotController::class, 'store']);
 
-        Route::post('retrait', [RetraitController::class, 'store']);
+        // Route::post('retrait', [RetraitController::class, 'store']);
     });
 
     Route::get('solde', [SoldeController::class, 'index']);
