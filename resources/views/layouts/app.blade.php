@@ -9,6 +9,7 @@
     <title>@yield('title')</title>
     <meta name="description" content="Baxe website">
     <meta name="author" content="OFIELD GROUP">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
     <!-- Web Fonts
 ============================================= -->
