@@ -42,8 +42,8 @@ Route::post("/resendsmscode", [AuthenticationController::class, "resendSmsCode"]
 
 //
 Route::get('/api/validation/{codeDetails}', [AuthenticationController::class, 'validateCode']);
-
-Route::middleware(['auth', 'verified', 'ip.valid'])->group(function () { 
+//Route::get('/api/validation', [AuthenticationController::class, 'validateCode']);
+Route::middleware(['auth', 'verified', 'ip.valid'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/transactions', [HomeController::class, 'transactions'])->name('transactions');
     //send

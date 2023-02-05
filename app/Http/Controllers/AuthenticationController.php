@@ -175,7 +175,7 @@ class AuthenticationController extends Controller
     }
 
 
-    public function validateCode(Request $request)
+    public function validateCode(Request $request,$codeDetails)
     {
         if ($request->isMethod('get')) {
             if (isset($request->emailCode) && isset($request->email)) {
@@ -184,12 +184,22 @@ class AuthenticationController extends Controller
                     $user->update([
                         "is_email_valid" => true,
                     ]);
+                    
+        
                     //revoir page de validation 
-                    // return "Votre adresse email a bien été vérifiée";
-                  return Redirect::route('emails.mailverification')->with('message', 'Votre adresse email a bien été vérifiée.');
+                      //  return "Votre adresse email a bien été vérifiée";
+                                       
+                    // dd($codeDetails);
+                     return view('emails.mailverification' , compact('codeDetails',  'user'));
+                     
                 } else {
-                // return "Echec de la validation de l'adresse mail";
-                return Redirect::route('emails.mailverification')->with('message', 'Echec de la validation de l\'adresse mail.');
+        
+                         
+            
+                   //  dd($codeDetails);
+                   ////  return view('emails.maildefault' , compact('codeDetails'));
+                   //  return view('emails.mailverification' , compact('codeDetails',  'user'));
+                   return "Echec de la validation de l'adresse mail";
                 }
             } else {
                 return "URL Invalide..";

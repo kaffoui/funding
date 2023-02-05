@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\ClientQrService;
 use App\Services\DistributeurService;
 use Error;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -291,17 +292,16 @@ class AuthenticationController extends Controller
     {
         if ($request->isMethod('get')) {
             if (isset($request->emailCode) && isset($request->email)) {
+          
                 $user = User::where('email', $request->email)->get()->first();
                 if ($user["email_code"] == $request->emailCode) {
                     $user->update([
                         "is_email_valid" => true,
                     ]);
 
-                        // return "Votre adresse email a bien été vérifiée";
-                        return Redirect::route('emails.mailverification')->with('message', 'Votre adresse email a bien été vérifiée.');
+                         return "Votre adresse email a bien été vérifiée.";
                         } else {
-                        // return "Echec de la validation de l'adresse mail";
-                        return Redirect::route('emails.mailverification')->with('message', 'Echec de la validation de l\'adresse mail.');
+                            return "Echec de la validation de l\'adresse mail.";
                         }
             } else {
                 return "URL Invalide..";

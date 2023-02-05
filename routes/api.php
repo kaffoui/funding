@@ -63,7 +63,7 @@ Route::post('register', [AuthenticationController::class, 'register_client']);
 Route::post('renvoyer-code', [AuthenticationController::class, 'resend_code']);
 
 //Offcial for code validation
-Route::match(["get","post"],"/validation/code",[AuthenticationController::class,"validateCode"]);
+//Route::match(["get","post"],"/validation/code",[AuthenticationController::class,"validateCode"]);
 Route::post("/resendemailcode",[AuthenticationController::class,"resendEmailCode"]);
 Route::post("/resendsmscode",[AuthenticationController::class,"resendSmsCode"]);
 

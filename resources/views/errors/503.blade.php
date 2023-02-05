@@ -13,6 +13,6 @@
     <h1>Nous reviendrons très bientôt !</h1>
     <div>
         <p>Excusez nous pour les désagréments que cela peut causer mais nous opérons quelques modifications en ce moment. Au besoin vous pouvez nous envoyer un mail : <a href="mailto:contact@ofieldgroup.com">Contactez nous</a></p>
-        <p>&mdash; BAXE MONEY </p>
+        <p>&mdash; LISOCASH </p>
     </div>
 </article>
