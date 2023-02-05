@@ -10,7 +10,7 @@
             <div class="container-fluid px-0 " style="height: 600px">
                 <div class="row no-gutters h-100">
                     <!-- Welcome Text
-                              ============================================= -->
+                                              ============================================= -->
                     <div class="col-md-6">
                         <div class="hero-wrap d-flex align-items-center h-100">
                             <div class="hero-mask opacity-8 bg-primary"></div>
@@ -40,7 +40,7 @@
                     <!-- Welcome Text End -->
 
                     <!-- Login Form
-                              ============================================= -->
+                                              ============================================= -->
                     <div class="col-md-6 d-flex align-items-center">
 
                         <div class="container my-4">
@@ -53,8 +53,8 @@
                                                     <p><strong>Scan en cours..</strong></p>
                                                 </center>
                                             </div>
-                                            <div class="col-6">
-                                                <div id="reader" width="600px"></div>
+                                            <div class="col-12">
+                                                <div id="reader" width="100%" class="col-12"></div>
                                                 {{-- <video width="215%" height="100%" src="" id="preview"></video> --}}
                                             </div>
                                         </div>
@@ -90,25 +90,47 @@
         function onScanSuccess(decodedText, decodedResult) {
             // handle the scanned code as you like, for example:
             console.log(`Code matched = ${decodedText}`, decodedResult);
+            let a = 1;
+
+            alert("QR code détecté. Patientez..");
+            makeWithdrawal(decodedText);
+            html5QrCode.stop().then((ignore) => {
+                log('QR Code scanning is stopped');
+            }).catch((err) => {
+                log('Stop failed, handle it');
+            });
+
         }
 
         function onScanFailure(error) {
             // handle scan failure, usually better to ignore and keep scanning.
             // for example:
             console.warn(`Code scan error = ${error}`);
+       
+
         }
 
         let html5QrcodeScanner = new Html5QrcodeScanner(
+
             "reader", {
                 fps: 10,
                 qrbox: {
-                    width: 250,
-                    height: 250
-                }
+                    width: 500,
+                    height: 500
+                },
+                // rememberLastUsedCamera: true,
+                // supportedScanTypes:  [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
             },
             /* verbose= */
             false);
+
+
         html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
+    <script>
+        window.addEventListener("load", function() {
+            document.getElementById("html5-qrcode-anchor-scan-type-change").style.display = 'none';
+        })
     </script>
 
 
@@ -151,6 +173,7 @@
                 }
             });
             console.log(data);
+            let url = {{route('')}}
             console.log(url);
             $.ajax({
                 url: url,
