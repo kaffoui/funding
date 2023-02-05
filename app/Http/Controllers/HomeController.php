@@ -91,9 +91,5 @@ class HomeController extends Controller
         return view('dashboard.deposit.index');
     }
 
-    public function retrait(Request $request)
-    {
-        return view('dashboard.retrait.index');
-    }
 
 }
