@@ -35,7 +35,9 @@ class SoldeController extends Controller
             // $solde->ancien = round_somme($solde->ancien);
             $solde->actuel = round_somme($solde->actuel);
             return response()->json([
+
                 "success" => true, 
+
                 'solde' => $solde->actuel,
             ], 200);
         } catch (\Throwable $th) {

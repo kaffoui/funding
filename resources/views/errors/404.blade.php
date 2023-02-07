@@ -13,6 +13,6 @@
     <h1>Oups ! Etes vous sûr que vous avez entré la bonne adresse ? </h1>
     <div>
         <p>Au besoin vous pouvez nous envoyer un mail : <a href="mailto:contact@ofieldgroup.com">Contactez nous</a></p>
-        <p>&mdash; BAXE MONEY </p>
+        <p>&mdash; LISOCASH </p>
     </div>
 </article>
