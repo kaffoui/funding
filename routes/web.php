@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RetraitController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\TransfertController;
 use App\Http\Controllers\AuthenticationController;
@@ -52,8 +53,11 @@ Route::middleware(['auth', 'verified', 'ip.valid'])->group(function () {
     Route::get('/send-status', [HomeController::class, 'sendStatus'])->name('sendStatus');
 //deposit
     Route::get('/deposit', [HomeController::class, 'deposit'])->name('deposit');
-//deposit
+//retrait
     Route::get('/retrait', [HomeController::class, 'retrait'])->name('retrait');
+//withdraw
+Route::post('withdrawal', [RetraitController::class, 'withdrawal'])->name('makeWithdraw');
+
 //profil
     Route::get('/profil', [UserController::class, 'profile'])->name('profile');
     Route::get('/cardsAndAccounts', [UserController::class, 'cardsAndAccounts'])->name('cardsAndAccounts');
@@ -89,12 +93,11 @@ Route::post('/transferts', [TransfertController::class, 'send'])->name('transfer
             Route::post('store/{moyenRechargement}', [RechargementController::class, 'store'])->name('store');
         });
 
-        Route::prefix('retrait')->name('retrait.')->group(function () {
-            Route::get('/', [RetraitController::class, 'index'])->name('index');
-            Route::get('create', [RetraitController::class, 'create'])->name('create');
-        });
+        // Route::prefix('retrait')->name('retrait.')->group(function () {
+            // Route::get('/', [RetraitController::class, 'index'])->name('index');
+            // Route::get('create', [RetraitController::class, 'create'])->name('create');
+        // });
 
-        Route::post('withdrawal', [RetraitController::class, 'withd'])->name('withdrawal');
 
 
         /* * Pour les paiements

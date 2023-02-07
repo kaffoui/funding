@@ -31,14 +31,14 @@ class RetraitController extends Controller
             return response()->json([
                 "success" => false,
                 "message" => "Utilisateur invalide",
-            ],200);
+            ],400);
         }
 
         if ($data->montant_client < 1) {
             return response()->json([
                 "success" => false,
                 "message" => "Montant invalide",
-            ],200);
+            ],400);
         }
 
         // $validator = Validator::make($data, [

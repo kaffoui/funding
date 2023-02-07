@@ -173,10 +173,10 @@
                 }
             });
             console.log(data);
-            let url = {{route('')}}
-            console.log(url);
+            // let url = ;
+            // console.log(url);
             $.ajax({
-                url: url,
+                url: "{{route('makeWithdraw')}}",
                 type: 'POST',
                 data: data,
                 success: function(resp) {
