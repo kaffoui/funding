@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Retrait;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Traits\TauxTrait;
+use App\Http\Traits\FraisTrait;
+use App\Http\Traits\SoldesTrait;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Traits\LocalisationTrait;
 use App\Http\Requests\StoreRetraitRequest;
 use App\Http\Requests\UpdateRetraitRequest;
-use App\Http\Traits\FraisTrait;
-use App\Http\Traits\LocalisationTrait;
-use App\Http\Traits\SoldesTrait;
-use App\Http\Traits\TauxTrait;
-use App\Models\Retrait;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class RetraitController extends Controller
 {
@@ -54,14 +55,15 @@ class RetraitController extends Controller
         }
 
         $data = json_decode(json_encode($data));
-        $data = Str::between($data, ':"', '}');
+        $data = Str::between($data, ':', '}');
         $d["data"] = $data;
-
+        // dd($data);
         $data = base64_decode(base64_decode($data));
-        $data = Str::between($data, '"', '"');
-        $data = json_decode(json_encode($data));
-        $client_id = str_replace(' ', '', Str::between($data,'client_id:', ","));
-        $client_montant = str_replace(' ', '', Str::between($data,'client_montant:', "}"));
+        // dd($data);
+        // $data = Str::between($data, '"', '"');
+        $data = json_decode($data);
+        $client_id =$data->client_id;
+        $client_montant = $data->client_montant;
         $client = User::find($client_id);
         if (!$client) {
             return response()->json([
@@ -141,6 +143,7 @@ class RetraitController extends Controller
 
             return response()->json([
                 'data' => $client,
+                'success' => true
             ], 200);
         }
 
@@ -182,6 +185,7 @@ class RetraitController extends Controller
             'data' => $retrait,
             'commission_retrait' => $commission_retrait,
             'message' => $message,
+            'success' => true
         ], 200);
 
         // $req = Request::create('/api/retrait','POST',$d);

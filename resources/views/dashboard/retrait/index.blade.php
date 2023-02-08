@@ -190,7 +190,7 @@
                         });
                         setTimeout(() => {
                         history.back();
-                    }, 4000);
+                    }, 6000);
                     } else {
                         console.log(resp);
                         console.log("Bad happen");
@@ -201,7 +201,7 @@
                         });
                         setTimeout(() => {
                         history.back();
-                    }, 4000);
+                    }, 6000);
                     }
                 },
                 error: function(error) {
@@ -212,9 +212,9 @@
                         "hideMethod": "fadeOut",
                         timeOut: 5000
                     });
-                    // setTimeout(() => {
-                    //     history.back();
-                    // }, 4000);
+                    setTimeout(() => {
+                        history.back();
+                    }, 6000);
                 },
             });
         }
