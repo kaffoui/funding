@@ -212,9 +212,9 @@
                         "hideMethod": "fadeOut",
                         timeOut: 5000
                     });
-                    setTimeout(() => {
-                        history.back();
-                    }, 4000);
+                    // setTimeout(() => {
+                    //     history.back();
+                    // }, 4000);
                 },
             });
         }
