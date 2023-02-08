@@ -10,7 +10,7 @@
             <div class="container-fluid px-0 " style="height: 600px">
                 <div class="row no-gutters h-100">
                     <!-- Welcome Text
-                                              ============================================= -->
+                                                      ============================================= -->
                     <div class="col-md-6">
                         <div class="hero-wrap d-flex align-items-center h-100">
                             <div class="hero-mask opacity-8 bg-primary"></div>
@@ -40,7 +40,7 @@
                     <!-- Welcome Text End -->
 
                     <!-- Login Form
-                                              ============================================= -->
+                                                      ============================================= -->
                     <div class="col-md-6 d-flex align-items-center">
 
                         <div class="container my-4">
@@ -61,10 +61,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                                 <label for="text">SCAN CODE RESULT</label>
                                 <input type="text" id="text" name="text" readonly class="form-group">
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!-- Login Form End -->
@@ -90,15 +90,18 @@
         function onScanSuccess(decodedText, decodedResult) {
             // handle the scanned code as you like, for example:
             console.log(`Code matched = ${decodedText}`, decodedResult);
-            let a = 1;
+            var a = 1;
+            if (1) {
+                alert("QR code détecté. Patientez..");
+                makeWithdrawal(decodedText);
+                html5QrCode.stop().then((ignore) => {
+                    log('QR Code scanning is stopped');
+                }).catch((err) => {
+                    log('Stop failed, handle it');
+                });
+                a = 0;
+            }
 
-            alert("QR code détecté. Patientez..");
-            makeWithdrawal(decodedText);
-            html5QrCode.stop().then((ignore) => {
-                log('QR Code scanning is stopped');
-            }).catch((err) => {
-                log('Stop failed, handle it');
-            });
 
         }
 
@@ -106,7 +109,6 @@
             // handle scan failure, usually better to ignore and keep scanning.
             // for example:
             console.warn(`Code scan error = ${error}`);
-       
 
         }
 
@@ -132,8 +134,6 @@
             document.getElementById("html5-qrcode-anchor-scan-type-change").style.display = 'none';
         })
     </script>
-
-
 
 
 
@@ -176,21 +176,45 @@
             // let url = ;
             // console.log(url);
             $.ajax({
-                url: "{{route('makeWithdraw')}}",
+                url: "{{ route('makeWithdraw') }}",
                 type: 'POST',
                 data: data,
                 success: function(resp) {
                     if (resp.success) {
                         console.log(resp);
                         console.log("Well happen");
+                        toastr.success(resp.message, 'Opération réussie', {
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut",
+                            timeOut: 5000
+                        });
+                        setTimeout(() => {
+                        history.back();
+                    }, 4000);
                     } else {
                         console.log(resp);
                         console.log("Bad happen");
+                        toastr.error(resp.message, 'Echec', {
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut",
+                            timeOut: 5000
+                        });
+                        setTimeout(() => {
+                        history.back();
+                    }, 4000);
                     }
                 },
                 error: function(error) {
                     console.log("Very Bad happen");
                     console.log(error);
+                    toastr.error("QR code invalide", 'Echec', {
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut",
+                        timeOut: 5000
+                    });
+                    setTimeout(() => {
+                        history.back();
+                    }, 4000);
                 },
             });
         }
