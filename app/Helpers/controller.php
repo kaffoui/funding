@@ -1,13 +1,14 @@
 <?php
 
-use App\Mail\MailSender;
 use App\Models\Solde;
+use App\Mail\MailSender;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Mail;
 
 if (!function_exists('storage_file'))
 {
@@ -188,6 +189,21 @@ if (! function_exists('send_code'))
         } else {
             return send_sms($to, $message);
         }
+    }
+}
+
+if (! function_exists('send_password_reset_link'))
+{
+    function send_password_reset_link($to)
+    {
+        $title = "Réinitialisation de mot de passe";
+
+        $toCrypted = Crypt::encryptString($to);
+        $message = "Veuillez cliquer sur le bouton suivant pour réinitialiser votre mot de passe\n\n".
+            "<a class='btn btn-primary' href='https://lisocash.com/resetPassword/$toCrypted'>Réinitialiser</a>";
+        
+        return send_mail($to, $title, $message);
+      
     }
 }
 

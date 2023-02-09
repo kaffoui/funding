@@ -424,7 +424,6 @@ class AuthenticationController extends Controller
     public function logout()
     {
         auth()->user()->tokens()->delete();
-
         return response()->json([
             'logout' => true,
         ], 200);
@@ -461,6 +460,30 @@ class AuthenticationController extends Controller
         return response()->json([
             "status" => send_code($request->type, $request->to, $request->code, $request->for),
         ]);
+    }
+
+    public function sendResetPasswordMail(Request $request){
+        $email = $request->all()["email"];
+        $user = User::where("email",$email)->get()->first();
+        if(!$user){
+            return response()->json([
+                "success" => false,
+                "message" => "Aucun utilisateur correspondant à cette adresse !"
+            ],400);
+        }
+
+        // try {
+            send_password_reset_link(strtolower($email));
+        // } catch (\Throwable $th) {
+        //     try {
+        //         send_password_reset_link(strtolower($email));
+        //     } catch (\Throwable $th) {
+        //         return response()->json([
+        //             "success" => false,
+        //             "message" => "Un problème a été rencontré. Essayez plus tard !"
+        //         ],400);
+        //     }
+        // }
     }
 
 }

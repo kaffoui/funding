@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 
 class AuthenticationController extends Controller
@@ -219,6 +220,36 @@ class AuthenticationController extends Controller
             }
         }
         // Return new client JSON
+    }
+
+
+    public function showResetPasswordForm(Request $request){
+        // dd(Crypt::encryptString("rigelspero@gmail.com"));
+        $decryptedEmail = Crypt::decryptString($request->cryptedEmail);
+
+        return view('resetPassword',[
+            'email' => $decryptedEmail
+        ]);
+    }
+
+    public function resetPassword(Request $request){
+        $data = $request->all();
+        if($data["password"] != $data["confirmation_password"]){
+            return redirect()->back()->with([
+                "success" => false,
+                "message" => "Les valeurs spécifiées ne correspondent pas"
+            ]);
+        }
+
+        $user = User::where('email',$data["email"])->get()->first();
+        // dd($user);
+        $user->update([
+            "password" => Hash::make($data["password"])
+        ]);
+        return redirect()->back()->with([
+            "success" => true,
+            "message" => "Mise à jour du mot de passe effectué. Vous pouvez vous connecter !"
+        ]);
     }
 
     public function logout()

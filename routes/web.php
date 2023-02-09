@@ -69,6 +69,9 @@ Route::post('/addBankAccount', [UserPaymentAccountController::class, 'addBankAcc
 Route::post('/deleteBankAccount', [UserPaymentAccountController::class, 'deleteBankAccount'])->name('deleteBankAccount');
 //UPDATE PASSWORD
 Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
+//when updating from app
+Route::get('/resetPassword/{cryptedEmail}', [AuthenticationController::class, 'showResetPasswordForm']);
+Route::post('/resetPassword', [AuthenticationController::class, 'resetPassword'])->name("resetPassword");
 
 //TRANSFERTS
 Route::post('/transferts', [TransfertController::class, 'send'])->name('transferts');

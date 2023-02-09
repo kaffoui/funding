@@ -54,9 +54,13 @@ Route::get('taux/convert', [TauxController::class, 'convert']);
 
 
 Route::post('login', [AuthenticationController::class, 'login'])->name("apilogin");
+//when password forgotten
+Route::post('password/reset', [AuthenticationController::class, 'sendResetPasswordMail'])->name('resetPassword');
+
+
+
 
 Route::post('password/forget-password', [ForgetPasswordController::class, 'sendResetLinkResponse'])->name('passwords.sent');
-Route::post('password/reset', [ResetPasswordController::class, 'sendResetResponse'])->name('passwords.reset');
 
 Route::post('register', [AuthenticationController::class, 'register_client']);
 
