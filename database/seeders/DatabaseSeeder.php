@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CarteCredit;
 use App\Models\Pays;
 use App\Models\User;
 use App\Models\Departement;
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
                 SoldeSeeder::class,
                 MoyenRechargementSeeder::class,
                 DemandeDistributeurSeeder::class,
+
             ]);
         }
 

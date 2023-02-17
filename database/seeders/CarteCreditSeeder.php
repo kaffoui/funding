@@ -13,6 +13,6 @@ class CarteCreditSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }

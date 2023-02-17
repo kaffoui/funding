@@ -1,0 +1,330 @@
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lisocash - Dashboard Administrateur</title>
+
+    <!-- Link Cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"/>
+
+</head>
+<body>
+
+    <div class="container-scroller">
+
+        <!-- Navbar -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                    <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"></a>
+                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"></a>
+                </div>
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span><i class="fa-solid fa-bars"></i></span>
+                    </button>
+                    <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="count"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                            <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-success">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                Just now
+                                </p>
+                            </div>
+                            </a>
+
+                        </div>
+                        </li>
+                        <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            <img src="images/faces/face28.jpg" alt="profile">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i>
+                                Mon Profil
+                            </a>
+                            <a class="dropdown-item">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Se Deconnecter
+                            </a>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
+
+        <div class="container-fluid page-body-wrapper">
+
+            <!-- SideBar -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="">
+                        <i class="fa-solid fa-gauge mr-3"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="fa-solid fa-users mr-3"></i>
+                        <span class="menu-title">Utilisateur</span>
+                    </a>
+                    <div class="collapse" id="auth">
+                        <ul class="nav flex-column">
+                        <li class="nav-item"> <a class="nav-link" href=""> Login </a></li>
+                        <li class="nav-item"> <a class="nav-link" href=""> Register </a></li>
+                        </ul>
+                    </div>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fa-regular fa-file mr-3"></i>
+                        <span class="menu-title">Documentation</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Content -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+
+                    <!-- Statistiques -->
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="row">
+                                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                                    <h3 class="font-weight-bold">Bienvenue Joe</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card rounded float-start w-100">
+                                <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top h-100" alt="...">
+                                <div class="card-body">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin transparent">
+                            <div class="row">
+                            <div class="col-md-6 mb-4 stretch-card transparent">
+                                <div class="card card-tale">
+                                <div class="card-body">
+                                    <p class="mb-4">Nombre de clients</p>
+                                    <p class="fs-30 mb-2">4006</p>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4 stretch-card transparent">
+                                <div class="card card-dark-blue">
+                                <div class="card-body">
+                                    <p class="mb-4">Nombre de Distributeur</p>
+                                    <p class="fs-30 mb-2">614</p>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                                <div class="card card-light-blue">
+                                <div class="card-body">
+                                    <p class="mb-4">Nombre de Transaction</p>
+                                    <p class="fs-30 mb-2">34040</p>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 stretch-card transparent">
+                                <div class="card card-light-danger">
+                                <div class="card-body">
+                                    <p class="mb-4">Nombre
+                                    <p class="fs-30 mb-2">33</p>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Demande Client, Distributeur -->
+                    <div class="row">
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card">
+                            <div class="card-body">
+                                <p class="card-title mb-0">Demande d'ahésion Client</p>
+                                <div class="table-responsive">
+                                <table class="table table-striped table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th>N° de compte</th>
+                                        <th>Nom et Prénoms</th>
+                                        <th>Date d'inscription</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="font-weight-bold">C001</td>
+                                        <td>Search Engine Marketing</td>
+                                        <td>21 Sep 2018</td>
+                                        <td class="font-weight-medium"><div class="badge badge-success w-100">Valider</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">C002</td>
+                                        <td>Pay Per Click Advertising</td>
+                                        <td>30 Jun 2018</td>
+                                        <td class="font-weight-medium"><div class="badge badge-warning w-100">En cours</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">C003</td>
+                                        <td>E-Mail Marketing</td>
+                                        <td>01 Nov 2018</td>
+                                        <td class="font-weight-medium"><div class="badge badge-danger w-100">Refuser</div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card">
+                            <div class="card-body">
+                                <p class="card-title mb-0">Demande d'ahésion Distributeur</p>
+                                <div class="table-responsive">
+                                <table class="table table-striped table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th>N° de compte</th>
+                                        <th>Nom et Prénoms</th>
+                                        <th>Date de demande</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="font-weight-bold">D001</td>
+                                        <td>Search Engine Marketing</td>
+                                        <td>21 Sep 2018</td>
+                                        <td class="font-weight-medium"><div class="badge badge-success w-100">Valider</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">D002</td>
+                                        <td>E-Mail Marketing</td>
+                                        <td>01 Nov 2018</td>
+                                        <td class="font-weight-medium"><div class="badge badge-warning w-100">En Cours</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">D003</td>
+                                        <td>E-Mail Marketing</td>
+                                        <td>01 Nov 2018</td>
+                                        <td class="font-weight-medium"><div class="badge badge-danger w-100">Refuser</div></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+
+                            <!-- Transaction recente -->
+                            <div class="card">
+                                <div class="card-body">
+                                        <p class="card-title">Transactions recentes</p>
+                                        <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                            <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-6"></div>
+                                                    <div class="col-sm-12 col-md-6"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table id="example" class="display expandable-table dataTable no-footer" style="width: 100%;" role="grid">
+                                                            <thead>
+                                                                <tr role="row">
+                                                                    <th class="select-checkbox sorting_disabled" rowspan="1" colspan="1" aria-label="Quote#" style="width: 89px;">#</th>
+                                                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" style="width: 97px;">N° de transacation</th>
+                                                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 118px;">Destinateur</th>
+                                                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Beneficitaire</th>
+                                                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Montant</th>
+                                                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 97px;">Date</th>
+                                                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Statut</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>01</td>
+                                                                    <td>TR001</td>
+                                                                    <td>Koné Zakaria</td>
+                                                                    <td>Atchin Parfait</td>
+                                                                    <td>$1200</td>
+                                                                    <td>16/02/2023</td>
+                                                                    <td><div class="badge badge-danger w-100">Refuser</div></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>02</td>
+                                                                    <td>TR002</td>
+                                                                    <td>Business type 2</td>
+                                                                    <td>Jesse Thomas</td>
+                                                                    <td>$1200</td>
+                                                                    <td>25/04/2020</td>
+                                                                    <td><div class="badge badge-success w-100">Valider</div></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <footer class="footer">
+                                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+                                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="ti-heart text-danger ml-1"></i></span>
+                                </div>
+                            </footer>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+</body>
+</html>

@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Http\Traits\LocalisationTrait;
-use Illuminate\Http\Request;
+use App\Models\Pays;
 use App\Models\User;
 use App\Models\Client;
-use App\Models\Pays;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Traits\LocalisationTrait;
+use App\Models\CarteCredit;
+use App\Models\CompteBanque;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -27,7 +30,15 @@ class ClientController extends Controller
      */
     public function index()
     {
-       
+
+        $clients = DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->select('users.*', 'clients.*')
+            ->get();
+
+        return view('dashboard.admin.client.index', compact('clients'));
+
+
     }
 
     /**
@@ -109,18 +120,34 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $data = [];
+
+        $carte_credits = CarteCredit::where('user_id',$id)
+            ->where('statut', '=', '1')
+            ->get();
+
+        $compte_banques = CompteBanque::where('user_id',$id)
+            ->where('statut', '=', '1')
+            ->get();
+
+        return view('dashboard.admin.client.show', compact('carte_credits', 'compte_banques'));
+
+        /* $data = [];
         try{
             $client= Client::where('id',$id)->first();
-            $data["status"] = "ok"; 
+            $data["status"] = "ok";
             $data["data"] = $client;
         }catch(\Throwable $e){
             $data["status"] = "ko";
-            $data["message"] = $e->getMessage(); 
+            $data["message"] = $e->getMessage();
         }
-        return response()->json($data, 200);
+        return response()->json($data, 200); */
     }
-    
+
+    public function edit(Request $request, $id)
+    {
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -143,5 +170,5 @@ class ClientController extends Controller
     {
         //
     }
- 
+
 }

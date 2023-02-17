@@ -23,6 +23,7 @@ class CreateClientsTable extends Migration
             $table->string('ville');
             $table->string('email');
             $table->string('telephone');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -37,7 +37,7 @@ class CompteBancaireController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $userConnect = auth()->user();
         // dd($userConnect->id);
         $validator = Validator::make($request->all(), [
@@ -65,7 +65,7 @@ class CompteBancaireController extends Controller
         }else{
             return redirect()->back()->with('error', "Erreur lors");
         }
-        
+
     }
 
     /**
@@ -108,7 +108,7 @@ class CompteBancaireController extends Controller
         ]);
 
         return redirect()->back()->with('message', "Vos informations bancaire sont enregistrés avec succès");
-        
+
     }
 
     /**
@@ -120,7 +120,17 @@ class CompteBancaireController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Bloquage de Carte de Credit
+        $request->validate([
+            'statut' => 'required',
+        ]);
+
+        $update_compte_bancaire = CompteBanque::findOrFail($id);
+        $update_compte_bancaire->statut = $request->get('statut');
+
+        $update_compte_bancaire->update();
+
+        return redirect()->back()->with('message', "Le compte bancaire à été cloturé");
     }
 
     /**

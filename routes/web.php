@@ -1,12 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RetraitController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\TransfertController;
+use App\Http\Controllers\API\ClientController;
+use App\Http\Controllers\CarteCreditController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CompteBancaireController;
 use App\Http\Controllers\UserPaymentMethodController;
 use App\Http\Controllers\UserPaymentAccountController;
 
@@ -20,6 +24,16 @@ use App\Http\Controllers\UserPaymentAccountController;
 | contains the "web" middleware group. Now create something great!
 |
  */
+route::get('/admin', function(){
+    return view('dashboard.admin.index');
+});
+Route::apiResource('/clients',ClientController::class);
+Route::Resource('/credit_card',CarteCreditController::class);
+Route::resource('/compte_banque', CompteBancaireController::class);
+
+
+
+
 
 if (env('APP_ENV') == 'production') {
     URL::forceScheme('https');

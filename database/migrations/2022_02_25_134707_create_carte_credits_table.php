@@ -20,6 +20,8 @@ class CreateCarteCreditsTable extends Migration
             $table->string('titulaire');
             $table->string('type')->comment('Ex: mastercard, visa, etc...');
             $table->string('date_validite');
+            $table->string('statut')->default(1)->comment('Actif = 1, Bloquer = 0');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -20,7 +20,9 @@ class CreateCompteBanquesTable extends Migration
             $table->string('iban');
             $table->string('num_piece_identite');
             $table->string('domiciliation');
-        
+            $table->string('statut')->default(1)->comment('Actif = 1, Cloturer = 0');
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

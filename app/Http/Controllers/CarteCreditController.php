@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CarteCredit;
 use App\Http\Requests\StoreCarteCreditRequest;
-use App\Http\Requests\UpdateCarteCreditRequest;
+use Illuminate\Http\Request;
+
 
 class CarteCreditController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -68,9 +70,20 @@ class CarteCreditController extends Controller
      * @param  \App\Models\CarteCredit  $carteCredit
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCarteCreditRequest $request, CarteCredit $carteCredit)
+    public function update(Request $request, $id)
     {
-        //
+        // Bloquage de Carte de Credit
+        $request->validate([
+            'statut' => 'required',
+        ]);
+
+        $update_carte_credit = CarteCredit::findOrFail($id);
+        $update_carte_credit->statut = $request->get('statut');
+
+        $update_carte_credit->update();
+
+        return redirect()->back()->with('message', "La Carte à été bloqué");
+
     }
 
     /**
