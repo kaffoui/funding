@@ -1,5 +1,3 @@
-use App\Http\Controllers\CarteCreditController;
-use App\Http\Controllers\CompteBancaireController;
 @extends('dashboard.admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
@@ -7,17 +5,32 @@ use App\Http\Controllers\CompteBancaireController;
         <div class="content-wrapper">
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
-                <p>{{ $message }}</p>
+                    <p>{{ $message }}</p>
                 </div>
             @endif
-            <div class="row">
-                <div class="col-lg-6">
-                    <h4 class=" mb-3">Les cartes de Crédits</h4>
+
+            <div class="row mb-5">
+                <div class="content ">
+                    <h3 class="fw-bold mb-3">Infos du titulaire</h3>
+                        @foreach ( $clients_infos as $clients_info )
+                            <p>Pays : <span class="fw-bold"></span></p>
+                            <p>Code postal : <span class="fw-bold"> {{$clients_info->code_postal}}</span></p>
+                            <p>Ville : <span class="fw-bold"> {{$clients_info->ville}}</span ></p>
+                            <p>Email : <span class="fw-bold"> {{$clients_info->email}}</span></p>
+                            <p>Nom et prénoms : <span class="fw-bold"> {{$clients_info->nom}} {{$clients_info->prenoms}}</span></p>
+                            <p>Date de création : <span class="fw-bold"> {{$clients_info->created_at}}</span></p>
+                        @endforeach
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-lg-6 mb-5">
+                    <h4 class="fw-bold mb-3">Cartes de Crédits</h4>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
                             <tr>
-                                <th>Numero de la Carte de Credit</th>
+                                <th>Carte de Credit</th>
                                 <th>Expiration</th>
                                 <th>Type de Carte</th>
                                 <th>Nom du titulaire</th>
@@ -53,8 +66,8 @@ use App\Http\Controllers\CompteBancaireController;
                         </table>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <h4 class="mb-3">Les comptes bancaires</h4>
+                <div class="col-lg-6 mb-3">
+                    <h4 class="fw-bold mb-3">Comptes bancaires</h4>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
@@ -92,6 +105,12 @@ use App\Http\Controllers\CompteBancaireController;
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <button class="btn btn-success w-100"><a href="/clients">Retour</a></button>
                 </div>
             </div>
         </div>

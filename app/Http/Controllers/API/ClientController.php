@@ -28,7 +28,7 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $clients = DB::table('users')
@@ -37,8 +37,6 @@ class ClientController extends Controller
             ->get();
 
         return view('dashboard.admin.client.index', compact('clients'));
-
-
     }
 
     /**
@@ -129,7 +127,17 @@ class ClientController extends Controller
             ->where('statut', '=', '1')
             ->get();
 
-        return view('dashboard.admin.client.show', compact('carte_credits', 'compte_banques'));
+        $clients_infos = DB::table('users')
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->select('users.*', 'clients.*')
+            ->where('user_id',$id)
+            ->get();
+
+
+
+
+
+        return view('dashboard.admin.client.show', compact('carte_credits', 'compte_banques', 'clients_infos'));
 
         /* $data = [];
         try{

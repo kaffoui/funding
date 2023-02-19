@@ -8,6 +8,7 @@
     <!-- Link Cdn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"/>
 
@@ -93,6 +94,12 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/utilisateurs">
+                            <i class="fa-regular fa-user mr-3"></i>
+                            <span class="menu-title">Utilisateurs</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="">
                             <i class="fa-regular fa-file mr-3"></i>
                             <span class="menu-title">Documentation</span>
@@ -110,5 +117,13 @@
     </div>
 
         <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready( function () {
+                $('#client_datatable').DataTable();
+            } );
+      </script>
 </body>
 </html>
