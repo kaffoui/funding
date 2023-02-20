@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('dashboard.admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
@@ -20,13 +20,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        @foreach ($liste_clients as $liste_client)
+                                        @foreach ($administrateurs as $administrateur)
                                             <tr>
                                                 <td>01</td>
-                                                <td>{{$liste_client->nom}} {{$liste_client->prenoms}}</td>
-                                                <td>{{$liste_client->email}}</td>
-                                                <td>{{$liste_client->telephone}}</td>
-                                                <td>{{$liste_client->code_postal}}</td>
+                                                <td>{{$administrateur->nom}} {{$liste_client->prenoms}}</td>
+                                                <td>{{$administrateur->email}}</td>
+                                                <td>{{$administrateur->telephone}}</td>
+                                                <td>{{$administrateur->code_postal}}</td>
                                                 <td>
                                                     <form action="{{-- {{ route('client.destroy',$liste_client->id) }} --}}" method="Post">
 
@@ -41,9 +41,87 @@
                                         @endforeach
                                 </tbody>
                             </table>
-                            <ul>
+                            <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
 
-                            </ul>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="signupForm" method="post" action="">
+                @csrf
+                <div class="form-group">
+                    <label for="nom">Niveau D'accès</label>
+                    <input type="text" class="form-control" id="role" value="2" required
+                        placeholder="Entrez votre nom" name="role">
+                </div>
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" required
+                        placeholder="Entrez votre nom" name="nom">
+                </div>
+                <div class="form-group">
+                    <label for="prenoms">Prénoms</label>
+                    <input type="text" class="form-control" name="prenoms" required
+                        placeholder="Entrez votre prénom">
+                </div>
+              <div class="row">
+                <div class="form-group col-6">
+                    <label for="code_postal">Code postal</label>
+                    <input type="text" class="form-control" name="code_postal" required
+                        placeholder="Ex : 0000">
+                </div>
+                <div class="form-group col-6">
+                    <label for="ville">Ville</label>
+                    <input type="text" class="form-control" name="ville" required
+                        placeholder="Ville de résidence">
+                </div>
+              </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" required
+                        placeholder="Entrez votre adresse email">
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="indicatif">Indicatif</label>
+                        <input type="text" class="form-control" name="indicatif" required
+                            placeholder="Ex : +33">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="telephone">Téléphone</label>
+                        <input type="text" class="form-control" name="telephone" required
+                            placeholder="Entrez votre numéro de téléphone (Ex : 00000000)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" name="password" required
+                        placeholder="Entrez un mot de passe" minlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="password_confirmation">Confirmez votre mot de passe</label>
+                    <input type="password" class="form-control" name="password_confirmation" required
+                        placeholder="Tapez à nouveau le mot de passe" minlength="8">
+                </div>
+                <button class="btn btn-primary btn-block my-4" type="submit">S'inscrire</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
                            {{--  <form method="POST" action="{{ route('register') }}">
                                 @csrf

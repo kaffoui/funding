@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\RetraitController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\TransfertController;
@@ -30,7 +32,7 @@ route::get('/admin', function(){
 Route::apiResource('/clients',ClientController::class);
 Route::Resource('/credit_card',CarteCreditController::class);
 Route::resource('/compte_banque', CompteBancaireController::class);
-
+Route::resource('/utilisateur', AdminsController::class);
 
 
 
@@ -38,6 +40,7 @@ Route::resource('/compte_banque', CompteBancaireController::class);
 if (env('APP_ENV') == 'production') {
     URL::forceScheme('https');
 }
+
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
@@ -49,7 +52,8 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 Route::get('/validateSms', [AuthenticationController::class, 'showSmsValidationForm'])->name('validateSmsCodeForm');
 
-//Offcial for code validation
+
+//Official for code validation
 Route::match(["get", "post"], "/validation/code", [AuthenticationController::class, "validateCode"]);
 Route::post("/resendemailcode", [AuthenticationController::class, "resendEmailCode"]);
 Route::post("/resendsmscode", [AuthenticationController::class, "resendSmsCode"]);
@@ -60,6 +64,7 @@ Route::get('/api/validation/{codeDetails}', [AuthenticationController::class, 'v
 //Route::get('/api/validation', [AuthenticationController::class, 'validateCode']);
 Route::middleware(['auth', 'verified', 'ip.valid'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
     Route::get('/transactions', [HomeController::class, 'transactions'])->name('transactions');
     //send
     Route::get('/send', [HomeController::class, 'send'])->name('send');

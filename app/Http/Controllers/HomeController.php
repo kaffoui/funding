@@ -37,7 +37,7 @@ class HomeController extends Controller
                 $percentage = $percentage + 1 ;
             }
         }
-        
+
         $account_status["percentage"] = intval(($percentage / 4)*100);
 
         $transactionsContent = $repository->getHistories(auth()->user(), "dashboard")['transactionsContent'];

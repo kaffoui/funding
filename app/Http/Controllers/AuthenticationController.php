@@ -77,6 +77,7 @@ class AuthenticationController extends Controller
             'telephone' => $telephone,
             'recent_ip' => request()->ip(),
             'password' => Hash::make($request->password),
+            'role' => $request->role,
             'code_validation' => $request->code_validation,
             'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
@@ -139,7 +140,7 @@ class AuthenticationController extends Controller
                 "success" => false,
                 "message" => "Credentials incorrects"
             ]);
-            // return response(['error_message' => 'Incorrect Details. 
+            // return response(['error_message' => 'Incorrect Details.
             // Please try again']);
         }
 
@@ -163,9 +164,20 @@ class AuthenticationController extends Controller
             'recent_ip' => $recent_ip,
         ]);
 
-        auth()->user()->informations = Gate::allows('is-client') ? auth()->user()->client : auth()->user()->distributeur;
-        // return response(['user' => auth()->user(), 'pays' => auth()->user()->pays, 'token' => $token], 200);
-        return redirect()->route("home");
+
+
+        $user_role = Auth::user()->role;
+
+        if($user_role == '0'){
+            return redirect()->route("home");
+        }
+        else{
+            return view('dashboard.admin.index');
+        }
+
+        //auth()->user()->informations = Gate::allows('is-client') ? auth()->user()->client : auth()->user()->distributeur;
+                // return response(['user' => auth()->user(), 'pays' => auth()->user()->pays, 'token' => $token], 200);
+        //return redirect()->route("home");
     }
 
     public function showSmsValidationForm(Request $request){
@@ -185,18 +197,18 @@ class AuthenticationController extends Controller
                     $user->update([
                         "is_email_valid" => true,
                     ]);
-                    
-        
-                    //revoir page de validation 
+
+
+                    //revoir page de validation
                       //  return "Votre adresse email a bien été vérifiée";
-                                       
+
                     // dd($codeDetails);
                      return view('emails.mailverification' , compact('codeDetails',  'user'));
-                     
+
                 } else {
-        
-                         
-            
+
+
+
                    //  dd($codeDetails);
                    ////  return view('emails.maildefault' , compact('codeDetails'));
                    //  return view('emails.mailverification' , compact('codeDetails',  'user'));
@@ -259,7 +271,7 @@ class AuthenticationController extends Controller
         return redirect()->away('/');
     }
 
-    
+
 
 
 }
