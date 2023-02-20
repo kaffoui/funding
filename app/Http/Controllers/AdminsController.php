@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Pays;
 use App\Models\User;
-use App\Models\Admin;
+use App\Models\Client;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 
 class AdminsController extends Controller
 {
@@ -17,7 +20,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        $administrateurs = User::where('role', '>', '0');
+        $administrateurs = User::where('role', '>', '0')->get();
         return view('dashboard.admin.utilisateur.index', compact('administrateurs'));
     }
 
