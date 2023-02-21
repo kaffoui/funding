@@ -67,6 +67,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'ip.valid' => \App\Http\Middleware\IpValid::class,
         'code.confirmation' => \App\Http\Middleware\ValideCodeValidation::class,
-        'with.distributeur.user' => \App\Http\Middleware\DistributeurUserSession::class
+        'with.distributeur.user' => \App\Http\Middleware\DistributeurUserSession::class,
+        //
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

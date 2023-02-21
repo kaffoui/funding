@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
                 SoldeSeeder::class,
                 MoyenRechargementSeeder::class,
                 DemandeDistributeurSeeder::class,
+                CreateAdminUserSeeder::class,
 
             ]);
         }
