@@ -4,9 +4,19 @@
     <div class="main-panel">
         <div class="content-wrapper">
 
+        <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-harder">
+                            
+                        </div>
+                    <div class="card-body">
+                       
+
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-5">
+                    <div class="col-lg-9"> <p class="card-title mb-0"> <label for="">Liste des utilisateurs</label> </p><br><br></div>
+                    <div class="col-lg-3">
                         <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Ajouter un utilisateur
                         </button>
@@ -15,7 +25,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <table id="example" class="display expandable-table dataTable no-footer" style="width: 100%;" role="grid">
+                        <table id="client_datatable" class="display expandable-table dataTable no-footer" style="width: 100%;" role="grid">
                             <thead>
                                 <tr role="row">
                                     <th class="select-checkbox sorting_disabled" rowspan="1" colspan="1" aria-label="Quote#" >#</th>
@@ -26,7 +36,8 @@
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Pays</th>
                                     <!-- <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Code Postal</th> -->
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Ville</th>
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Action</th>
+                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Modifier</th>
+                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Supprimer</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,9 +49,20 @@
                                             <td>{{$employe->telephone}}</td>
                                             <td>{{$employe->pays->nom}}</td>
                                             <td>{{$employe->ville}}</td>
+
+                                            <td>
+                                                <form action="{{route('modification_employe', $employe->id)}}" method="POST">
+
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn ">
+                                                        <i class="fa-solid fa-edit" style="color: blue;"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
                                             
                                             <td>
-                                                <form action="{{-- {{  }} --}}" method="POST">
+                                                <form action="{{route('suppression_employe', $employe->id)}}" method="POST">
 
                                                     @csrf
                                                     @method('DELETE')
@@ -55,17 +77,23 @@
                         </table>
                         <!-- Button trigger modal -->
 
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un utilisateur</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="bg-dark p-5" style="color:#ffffff">
+                                    <!-- <div class="bg-dark p-5" style="color:#ffffff">
                                         <span>Les Accès par niveau</span>
                                         <div>
                                             <p>Editeur :</p>
@@ -86,45 +114,46 @@
                                         </div>
 
 
-                                    </div>
-                                    <form id="signupForm" method="post" action="">
+                                    </div> -->
+                                    <form id="signupForm" method="post" action="{{route('ajout_employe')}}">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="nom">Niveau D'accès</label>
+                                            <label for="nom">Rôle</label>
                                             <select class="form-select" aria-label="Default select example" name="role">
-                                                <option selected>Selectionner le niveau</option>
-                                                <option value="1">Editeur</option>
-                                                <option value="2">Administrateur</option>
-                                                <option value="3">Super Admin</option>
+                                                <option selected>Selectionnez le rôle</option>
+                                                <option value="admin">Administrateur</option>
+                                                <option value="agent">Agent</option>
+                                                <option value="gestionnaire">Gestionnaire</option>
+                                                <option value="guichetier">Guichetier</option>
                                             </select>
 
                                         </div>
                                         <div class="form-group">
                                             <label for="nom">Nom</label>
                                             <input type="text" class="form-control" id="nom" required
-                                                placeholder="Entrez votre nom" name="nom">
+                                                placeholder="Entrez le nom" name="nom">
                                         </div>
                                         <div class="form-group">
                                             <label for="prenoms">Prénoms</label>
                                             <input type="text" class="form-control" name="prenoms" required
-                                                placeholder="Entrez votre prénom">
+                                                placeholder="Entrez le(s) prénom(s)">
                                         </div>
-                                    <div class="row">
-                                        <div class="form-group col-6">
+                                    <!-- <div class="row"> -->
+                                        <!-- <div class="form-group col-6">
                                             <label for="code_postal">Code postal</label>
                                             <input type="text" class="form-control" name="code_postal" required
                                                 placeholder="Ex : 0000">
-                                        </div>
-                                        <div class="form-group col-6">
+                                        </div> -->
+                                        <div class="form-group ">
                                             <label for="ville">Ville</label>
                                             <input type="text" class="form-control" name="ville" required
                                                 placeholder="Ville de résidence">
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" class="form-control" name="email" required
-                                                placeholder="Entrez votre adresse email">
+                                                placeholder="Entrez l'adresse e-mail">
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-6">
@@ -135,7 +164,7 @@
                                             <div class="form-group col-6">
                                                 <label for="telephone">Téléphone</label>
                                                 <input type="text" class="form-control" name="telephone" required
-                                                    placeholder="Entrez votre numéro de téléphone (Ex : 00000000)">
+                                                    placeholder="Entrez le numéro de téléphone (Ex : 00000000)">
                                             </div>
                                         </div>
 
@@ -145,17 +174,17 @@
                                                 placeholder="Entrez un mot de passe" minlength="8">
                                         </div>
                                         <div class="form-group">
-                                            <label for="password_confirmation">Confirmez votre mot de passe</label>
+                                            <label for="password_confirmation">Confirmez le mot de passe</label>
                                             <input type="password" class="form-control" name="password_confirmation" required
                                                 placeholder="Tapez à nouveau le mot de passe" minlength="8">
                                         </div>
-                                        <button class="btn btn-primary btn-block my-4" type="submit">S'inscrire</button>
+                                        <button class="btn btn-primary btn-block my-4" type="submit">Enregistrer</button>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                 <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
+                                </div> -->
                             </div>
                             </div>
                         </div>

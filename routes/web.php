@@ -168,9 +168,16 @@ Route::middleware(['auth', 'ip.valid'])->group(function () {
 Route::prefix('dashboard')->middleware(['auth', 'ip.valid',])->group(function() {
 
     Route::get('/', [AdminController::class, 'statistiques'])->name('dashboard');
+
     Route::get('/liste_clients', [AdminController::class, 'liste_clients'])->name('liste_clients');
     Route::get('/details_client/{id}', [AdminController::class, 'details_client'])->name('details_client');
+
     Route::get('/liste_employes', [AdminController::class, 'liste_employes'])->name('liste_employes')->middleware(['role:admin']);
+    Route::get('/ajout_employe', [AdminController::class, 'ajout_employe'])->name('ajout_employe')->middleware(['role:admin']);
+    Route::put('/modification_employe/{id}', [AdminController::class, 'modification_employe'])->name('modification_employe')->middleware(['role:admin']);
+    Route::get('/suppression_employe/{id}', [AdminController::class, 'suppression_employe'])->name('suppression_employe')->middleware(['role:admin']);
+
+
     Route::get('/liste_marchands', [AdminController::class, 'liste_marchands'])->name('liste_marchands')->middleware(['role:admin']);
     Route::get('/liste_distributeurs', [AdminController::class, 'liste_distributeurs'])->name('liste_distributeurs')->middleware(['role:admin']);
 

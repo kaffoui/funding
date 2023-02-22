@@ -8,10 +8,19 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        <p class="card-title mb-0">Liste des clients</p><br>
+                        
+                    <div class="row">
+                    <div class="col-lg-9"> <p class="card-title mb-0"> <label for="">Liste des clients</label> </p><br><br></div>
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Ajouter un client
+                        </button>
+                    </div>
+
+                </div>
 
             <div class="table-responsive">
-                <table class="table table-striped table-borderless " id="client_datatable">
+                <table class="table table-striped table-borderless display expandable-table dataTable no-footer " id="client_datatable">
                     <thead>
                     <tr>
                         <!-- <th>Pays</th> -->

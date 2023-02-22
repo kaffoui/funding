@@ -50,10 +50,6 @@ class AdminController extends Controller
             ->where('user_id',$id)
             ->get();
 
-
-
-
-
         return view('admin.clients.show', compact('carte_credits', 'compte_banques', 'clients_infos'));
     }
 
@@ -64,6 +60,8 @@ class AdminController extends Controller
 
         return view('admin.utilisateurs.index', compact('employes'));
     }
+
+    
 
     
 
