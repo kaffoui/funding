@@ -219,7 +219,7 @@ Route::prefix('dashboard')->middleware(['auth', 'ip.valid',])->group(function() 
     Route::get('/', [AdminController::class, 'statistiques'])->name('dashboard');
 
     Route::get('/liste_clients', [AdminController::class, 'liste_clients'])->name('liste_clients');
-    Route::get('/liste_clients/create', [AdminController::class, 'client_create'])->name('create_clients');
+    Route::get('/liste_clients/create', [AdminController::class, 'client_create']);
     Route::post('/liste_clients/create', [AdminController::class, 'client_store'])->name('store_clients');
 
     Route::get('/details_client/{id}', [AdminController::class, 'details_client'])->name('details_client');

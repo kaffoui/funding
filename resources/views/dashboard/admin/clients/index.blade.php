@@ -12,7 +12,7 @@
                     <div class="row">
                     <div class="col-lg-9"> <p class="card-title mb-0"> <label for="">Liste des clients</label> </p><br><br></div>
                     <div class="col-lg-3">
-                        <a href="{{route('liste_clients')}}" type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <a href="" type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Ajouter un client
                         </a>
                     </div>
