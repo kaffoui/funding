@@ -3,21 +3,32 @@
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminsController;
+
 use App\Http\Controllers\RetraitController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransfertController;
 use App\Http\Controllers\API\ClientController;
+use App\Http\Controllers\IndexAdminController;
 use App\Http\Controllers\CarteCreditController;
+
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CompteBancaireController;
+
+use App\Http\Controllers\RoleAdminController;
+use App\Http\Controllers\PermissionAdminController;
+use App\Http\Controllers\UserAdminController;
+
+
 use App\Http\Controllers\UserPaymentMethodController;
 use App\Http\Controllers\UserPaymentAccountController;
+
+// use App\Http\Controllers\Admin\RoleAdminController;
+// use App\Http\Controllers\Admin\UserAdminController;
+// use App\Http\Controllers\Admin\IndexAdminController;
+// use App\Http\Controllers\Admin\PermissionAdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,14 +41,31 @@ use App\Http\Controllers\UserPaymentAccountController;
 |
  */
 
- Route::group(['middleware' => ['auth','verified',]], function() {
-    Route::resource('dashboard', DashboardController::class);
-    Route::resource('roles', RoleController::class);
-    Route::resource('utilisateurs', UtilisateurController::class);
-    Route::apiResource('clients',ClientController::class);
-    Route::Resource('credit_card',CarteCreditController::class);
-    Route::resource('compte_banque', CompteBancaireController::class);
+//  Route::group(['middleware' => ['auth','verified',]], function() {
+//     Route::resource('dashboard', DashboardController::class);
+//     Route::resource('roles', RoleController::class);
+//     Route::resource('utilisateurs', UtilisateurController::class);
+//     Route::apiResource('clients',ClientController::class);
+//     Route::Resource('credit_card',CarteCreditController::class);
+//     Route::resource('compte_banque', CompteBancaireController::class);
 
+// });
+
+Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function () {
+     Route::get('/', [IndexAdminController::class, 'index'])->name('index');
+    Route::resource('/roles', RoleAdminController::class);
+    Route::post('/roles/{role}/permissions', [RoleAdminController::class, 'givePermission'])->name('roles.permissions');
+    Route::delete('/roles/{role}/permissions/{permission}', [RoleAdminController::class, 'revokePermission'])->name('roles.permissions.revoke');
+    Route::resource('/permissions', PermissionAdminController::class);
+    Route::post('/permissions/{permission}/roles', [PermissionAdminController::class, 'assignRole'])->name('permissions.roles');
+    Route::delete('/permissions/{permission}/roles/{role}', [PermissionAdminController::class, 'removeRole'])->name('permissions.roles.remove');
+    Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}', [UserAdminController::class, 'show'])->name('users.show');
+    Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('users.destroy');
+    Route::post('/users/{user}/roles', [UserAdminController::class, 'assignRole'])->name('users.roles');
+    Route::delete('/users/{user}/roles/{role}', [UserAdminController::class, 'removeRole'])->name('users.roles.remove');
+    Route::post('/users/{user}/permissions', [UserAdminController::class, 'givePermission'])->name('users.permissions');
+    Route::delete('/users/{user}/permissions/{permission}', [UserAdminController::class, 'revokePermission'])->name('users.permissions.revoke');
 });
 
 

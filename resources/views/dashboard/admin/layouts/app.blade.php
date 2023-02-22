@@ -56,14 +56,14 @@
                             <img src="images/faces/face28.jpg" alt="profile">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+
                             <a class="dropdown-item">
-                                <i class="fa-solid fa-gear"></i>
-                                Mon Profil
-                            </a>
-                            <a class="dropdown-item">
-                                <i class="fa-solid fa-right-from-bracket"></i>
+
                                 Se Deconnecter
                             </a>
+                            <a href="javascript:void(0)" class=""
+                                      onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i
+                                          class="ti-power-off "></i><i class="fa-solid fa-right-from-bracket"></i>Se Deconnecter</a>
                         </div>
                         </li>
                     </ul>
@@ -94,11 +94,21 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/utilisateurs">
-                            <i class="fa-regular fa-user mr-3"></i>
-                            <span class="menu-title">Utilisateurs</span>
+                        <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="auth">
+                            <i class="fa-solid fa-users mr-3"></i>
+                            <span class="menu-title">Utilisateur</span>
                         </a>
+                        <div class="collapse" id="user">
+                            <ul class="nav flex-column">
+                                <li class="nav-item"> <a class="nav-link" href="users"> Utilisateurs </a></li>
+
+                                <li class="nav-item"> <a class="nav-link" href="roles"> Rôles </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="permissions"> Permission </a></li>
+                            </ul>
+                        </div>
                     </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link" href="">
                             <i class="fa-regular fa-file mr-3"></i>

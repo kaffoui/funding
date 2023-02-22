@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         if (env('APP_ENV') == 'local')
         {
             $this->call([
+                RoleSeeder::class,
                 PaysSeeder::class,
                 FraisSeeder::class,
                 CommissionModaliteSeeder::class,
@@ -32,7 +33,6 @@ class DatabaseSeeder extends Seeder
                 SoldeSeeder::class,
                 MoyenRechargementSeeder::class,
                 DemandeDistributeurSeeder::class,
-                CreateAdminUserSeeder::class,
 
             ]);
         }

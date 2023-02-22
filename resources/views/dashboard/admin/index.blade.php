@@ -71,36 +71,36 @@
                     <div class="card-body">
                         <p class="card-title mb-0">Demande d'ahésion Client</p>
                         <div class="table-responsive">
-                        <table class="table table-striped table-borderless">
-                            <thead>
-                            <tr>
-                                <th>N° de compte</th>
-                                <th>Nom et Prénoms</th>
-                                <th>Date d'inscription</th>
-                                <th>Statut</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="font-weight-bold">C001</td>
-                                <td>Search Engine Marketing</td>
-                                <td>21 Sep 2018</td>
-                                <td class="font-weight-medium"><div class="badge badge-success w-100">Valider</div></td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">C002</td>
-                                <td>Pay Per Click Advertising</td>
-                                <td>30 Jun 2018</td>
-                                <td class="font-weight-medium"><div class="badge badge-warning w-100">En cours</div></td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">C003</td>
-                                <td>E-Mail Marketing</td>
-                                <td>01 Nov 2018</td>
-                                <td class="font-weight-medium"><div class="badge badge-danger w-100">Refuser</div></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            <table class="table table-striped table-borderless">
+                                <thead>
+                                <tr>
+                                    <th>N° de compte</th>
+                                    <th>Nom et Prénoms</th>
+                                    <th>Date d'inscription</th>
+                                    <th>Statut</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">C001</td>
+                                    <td>Search Engine Marketing</td>
+                                    <td>21 Sep 2018</td>
+                                    <td class="font-weight-medium"><div class="badge badge-success w-100">Valider</div></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">C002</td>
+                                    <td>Pay Per Click Advertising</td>
+                                    <td>30 Jun 2018</td>
+                                    <td class="font-weight-medium"><div class="badge badge-warning w-100">En cours</div></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">C003</td>
+                                    <td>E-Mail Marketing</td>
+                                    <td>01 Nov 2018</td>
+                                    <td class="font-weight-medium"><div class="badge badge-danger w-100">Refuser</div></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     </div>
