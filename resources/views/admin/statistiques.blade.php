@@ -1,4 +1,4 @@
-@extends('dashboard.admin.layouts.app')
+@extends('admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
@@ -9,21 +9,21 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Bienvenue Joe</h3>
+                            <h3 class="font-weight-bold">Bienvenue sur votre interface </h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 mb-3">
+                <!-- <div class="col-md-6 mb-3">
                     <div class="card rounded float-start w-100">
                         <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top h-100" alt="...">
                         <div class="card-body">
 
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 grid-margin transparent">
+                </div> -->
+                <div class="col-md-12 grid-margin transparent">
                     <div class="row">
                         <div class="col-md-6 mb-4 stretch-card transparent">
                             <div class="card card-tale">
@@ -36,7 +36,7 @@
                         <div class="col-md-6 mb-4 stretch-card transparent">
                             <div class="card card-dark-blue">
                             <div class="card-body">
-                                <p class="mb-4">Nombre de Distributeur</p>
+                                <p class="mb-4">Nombre de Distributeurs</p>
                                 <p class="fs-30 mb-2">614</p>
                             </div>
                             </div>
@@ -46,7 +46,7 @@
                         <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                             <div class="card card-light-blue">
                                 <div class="card-body">
-                                    <p class="mb-4">Nombre de Transaction</p>
+                                    <p class="mb-4">Nombre de Transactions</p>
                                     <p class="fs-30 mb-2">34040</p>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                         <div class="col-md-6 stretch-card transparent">
                             <div class="card card-light-danger">
                                 <div class="card-body">
-                                    <p class="mb-4">Nombre
+                                    <p class="mb-4">Nombre d'employés 
                                     <p class="fs-30 mb-2">33</p>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        <p class="card-title mb-0">Demande d'ahésion Client</p>
+                        <p class="card-title mb-0">Demande d'adhésion Client</p>
                         <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
@@ -108,7 +108,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        <p class="card-title mb-0">Demande d'ahésion Distributeur</p>
+                        <p class="card-title mb-0">Demande d'adhésion Distributeur</p>
                         <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>

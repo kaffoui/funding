@@ -261,7 +261,7 @@
                           @auth()
                               <li><a href="javascript:void(0)" class="btn btn-outline-danger"
                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i
-                                          class="ti-power-off "></i>Logout</a></li>
+                                          class="ti-power-off "></i>Déconnexion</a></li>
                               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
                                   @csrf
                               </form>

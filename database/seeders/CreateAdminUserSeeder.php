@@ -21,14 +21,14 @@ class CreateAdminUserSeeder extends Seeder
         $user = User::create([
             'pays_register_id'  => Pays::where('indicatif', "+225")->first()->id,
             'ip_register'       => '160.154.156.144',
-            'email' => 'admin@laraveltuts.com',
+            'email' => 'admin@lisocash.com',
             'password' => bcrypt('password'),
             'recent_ip'         => '160.154.156.144',
             'telephone'         => '+2250789482126',
 
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create(['name' => 'admin']);
 
         $permissions = Permission::pluck('id','id')->all();
 

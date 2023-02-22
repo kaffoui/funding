@@ -20,15 +20,29 @@
         <!-- Navbar -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"></a>
+                    <!-- <a class="navbar-brand brand-logo mr-5" href="/"><img src="images/logo.svg" class="mr-2" alt="logo"></a> -->
+                    <!-- <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"></a> -->
+                    <a class="navbar-brand brand-logo mr-5" href="/">LISOCASH </a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <!-- <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <span><i class="fa-solid fa-bars"></i></span>
-                    </button>
+                    </button> -->
                     <ul class="navbar-nav navbar-nav-right">
-                        <li class="nav-item dropdown">
+
+                        <!-- DECONNEXION -->
+                    <li class="nav-item"><a href="javascript:void(0)" class="btn btn-outline-danger"
+                                      onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i
+                                          class="ti-power-off "></i>Déconnexion</a></li>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
+                                  @csrf
+                              </form>
+                              <!-- END DECONNEXION  -->
+
+
+
+
+                        <!-- <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                             <i class="fa-solid fa-bell"></i>
                             <span class="count"></span>
@@ -51,6 +65,7 @@
 
                         </div>
                         </li>
+                        
                         <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <img src="images/faces/face28.jpg" alt="profile">
@@ -64,8 +79,10 @@
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                 Se Deconnecter
                             </a>
+
+                            
                         </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
         </nav>
@@ -74,37 +91,46 @@
 
             <!-- SideBar -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin">
+                <ul class="nav" id="nav">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/dashboard">
                             <i class="fa-solid fa-gauge mr-3"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">Statistiques</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <a class="nav-link" href="/dashboard/liste_clients" aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-users mr-3"></i>
                             <span class="menu-title">Clients</span>
                         </a>
-                        <div class="collapse" id="auth">
-                            <ul class="nav flex-column">
-                                <li class="nav-item"> <a class="nav-link" href="/clients"> Consultation </a></li>
-                            </ul>
-                        </div>
+                       
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/utilisateurs">
+                        <a class="nav-link" href="/dashboard/liste_employes">
                             <i class="fa-regular fa-user mr-3"></i>
                             <span class="menu-title">Utilisateurs</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fa-regular fa-file mr-3"></i>
-                            <span class="menu-title">Documentation</span>
+                        <a class="nav-link" href="{{ route('liste_employes') }}">
+                            <i class="fa-regular fa-user mr-3"></i>
+                            <span class="menu-title">Distributeurs</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('liste_employes') }}">
+                            <i class="fa-regular fa-user mr-3"></i>
+                            <span class="menu-title">Marchands</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('liste_employes') }}">
+                            <i class="fa-regular fa-user mr-3"></i>
+                            <span class="menu-title">Agences</span>
+                        </a>
+                    </li>
+                    
                 </ul>
             </nav>
 
@@ -123,9 +149,20 @@
         <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 
         <script type="text/javascript">
+
+            $("#nav>li").each(function() {
+                var navItem = $(this);
+                if (navItem.find("a").attr("href") == location.pathname) {
+                navItem.addClass("active");
+                }
+            });
+
+
             $(document).ready( function () {
                 $('#client_datatable').DataTable();
             } );
+
+            
       </script>
 </body>
 </html>

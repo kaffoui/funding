@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('recent_ip');
             $table->string('password');
-            $table->string('role')->default(0)->comment('client = 0, editor = 1, admin = 2, superadmin = 3');
             $table->rememberToken();
             $table->timestamps();
 

@@ -1,17 +1,23 @@
-@extends('dashboard.admin.layouts.app')
+@extends('admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">
 
+        <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                    <div class="card-body">
+                        <p class="card-title mb-0">Liste des clients</p><br>
+
             <div class="table-responsive">
                 <table class="table table-striped table-borderless " id="client_datatable">
                     <thead>
                     <tr>
-                        <th>Pays</th>
-                        <th>Code Postal</th>
-                        <th>Ville</th>
-                        <th>Nom  du client</th>
+                        <!-- <th>Pays</th> -->
+                        <!-- <th>Code Postal</th> -->
+                        <!-- <th>Ville</th> -->
+                        <th>Nom et Prénom(s)</th>
                         <th>Email</th>
                         <th>Numero de téléphone</th>
                         <th>Action</th>
@@ -20,15 +26,15 @@
                     <tbody>
                         @foreach ( $clients as $client )
                             <tr>
-                                <td></td>
-                                <td>{{$client->code_postal}}</td>
-                                <td>{{$client->ville}}</td>
+                                <!-- <td></td> -->
+                                <!-- <td>{{$client->code_postal}}</td> -->
+                                <!-- <td>{{$client->ville}}</td> -->
                                 <td>{{$client->nom}} {{$client->prenoms}}</td>
                                 <td>{{$client->email}}</td>
                                 <td>{{$client->telephone}}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{ route('clients.show',$client->id) }}">
-                                        Details <i class="fa-solid fa-eye ml-3"></i>
+                                    <a class="btn btn-primary" href="{{ route('details_client',$client->id) }}">
+                                        Détails <i class="fa-solid fa-eye ml-3"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -40,6 +46,11 @@
                     {{$clients->links()}}
                 </div> --}}
             </div>
+
+            </div>
+                    </div>
+                    </div>
+                </div>
 
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('dashboard.admin.layouts.app')
+@extends('admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
@@ -8,24 +8,56 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
+            <div class="row">
+                <div class="col-lg-7">
+                    <button class="btn btn-primary"><a href="{{route('liste_clients')}}" style="color : white; text-decoration : none">Retour</a></button>
+               
+                    </div>
+                <div class="col-lg-5">
+                <button class="btn btn-danger"><a href="#" style="color : white; text-decoration : none">Clôturer ce compte</a></button>
+                
+                <button class="btn btn-info"><a href="#" style="color : white; text-decoration : none">Bloquer la carte </a></button>
+           
+                </div>
+            </div> <br><br>
+
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                    <div class="card-body">
+                        <p class="card-title mb-0">Informations personnelles </p><br>
 
             <div class="row mb-5">
                 <div class="content ">
-                    <h3 class="fw-bold mb-3">Infos du titulaire</h3>
+                    <!-- <h3 class="fw-bold mb-3">Infos du titulaire</h3> -->
                         @foreach ( $clients_infos as $clients_info )
-                            <p>Pays : <span class="fw-bold"></span></p>
+                             <p>Nom et prénoms : <span class="fw-bold"> {{$clients_info->nom}} {{$clients_info->prenoms}}</span></p>
+                             <p>Email : <span class="fw-bold"> {{$clients_info->email}}</span></p>
+                             <p>Numéro de téléphone : <span class="fw-bold"> {{$clients_info->telephone}}</span></p>
+                             <p>Pays : <span class="fw-bold">{{$clients_info->nom_pays}}</span></p>
                             <p>Code postal : <span class="fw-bold"> {{$clients_info->code_postal}}</span></p>
                             <p>Ville : <span class="fw-bold"> {{$clients_info->ville}}</span ></p>
-                            <p>Email : <span class="fw-bold"> {{$clients_info->email}}</span></p>
-                            <p>Nom et prénoms : <span class="fw-bold"> {{$clients_info->nom}} {{$clients_info->prenoms}}</span></p>
-                            <p>Date de création : <span class="fw-bold"> {{$clients_info->created_at}}</span></p>
+                            
+                            
+                            <p>Date de création du compte : <span class="fw-bold"> {{$clients_info->created_at}}</span></p>
                         @endforeach
                 </div>
             </div>
 
+            </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                    <div class="card-body">
+                        <p class="card-title mb-0">Cartes de Crédits </p><br>
+
             <div class="row mb-5">
                 <div class="col-lg-6 mb-5">
-                    <h4 class="fw-bold mb-3">Cartes de Crédits</h4>
+                    <!-- <h4 class="fw-bold mb-3"></h4> -->
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
@@ -66,8 +98,21 @@
                         </table>
                     </div>
                 </div>
+
+                </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                    <div class="card-body">
+                        <p class="card-title mb-0">Comptes bancaires </p><br>
+
+
                 <div class="col-lg-6 mb-3">
-                    <h4 class="fw-bold mb-3">Comptes bancaires</h4>
+                    <!-- <h4 class="fw-bold mb-3"></h4> -->
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
@@ -108,11 +153,12 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-4">
-                    <button class="btn btn-success w-100"><a href="/clients">Retour</a></button>
-                </div>
             </div>
+                    </div>
+                    </div>
+                </div>
+
+            
         </div>
     </div>
 @endsection

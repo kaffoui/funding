@@ -1,4 +1,4 @@
-@extends('dashboard.admin.layouts.app')
+@extends('admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
@@ -21,28 +21,30 @@
                                     <th class="select-checkbox sorting_disabled" rowspan="1" colspan="1" aria-label="Quote#" >#</th>
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending">Nom & Prénoms</th>
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1">Email</th>
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1">Fonction</th>
+                                    <!-- <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1">Fonction</th> -->
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Téléphone</th>
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Pays</th>
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Code Postal</th>
+                                    <!-- <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Code Postal</th> -->
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Ville</th>
                                     <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    @foreach ($administrateurs as $administrateur)
+                                    @foreach ($employes as $employe)
                                         <tr>
                                             <td>01</td>
-                                            <td>{{$administrateur->nom}} {{$administrateur->prenoms}}</td>
-                                            <td>{{$administrateur->email}}</td>
-                                            <td>{{$administrateur->telephone}}</td>
-                                            <td>{{$administrateur->code_postal}}</td>
+                                            <td>{{$employe->nom}} {{$employe->prenoms}}</td>
+                                            <td>{{$employe->email}}</td>
+                                            <td>{{$employe->telephone}}</td>
+                                            <td>{{$employe->pays->nom}}</td>
+                                            <td>{{$employe->ville}}</td>
+                                            
                                             <td>
-                                                <form action="{{-- {{ route('client.destroy',$liste_client->id) }} --}}" method="Post">
+                                                <form action="{{-- {{  }} --}}" method="POST">
 
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
+                                                    <button type="submit" class="btn ">
                                                         <i class="fa-solid fa-trash" style="color: red;"></i>
                                                     </button>
                                                 </form>
