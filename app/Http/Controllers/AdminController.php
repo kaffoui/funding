@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pays;
 use App\Models\User;
 use App\Models\Employe;
+use App\Models\Client;
 use App\Models\Departement;
 use App\Models\Distributeur;
 use App\Notifications\EmployeCree;
@@ -12,15 +13,57 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\CarteCredit;
+use App\Models\CompteBanque;
+use DB;
 
 class AdminController extends Controller
 {
-    public function employe()
-    {
-        $employes = Employe::/* where('user_id', '<>', auth()->id())-> */orderBy('nom')->orderBy('prenoms')->paginate(20);
 
-        return view('admin.employe.index', compact('employes'));
+    public function statistiques() {
+
+        return view('admin.statistiques');
+
     }
+
+    public function liste_clients() {
+
+        $clients = Client::all();
+
+        return view('admin.clients.index', compact('clients'));
+
+    }
+
+    public function details_client($id) {
+
+        $carte_credits = CarteCredit::where('user_id',$id)
+            ->where('statut', '=', '1')
+            ->get();
+
+        $compte_banques = CompteBanque::where('user_id',$id)
+            ->where('statut', '=', '1')
+            ->get();
+
+        $clients_infos = DB::table('clients')
+            ->join('pays', 'pays.id', '=', 'clients.pays_id')
+            ->select('pays.nom as nom_pays', 'clients.*')
+            ->where('user_id',$id)
+            ->get();
+
+        return view('admin.clients.show', compact('carte_credits', 'compte_banques', 'clients_infos'));
+    }
+
+
+    public function liste_employes()
+    {
+        $employes = Employe::all();
+
+        return view('admin.utilisateurs.index', compact('employes'));
+    }
+
+    
+
+    
 
     public function employe_create()
     {
@@ -136,4 +179,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.employe.index')->with('message', "Le gestionnaire de compte peut maintenant effectuer des opérations de distributeur.");
     }
+
+    
 }

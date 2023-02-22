@@ -81,7 +81,7 @@ class AuthenticationController extends Controller
             'code_validation' => $request->code_validation,
             'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
-        // nouvel client
+        // nouveau client
         Client::create([
             'reference' => Str::random(10),
             'nom' => ucwords(strtolower($request->nom)),
@@ -166,13 +166,25 @@ class AuthenticationController extends Controller
 
 
 
-        $user_role = Auth::user()->role;
+        if (Auth::user()->hasRole('admin')) {
 
-        if($user_role == '0'){
+            return redirect()->route('dashboard');
+
+        } else if (Auth::user()->hasRole('client')) {
+
             return redirect()->route("home");
-        }
-        else{
-            return view('dashboard.admin.index');
+
+        } else if (Auth::user()->hasRole('distributeur')) {
+
+            return redirect()->route("dashboard");
+
+        } else if (Auth::user()->hasRole('agent')) {
+
+            return redirect()->route("dashboard");
+
+        } else {
+
+            return redirect('home');
         }
 
         //auth()->user()->informations = Gate::allows('is-client') ? auth()->user()->client : auth()->user()->distributeur;
