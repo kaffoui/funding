@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('dashboard.admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
@@ -8,13 +8,13 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        
+
                     <div class="row">
                     <div class="col-lg-9"> <p class="card-title mb-0"> <label for="">Liste des clients</label> </p><br><br></div>
                     <div class="col-lg-3">
-                        <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <a href="{{route('liste_clients')}}" type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Ajouter un client
-                        </button>
+                        </a>
                     </div>
 
                 </div>

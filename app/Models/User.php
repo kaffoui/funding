@@ -12,11 +12,8 @@ use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 100515abad76e3486098d332b5592d2b39ff6738
 
 class User extends Authenticatable implements MustVerifyEmail
 {

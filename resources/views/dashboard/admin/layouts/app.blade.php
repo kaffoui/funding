@@ -65,7 +65,7 @@
 
                         </div>
                         </li>
-                        
+
                         <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <img src="images/faces/face28.jpg" alt="profile">
@@ -76,14 +76,11 @@
 
                                 Se Deconnecter
                             </a>
-<<<<<<< HEAD:resources/views/dashboard/admin/layouts/app.blade.php
                             <a href="javascript:void(0)" class=""
                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i
                                           class="ti-power-off "></i><i class="fa-solid fa-right-from-bracket"></i>Se Deconnecter</a>
-=======
 
-                            
->>>>>>> 100515abad76e3486098d332b5592d2b39ff6738:resources/views/admin/layouts/app.blade.php
+
                         </div>
                         </li> -->
                     </ul>
@@ -107,23 +104,15 @@
                             <i class="fa-solid fa-users mr-3"></i>
                             <span class="menu-title">Clients</span>
                         </a>
-                       
+
                     </li>
                     <li class="nav-item">
-<<<<<<< HEAD:resources/views/dashboard/admin/layouts/app.blade.php
                         <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-users mr-3"></i>
                             <span class="menu-title">Utilisateur</span>
-=======
-                        <a class="nav-link" href="/dashboard/liste_employes">
-                            <i class="fa-regular fa-user mr-3"></i>
-                            <span class="menu-title">Utilisateurs</span>
->>>>>>> 100515abad76e3486098d332b5592d2b39ff6738:resources/views/admin/layouts/app.blade.php
-                        </a>
                         <div class="collapse" id="user">
                             <ul class="nav flex-column">
                                 <li class="nav-item"> <a class="nav-link" href="users"> Utilisateurs </a></li>
-
                                 <li class="nav-item"> <a class="nav-link" href="roles"> Rôles </a></li>
                                 <li class="nav-item"> <a class="nav-link" href="permissions"> Permission </a></li>
                             </ul>
@@ -149,7 +138,7 @@
                             <span class="menu-title">Agences</span>
                         </a>
                     </li>
-                    
+
                 </ul>
             </nav>
 
@@ -181,7 +170,7 @@
                 $('#client_datatable').DataTable();
             } );
 
-            
+
       </script>
 </body>
 </html>

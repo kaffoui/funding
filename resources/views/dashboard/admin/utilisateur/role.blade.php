@@ -8,7 +8,7 @@
                 <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
                     <div class="container">
                         <div class="row">
-                            <a href="{{ route('admin.users.index') }}" class="bg-primary p-2">
+                            <a href="{{ route('users.index') }}" class="bg-primary p-2">
                                 Retour
                             </a>
                         </div>
@@ -25,7 +25,7 @@
                                     @if ($user->roles)
                                     @foreach ($user->roles as $user_role)
                                         <form class="mr-3" method="POST"
-                                            action="{{ route('admin.users.roles.remove', [$user->id, $user_role->id]) }}"
+                                            action="{{ route('users.roles.remove', [$user->id, $user_role->id]) }}"
                                             onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('DELETE')
@@ -37,7 +37,7 @@
                             </div>
                             <div class="add role">
                                 <span>Ajouter un rôle</span>
-                                    <form method="POST" action="{{ route('admin.users.roles', $user->id) }}">
+                                    <form method="POST" action="{{ route('users.roles', $user->id) }}">
                                         @csrf
                                         <div>
                                             <label class="">Roles</label>
@@ -67,7 +67,7 @@
                                         @if ($user->permissions)
                                             @foreach ($user->permissions as $user_permission)
                                                 <form class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md" method="POST"
-                                                    action="{{ route('admin.users.permissions.revoke', [$user->id, $user_permission->id]) }}"
+                                                    action="{{ route('users.permissions.revoke', [$user->id, $user_permission->id]) }}"
                                                     onsubmit="return confirm('Are you sure?');">
                                                     @csrf
                                                     @method('DELETE')
@@ -77,7 +77,7 @@
                                         @endif
                                     </div>
                                     <div class="max-w-xl mt-6">
-                                        <form method="POST" action="{{ route('admin.users.permissions', $user->id) }}">
+                                        <form method="POST" action="{{ route('users.permissions', $user->id) }}">
                                             @csrf
                                             <div class="sm:col-span-6">
                                                 <label for="permission" class="block text-sm font-medium text-gray-700">Permission</label>

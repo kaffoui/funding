@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('dashboard.admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
@@ -54,7 +54,7 @@
                         <div class="col-md-6 stretch-card transparent">
                             <div class="card card-light-danger">
                                 <div class="card-body">
-                                    <p class="mb-4">Nombre d'employés 
+                                    <p class="mb-4">Nombre d'employés
                                     <p class="fs-30 mb-2">33</p>
                                 </div>
                             </div>

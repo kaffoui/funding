@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use App\Models\Pays;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Traits\LocalisationTrait;
+
+
+use Spatie\Permission\Models\Permission;
 
 
 class UserAdminController extends Controller
 {
+    use LocalisationTrait;
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +36,7 @@ class UserAdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.utilisateur.create');
     }
 
     /**
@@ -40,7 +47,42 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Localisation curent user
+        $adress_datas = $this->get_geolocation();
+
+        // recuperation pays user via code pour avoir l'identifiant du pays
+        $paysUser = Pays::where('code', $adress_datas['country_code2'])->first();
+
+        $request->merge([
+            'telephone' => $paysUser->indicatif.$request->telephone,
+        ]);
+
+        // La validation
+        $validator = Validator::make($request->all(), [
+            'nom'         => ['required', 'string', 'max:255'],
+            'prenoms'     => ['required', 'string', 'max:255'],
+            'code_postal' => ['required', 'string', 'max:255'],
+            'email'       => ['required', 'email', 'max:255', 'unique:clients'],
+            'ville'       => ['required', 'string', 'max:255'],
+            'telephone'   => ['required', 'string', 'unique:users,telephone'],
+            'password'    => ['required', 'min:8', 'confirmed'],
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        // nouvel user pour les infos de connexion
+        $user = User::create([
+            'pays_register_id' => $paysUser->id,
+            'ip_register'      => $adress_datas['ip'],
+            'email'            => $request->email,
+            'telephone'        => $request->telephone,
+            'recent_ip'        => $adress_datas['ip'],
+            'password'         => Hash::make($request->password)
+        ]);
+
+
     }
 
     /**

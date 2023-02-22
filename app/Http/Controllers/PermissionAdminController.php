@@ -16,7 +16,7 @@ class PermissionAdminController extends Controller
     public function index()
     {
         $permissions = Permission::all();
-        return view('dashboard.admin.permission.index', compact('permissions'));
+        return view('dashboard.admin.utilisateur.permission.index', compact('permissions'));
     }
 
     /**
