@@ -202,7 +202,7 @@ Route::prefix('dashboard')->middleware(['auth', 'ip.valid',])->group(function() 
    Route::post('/permissions/{permission}/roles', [PermissionAdminController::class, 'assignRole'])->name('permissions.roles');
    Route::delete('/permissions/{permission}/roles/{role}', [PermissionAdminController::class, 'removeRole'])->name('permissions.roles.remove');
    Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
-   Route::get('/users/create', [UserAdminController::class])->name('users.create');
+   Route::get('/users/create', [UserAdminController::class, 'create'])->name('users.create');
    Route::post('/users/create', [UserAdminController::class, 'store'])->name('users.store');
    Route::get('/users/{user}', [UserAdminController::class, 'show'])->name('users.show');
    Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('users.destroy');
@@ -217,6 +217,7 @@ Route::prefix('dashboard')->middleware(['auth', 'ip.valid',])->group(function() 
 
 
     Route::get('/', [AdminController::class, 'statistiques'])->name('dashboard');
+
 
     Route::get('/liste_clients', [AdminController::class, 'liste_clients'])->name('liste_clients');
     Route::get('/liste_clients/create', [AdminController::class, 'client_create'])->name('create_clients');

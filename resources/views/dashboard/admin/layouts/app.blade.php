@@ -112,9 +112,9 @@
                             <span class="menu-title">Utilisateur</span>
                         <div class="collapse" id="user">
                             <ul class="nav flex-column">
-                                <li class="nav-item"> <a class="nav-link" href="users"> Utilisateurs </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="roles"> Rôles </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="permissions"> Permission </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('users.index')}}"> Utilisateurs </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('roles.index')}}"> Rôles </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('permissions.index')}}"> Permission </a></li>
                             </ul>
                         </div>
                     </li>
