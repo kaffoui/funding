@@ -24,10 +24,6 @@ use App\Http\Controllers\CompteBancaireController;
 use App\Http\Controllers\PermissionAdminController;
 use App\Http\Controllers\UserPaymentMethodController;
 
-// use App\Http\Controllers\Admin\RoleAdminController;
-// use App\Http\Controllers\Admin\UserAdminController;
-// use App\Http\Controllers\Admin\IndexAdminController;
-// use App\Http\Controllers\Admin\PermissionAdminController;
 
 use App\Http\Controllers\UserPaymentAccountController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -42,22 +38,6 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
-//  Route::group(['middleware' => ['auth','verified',]], function() {
-//     Route::resource('dashboard', DashboardController::class);
-//     Route::resource('roles', RoleController::class);
-//     Route::resource('utilisateurs', UtilisateurController::class);
-//     Route::apiResource('clients',ClientController::class);
-//     Route::Resource('credit_card',CarteCreditController::class);
-//     Route::resource('compte_banque', CompteBancaireController::class);
-
-// });
-
-
-
-
-
-
 
 
 
@@ -194,57 +174,36 @@ Route::middleware(['auth', 'ip.valid'])->group(function () {
 
 Route::prefix('dashboard')->middleware(['auth', 'ip.valid',])->group(function() {
 
-    //Route::get('/', [IndexAdminController::class, 'index'])->name('index');
-   Route::resource('/roles', RoleAdminController::class);
-   Route::post('/roles/{role}/permissions', [RoleAdminController::class, 'givePermission'])->name('roles.permissions');
-   Route::delete('/roles/{role}/permissions/{permission}', [RoleAdminController::class, 'revokePermission'])->name('roles.permissions.revoke');
-   Route::resource('/permissions', PermissionAdminController::class);
-   Route::post('/permissions/{permission}/roles', [PermissionAdminController::class, 'assignRole'])->name('permissions.roles');
-   Route::delete('/permissions/{permission}/roles/{role}', [PermissionAdminController::class, 'removeRole'])->name('permissions.roles.remove');
-   Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
-   Route::get('/users/create', [UserAdminController::class, 'create'])->name('users.create');
-   Route::post('/users/create', [UserAdminController::class, 'store'])->name('users.store');
-   Route::get('/users/{user}', [UserAdminController::class, 'show'])->name('users.show');
-   Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('users.destroy');
-   Route::post('/users/{user}/roles', [UserAdminController::class, 'assignRole'])->name('users.roles');
-   Route::delete('/users/{user}/roles/{role}', [UserAdminController::class, 'removeRole'])->name('users.roles.remove');
-   Route::post('/users/{user}/permissions', [UserAdminController::class, 'givePermission'])->name('users.permissions');
-   Route::delete('/users/{user}/permissions/{permission}', [UserAdminController::class, 'revokePermission'])->name('users.permissions.revoke');
-
-
-
-
-
-
     Route::get('/', [AdminController::class, 'statistiques'])->name('dashboard');
+    Route::resource('/roles', RoleAdminController::class);
+    Route::post('/roles/{role}/permissions', [RoleAdminController::class, 'givePermission'])->name('roles.permissions');
+    Route::delete('/roles/{role}/permissions/{permission}', [RoleAdminController::class, 'revokePermission'])->name('roles.permissions.revoke');
+    Route::resource('/permissions', PermissionAdminController::class);
+    Route::post('/permissions/{permission}/roles', [PermissionAdminController::class, 'assignRole'])->name('permissions.roles');
+    Route::delete('/permissions/{permission}/roles/{role}', [PermissionAdminController::class, 'removeRole'])->name('permissions.roles.remove');
+    Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserAdminController::class, 'create'])->name('users.create');
+    Route::post('/users/create', [UserAdminController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [UserAdminController::class, 'show'])->name('users.show');
+    Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('users.destroy');
+    Route::post('/users/{user}/roles', [UserAdminController::class, 'assignRole'])->name('users.roles');
+    Route::delete('/users/{user}/roles/{role}', [UserAdminController::class, 'removeRole'])->name('users.roles.remove');
+    Route::post('/users/{user}/permissions', [UserAdminController::class, 'givePermission'])->name('users.permissions');
+    Route::delete('/users/{user}/permissions/{permission}', [UserAdminController::class, 'revokePermission'])->name('users.permissions.revoke');
+
 
 
     Route::get('/liste_clients', [AdminController::class, 'liste_clients'])->name('liste_clients');
     Route::get('/liste_clients/create', [AdminController::class, 'client_create'])->name('create_clients');
     Route::post('/liste_clients/create', [AdminController::class, 'client_store'])->name('store_clients');
-
     Route::get('/details_client/{id}', [AdminController::class, 'details_client'])->name('details_client');
-
     Route::get('/liste_employes', [AdminController::class, 'liste_employes'])->name('liste_employes')->middleware(['role:admin']);
     Route::get('/ajout_employe', [AdminController::class, 'ajout_employe'])->name('ajout_employe')->middleware(['role:admin']);
     Route::put('/modification_employe/{id}', [AdminController::class, 'modification_employe'])->name('modification_employe')->middleware(['role:admin']);
     Route::get('/suppression_employe/{id}', [AdminController::class, 'suppression_employe'])->name('suppression_employe')->middleware(['role:admin']);
 
-
     Route::get('/liste_marchands', [AdminController::class, 'liste_marchands'])->name('liste_marchands')->middleware(['role:admin']);
     Route::get('/liste_distributeurs', [AdminController::class, 'liste_distributeurs'])->name('liste_distributeurs')->middleware(['role:admin']);
 
-
-    // Route::resource('dashboard', DashboardController::class);
-    // Route::resource('roles', RoleController::class);
-    // Route::resource('utilisateurs', UtilisateurController::class);
-    // Route::apiResource('clients',ClientController::class);
-    // Route::Resource('credit_card',CarteCreditController::class);
-    // Route::resource('compte_banque', CompteBancaireController::class);
-
-
-});
-
-Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function () {
 
 });
