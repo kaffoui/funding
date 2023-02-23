@@ -54,7 +54,7 @@
                                                 <form action="{{route('modification_employe', $employe->id)}}" method="POST">
 
                                                     @csrf
-                                                    @method('PATCH')
+                                                    
                                                     <button type="submit" class="btn ">
                                                         <i class="fa-solid fa-edit" style="color: blue;"></i>
                                                     </button>
@@ -65,7 +65,7 @@
                                                 <form action="{{route('suppression_employe', $employe->id)}}" method="POST">
 
                                                     @csrf
-                                                    @method('DELETE')
+                                                   
                                                     <button type="submit" class="btn ">
                                                         <i class="fa-solid fa-trash" style="color: red;"></i>
                                                     </button>
@@ -117,17 +117,7 @@
                                     </div> -->
                                     <form id="signupForm" method="post" action="{{route('ajout_employe')}}">
                                         @csrf
-                                        <div class="form-group">
-                                            <label for="nom">Rôle</label>
-                                            <select class="form-select" aria-label="Default select example" name="role">
-                                                <option selected>Selectionnez le rôle</option>
-                                                <option value="admin">Administrateur</option>
-                                                <option value="agent">Agent</option>
-                                                <option value="gestionnaire">Gestionnaire</option>
-                                                <option value="guichetier">Guichetier</option>
-                                            </select>
-
-                                        </div>
+                                        
                                         <div class="form-group">
                                             <label for="nom">Nom</label>
                                             <input type="text" class="form-control" id="nom" required
@@ -166,6 +156,30 @@
                                                 <input type="text" class="form-control" name="telephone" required
                                                     placeholder="Entrez le numéro de téléphone (Ex : 00000000)">
                                             </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="nom">Rôle</label>
+                                            <select class="form-select" aria-label="Default select example" name="role">
+                                                <option selected>Selectionnez le rôle</option>
+                                                <option value="admin">Administrateur</option>
+                                                <option value="agent">Agent</option>
+                                                <option value="gestionnaire">Gestionnaire</option>
+                                                <option value="guichetier">Guichetier</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="nom">Permissions</label>
+                                            <select class="form-select" aria-label="Default select example" name="role">
+                                                <option selected>Selectionnez les permissions</option>
+                                                <option value="admin">Consulter la liste des clients</option>
+                                                <option value="agent">Ajouter un client</option>
+                                                <option value="gestionnaire">Modifier les informations d'un client</option>
+                                                <option value="guichetier">Supprimer les informations d'un client </option>
+                                            </select>
+
                                         </div>
 
                                         <div class="form-group">
