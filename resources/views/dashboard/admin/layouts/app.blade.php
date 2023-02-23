@@ -95,6 +95,7 @@
             <!-- SideBar -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav" id="nav">
+                @role('Administrateur')
                     <li class="nav-item ">
                         <a class="nav-link" href="/dashboard">
                             <i class="fa-solid fa-gauge mr-3"></i>
@@ -139,6 +140,31 @@
                             <span class="menu-title">Agences</span>
                         </a>
                     </li>
+                    @endrole
+
+                    @role('Agent')
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-regular fa-user mr-3"></i>
+                            <span class="menu-title">Historique</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-regular fa-user mr-3"></i>
+                            <span class="menu-title">Dépôts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-regular fa-user mr-3"></i>
+                            <span class="menu-title">Retraits</span>
+                        </a>
+                    </li>
+
+
+                    @endrole
 
                 </ul>
             </nav>
