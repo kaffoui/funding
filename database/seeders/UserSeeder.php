@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'recent_ip'         => '160.154.156.144',
             'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token'    => Str::random(10),
-        ]);
+        ])->assignRole('writer', 'admin');;
 
         User::create([
             'pays_register_id'  => Pays::where('indicatif', "+225")->first()->id,

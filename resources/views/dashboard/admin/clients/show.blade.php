@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('dashboard.admin.layouts.app')
 @section('title',"Dashboard")
 @section('content')
     <div class="main-panel">
@@ -11,13 +11,13 @@
             <div class="row">
                 <div class="col-lg-7">
                     <button class="btn btn-primary"><a href="{{route('liste_clients')}}" style="color : white; text-decoration : none">Retour</a></button>
-               
+
                     </div>
                 <div class="col-lg-5">
                 <button class="btn btn-danger"><a href="#" style="color : white; text-decoration : none">Clôturer ce compte</a></button>
-                
+
                 <button class="btn btn-info"><a href="#" style="color : white; text-decoration : none">Bloquer la carte </a></button>
-           
+
                 </div>
             </div> <br><br>
 
@@ -37,8 +37,8 @@
                              <p>Pays : <span class="fw-bold">{{$clients_info->nom_pays}}</span></p>
                             <p>Code postal : <span class="fw-bold"> {{$clients_info->code_postal}}</span></p>
                             <p>Ville : <span class="fw-bold"> {{$clients_info->ville}}</span ></p>
-                            
-                            
+
+
                             <p>Date de création du compte : <span class="fw-bold"> {{$clients_info->created_at}}</span></p>
                         @endforeach
                 </div>
@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-            
+
         </div>
     </div>
 @endsection

@@ -65,22 +65,22 @@
 
                         </div>
                         </li>
-                        
+
                         <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <img src="images/faces/face28.jpg" alt="profile">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+
                             <a class="dropdown-item">
-                                <i class="fa-solid fa-gear"></i>
-                                Mon Profil
-                            </a>
-                            <a class="dropdown-item">
-                                <i class="fa-solid fa-right-from-bracket"></i>
+
                                 Se Deconnecter
                             </a>
+                            <a href="javascript:void(0)" class=""
+                                      onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i
+                                          class="ti-power-off "></i><i class="fa-solid fa-right-from-bracket"></i>Se Deconnecter</a>
 
-                            
+
                         </div>
                         </li> -->
                     </ul>
@@ -104,14 +104,22 @@
                             <i class="fa-solid fa-users mr-3"></i>
                             <span class="menu-title">Clients</span>
                         </a>
-                       
+
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/liste_employes">
-                            <i class="fa-regular fa-user mr-3"></i>
-                            <span class="menu-title">Utilisateurs</span>
-                        </a>
+                        <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="auth">
+                            <i class="fa-solid fa-users mr-3"></i>
+                            <span class="menu-title">Utilisateur</span>
+                        <div class="collapse" id="user">
+                            <ul class="nav flex-column">
+                                <li class="nav-item"> <a class="nav-link" href="{{route('users.index')}}"> Utilisateurs </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('roles.index')}}"> Rôles </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('permissions.index')}}"> Permission </a></li>
+                            </ul>
+                        </div>
                     </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('liste_employes') }}">
                             <i class="fa-regular fa-user mr-3"></i>
@@ -130,7 +138,7 @@
                             <span class="menu-title">Agences</span>
                         </a>
                     </li>
-                    
+
                 </ul>
             </nav>
 
@@ -162,7 +170,7 @@
                 $('#client_datatable').DataTable();
             } );
 
-            
+
       </script>
 </body>
 </html>
