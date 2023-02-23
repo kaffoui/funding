@@ -4,14 +4,26 @@
     <div class="main-panel">
         <div class="content-wrapper">
 
-            <div class="w-100">
-                <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-                    <div class="container">
-                        <div class="row">
-                            <a href="{{ route('users.index') }}" class="bg-primary p-2">
-                                Retour
-                            </a>
+        <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-harder">
+                            
                         </div>
+                    <div class="card-body">
+                       
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="/dashboard/users" type="button" class="btn btn-primary mb-5">
+                            Retour
+</a>
+                    </div>
+
+                </div>
+
+
                         <div class="row">
                             <div class="user-infos mt-5 mb-5">
                                 <div class="mb-3">User Email: {{ $user->email }}</div>

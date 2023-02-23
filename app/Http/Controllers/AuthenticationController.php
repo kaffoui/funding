@@ -166,19 +166,19 @@ class AuthenticationController extends Controller
 
 
 
-        if (Auth::user()->hasRole('admin')) {
+        if (Auth::user()->hasRole('Administrateur')) {
 
             return redirect()->route('dashboard');
 
-        } else if (Auth::user()->hasRole('client')) {
+        } else if (Auth::user()->hasRole('Client')) {
 
             return redirect()->route("home");
 
-        } else if (Auth::user()->hasRole('distributeur')) {
+        } else if (Auth::user()->hasRole('Distributeur')) {
 
             return redirect()->route("dashboard");
 
-        } else if (Auth::user()->hasRole('agent')) {
+        } else if (Auth::user()->hasRole('Agent')) {
 
             return redirect()->route("dashboard");
 

@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"/>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+   
+
 </head>
 <body>
 
@@ -106,34 +109,32 @@
                         </a>
 
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="auth">
+                        <a class="nav-link" href="/dashboard/liste_employes" aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-users mr-3"></i>
-                            <span class="menu-title">Utilisateur</span>
-                        <div class="collapse" id="user">
-                            <ul class="nav flex-column">
-                                <li class="nav-item"> <a class="nav-link" href="{{route('users.index')}}"> Utilisateurs </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{route('roles.index')}}"> Rôles </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{route('permissions.index')}}"> Permission </a></li>
-                            </ul>
-                        </div>
+                            <span class="menu-title">Utilisateurs</span>
+                        </a>
+
                     </li>
+                   
+                   
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('liste_employes') }}">
+                        <a class="nav-link" href="#">
                             <i class="fa-regular fa-user mr-3"></i>
                             <span class="menu-title">Distributeurs</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('liste_employes') }}">
+                        <a class="nav-link" href="#">
                             <i class="fa-regular fa-user mr-3"></i>
                             <span class="menu-title">Marchands</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('liste_employes') }}">
+                        <a class="nav-link" href="#">
                             <i class="fa-regular fa-user mr-3"></i>
                             <span class="menu-title">Agences</span>
                         </a>
@@ -154,6 +155,8 @@
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
         <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 
         <script type="text/javascript">
@@ -170,6 +173,10 @@
                 $('#client_datatable').DataTable();
             } );
 
+           
+    $(document).ready(function() {
+        $('.selectpicker').selectpicker();
+    });
 
       </script>
 </body>
