@@ -18,6 +18,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class AdminController extends Controller
@@ -136,46 +138,38 @@ class AdminController extends Controller
         return view('dashboard.admin.utilisateurs.index', compact('employes'));
     }
 
-
-
-
-
-    public function employe_create()
+    public function ajout_employe()
     {
-        $pays = Pays::orderBy('nom')->get();
-
-        $departements = Departement::orderBy('nom')->get();
-
-        $situations_matrimoniales = [
-            'Célibataire',
-            'Marié(e)',
-            'Divorcé(e)',
-            'Veuf(ve)',
-        ];
-
-        $genres = [
-            'Masculin',
-            'Féminin',
-        ];
-
-        return view('admin.employe.create', compact('pays', 'departements', 'situations_matrimoniales', 'genres'));
+        
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $payss = Pays::orderBy('nom', 'asc')->get();
+        return view('dashboard.admin.utilisateurs.create', compact('roles','permissions','payss'));
     }
+    
 
     public function employe_store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nom'                    => ['required', 'string', 'max:255'],
             'prenoms'                => ['required', 'string', 'max:255'],
-            'genre'                  => ['required', 'string', 'max:255', 'in:Masculin,Féminin'],
-            'situation_matrimoniale' => ['required', 'string', 'max:255', 'in:Célibataire,Marié(e),Divorcé(e),Veuf(ve)'],
+            'code_postal'                  => ['required', 'string', 'max:255'],
+            'indicatif' => ['required', 'string', 'max:255'],
+            'telephone' => ['required', 'string', 'max:255'],
             'email'                  => ['required', 'string', 'email', 'max:255', 'unique:employes,email', 'unique:users,email'],
             'pays'                   => ['required', 'integer', 'exists:pays,id'],
             'ville'                  => ['required', 'string', 'max:255'],
-            'adresse'                => ['required', 'string', 'max:255'],
-            'departement'            => ['required', 'integer', 'exists:departements,id'],
+            'email'                => ['required', 'string', 'max:255'],
+            'role'                => ['required', 'string', 'max:255'],
+            // 'permissions'                => ['required', 'string', 'max:255'],
+            'password'                => ['required', 'string', 'max:255'],
+            'password_confirmation'                => ['required', 'string', 'max:255', 'same:password'],
         ]);
 
+      
+
         $validator->after(function ($validator) use ($request) {
+
             $pays = Pays::find($request->pays);
 
             $telephone = $pays->indicatif.$request->telephone;
@@ -189,6 +183,7 @@ class AdminController extends Controller
             {
                 $validator->errors()->add('telephone', 'La valeur du champ est déjà utilisée.');
             }
+
         });
 
         if ($validator->fails())
@@ -196,42 +191,45 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $mot_de_passe = Str::random(10);
+
 
         $pays = Pays::find($request->pays);
 
-        if ($request->creation_acces)
-        {
+       
             $user = User::create([
                 'pays_register_id' => $request->pays,
                 'ip_register'      => '127.0.0.1',
                 'email'            => strtolower($request->email),
                 'telephone'        => str_replace(' ', '', $pays->indicatif.$request->telephone),
                 'recent_ip'        => '127.0.0.1',
-                'password'         => Hash::make($mot_de_passe),
-            ]);
+                'password'         => Hash::make($request->password),
+                'is_email_valid'        => '1',
+                'is_phone_valid'        => '1',
+            ])->assignRole($request->role);
 
-            $user->mot_de_passe = $mot_de_passe;
+            // $user->mot_de_passe = $mot_de_passe;
 
-            $user->notify(new EmployeCree($user));
-        }
+            // $user->notify(new EmployeCree($user));
+            // $role = $request->role;  
+
+            // $input['permissions'] = json_encode($input['permissions']);
+
+            // $role->givePermissionTo($input['permissions']);
+
+            
+        
 
         $employe = Employe::create([
             'user_id'                => isset($user) ? $user->id : null,
             'pays_id'                => $request->pays,
             'nom'                    => ucfirst(strtolower($request->nom)),
             'prenoms'                => ucfirst(strtolower($request->prenoms)),
-            'genre'                  => ucfirst(strtolower($request->genre)),
-            'situation_matrimoniale' => ucfirst(strtolower($request->situation_matrimoniale)),
             'telephone'              => str_replace(' ', '', $pays->indicatif.$request->telephone),
             'email'                  => strtolower($request->email),
             'ville'                  => ucfirst(strtolower($request->ville)),
-            'adresse'                => ucfirst(strtolower($request->adresse)),
         ]);
 
-        $employe->departements()->attach($request->departement);
-
-        return redirect()->route('admin.employe.index')->with('message', 'Employé créé avec succès.');
+        return redirect()->route('liste_employes')->with('message', 'Utilisateur créé avec succès.');
     }
 
     public function set_droit_distributeur(User $user)
@@ -252,7 +250,7 @@ class AdminController extends Controller
             'communication_baxe'    => 'Interne'
         ]);
 
-        return redirect()->route('admin.employe.index')->with('message', "Le gestionnaire de compte peut maintenant effectuer des opérations de distributeur.");
+        return redirect()->route('dashboard.admin.utilisateurs.index')->with('message', "Le gestionnaire de compte peut maintenant effectuer des opérations de distributeur.");
     }
 
 

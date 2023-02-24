@@ -42,6 +42,7 @@
                             </div>
                         </div>
                     </div>
+                    @role('Administrateur')
                     <div class="row">
                         <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                             <div class="card card-light-blue">
@@ -51,6 +52,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-md-6 stretch-card transparent">
                             <div class="card card-light-danger">
                                 <div class="card-body">
@@ -59,7 +61,9 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
+                    
 
                 </div>
             </div>
@@ -147,6 +151,7 @@
                 </div>
 
             </div>
+            @endrole
 
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">

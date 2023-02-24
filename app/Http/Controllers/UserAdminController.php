@@ -130,7 +130,7 @@ class UserAdminController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('Administrateur')) {
             return back()->with('message', 'you are admin.');
         }
         $user->delete();
