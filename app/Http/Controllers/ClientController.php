@@ -95,7 +95,7 @@ class ClientController extends Controller
             'telephone'   => $request->telephone,
             'pays_id'     => $paysUser->id,
 
-        ]);
+        ])->assignRole("Client");
 
         // user token
         $token = $user->createToken('API Token Login')->plainTextToken;
