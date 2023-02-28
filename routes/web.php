@@ -175,11 +175,11 @@ Route::middleware(['auth', 'ip.valid'])->group(function () {
 // ROUTES ADMIN
 
 
+Route::get('/', [AdminController::class, 'index'])->middleware('auth')->name('dashboard');
+
 
 // Action de l'administrateur
 Route::prefix('dashboard')->middleware(['auth', 'role:Administrateur',])->group(function() {
-
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     Route::resource('/employes', EmployeController::class); // Employes
     Route::resource('/clients', ClientController::class);  // Clients
@@ -191,15 +191,15 @@ Route::prefix('dashboard')->middleware(['auth', 'role:Administrateur',])->group(
 });
 
 
-
 // Action de l'agent
 Route::prefix('dashboard')->middleware(['auth', 'role:Agent',])->group(function() {
+    // Client
+    Route::get('/clients', [ClientController::class, 'index']);
+    Route::get('/clients/create', [ClientController::class,'create']);
 
-    Route::post('/depot', [DepotController::class, 'store']);
-
-    Route::get('/depot', function(){
-        return view('dashboard.agents.depot');
-    });
+    // Depot
+    Route::resource('/depot', DepotController::class);
+    Route::resource('/retrait', RetraitController::class);
 
 });
 

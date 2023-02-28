@@ -9,17 +9,19 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-9"> <p class="card-title mb-0"> <label for="">
-                                        Liste des clients</label> </p><br><br>
-                                    </div>
                                     <div class="col-lg-3">
-                                        <a href="" type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Ajouter un client
-                                        </a>
+                                        <a href="/dashboard/clients" type="button" class="btn btn-primary mb-5">
+                                            Retour
+                </a>
                                     </div>
 
                                 </div>
                                 <div class="row">
+                                    @if ($message = Session::get('success'))
+                                    <div class="alert alert-success">
+                                    <p>{{ $message }}</p>
+                                    </div>
+                                @endif
                                     <form id="signupForm" method="post" action="/signup">
                                         @csrf
                                         <div class="form-group">

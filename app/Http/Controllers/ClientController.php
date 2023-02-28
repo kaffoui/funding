@@ -85,6 +85,7 @@ class ClientController extends Controller
         ]);
         // nouvel client
         $client = Client::create([
+            'user_id'     => $user->id,
             'reference'   => Str::random(10),
             'nom'         => $request->nom,
             'prenoms'     => $request->prenoms,
@@ -93,13 +94,15 @@ class ClientController extends Controller
             'email'       => $request->email,
             'telephone'   => $request->telephone,
             'pays_id'     => $paysUser->id,
-            'user_id'     => $user->id,
+
         ]);
+
         // user token
         $token = $user->createToken('API Token Login')->plainTextToken;
         event(new Registered($user));
         // Return new client JSON
-        return response(['client' => $client, 'pays' => $user->pays, 'token' => $token]);
+        return redirect()->route('clients.index')->with('message', 'Client créé avec succès.');
+
     }
 
     /**

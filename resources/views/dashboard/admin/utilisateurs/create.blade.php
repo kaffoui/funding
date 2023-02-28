@@ -35,6 +35,11 @@
                 </ul>
             </div>
         @endif
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+        <p>{{ $message }}</p>
+        </div>
+        @endif
 
         <form id="signupForm" method="post" action="{{route('employes.store')}}">
             @csrf

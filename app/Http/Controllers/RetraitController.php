@@ -30,7 +30,7 @@ class RetraitController extends Controller
      */
     public function index()
     {
-        return view('shared-pages.retrait.index');
+        return view('dashboard.retrait.index');
     }
 
     /**

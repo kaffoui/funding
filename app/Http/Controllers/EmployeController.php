@@ -228,7 +228,7 @@ class EmployeController extends Controller
             'ville'                  => ucfirst(strtolower($request->ville)),
         ]);
 
-        return redirect()->route('liste_employes')->with('message', 'Utilisateur créé avec succès.');
+        return redirect()->route('employes.index')->with('message', 'Utilisateur créé avec succès.');
     }
 
     /**

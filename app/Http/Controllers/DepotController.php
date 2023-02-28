@@ -29,7 +29,7 @@ class DepotController extends Controller
     */
     public function index()
     {
-        return view('distributeur.depot.index');
+        return view('dashboard.agents.depot');
     }
 
     /**
@@ -39,7 +39,7 @@ class DepotController extends Controller
     */
     public function create()
     {
-        return view('distributeur.depot.create');
+        //return view('distributeur.depot.create');
     }
 
     /**
@@ -104,7 +104,7 @@ class DepotController extends Controller
 
         $request->session()->flash('message', $message);
 
-        return redirect()->route('distributeur.depot.index');
+        return redirect(route('depot.index'))->with('success', 'Transaction effectué avec succès');
     }
 
     /**

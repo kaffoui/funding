@@ -26,7 +26,9 @@ class UserSeeder extends Seeder
             'recent_ip'         => '160.154.156.144',
             'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token'    => Str::random(10),
-        ]);
+            'is_email_valid'    => '1',
+            'is_phone_valid'    =>'1',
+        ])->assignRole("Administrateur");
 
         User::create([
             'pays_register_id'  => Pays::where('indicatif', "+225")->first()->id,
@@ -37,7 +39,10 @@ class UserSeeder extends Seeder
             'recent_ip'         => '41.207.192.0',
             'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token'    => Str::random(10),
-        ])->assignRole('Administrateur');
+            'is_email_valid'    => '1',
+            'is_phone_valid'    =>'1',
+
+        ])->assignRole("Agent");
         /* CI */
 
         /* CM */
@@ -50,7 +55,9 @@ class UserSeeder extends Seeder
             'recent_ip'         => '102.135.189.255',
             'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token'    => Str::random(10),
-        ]);
+            'is_email_valid'    => '1',
+            'is_phone_valid'    =>'1',
+        ])->assignRole("Distributeur");
 
         User::create([
             'pays_register_id'  => Pays::where('indicatif', "+237")->first()->id,

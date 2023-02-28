@@ -12,8 +12,8 @@
                     <div class="row">
                     <div class="col-lg-9"> <p class="card-title mb-0"> <label for="">Liste des clients</label> </p><br><br></div>
                     <div class="col-lg-3">
-                        <a href="" type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Ajouter un client
+                        <a href="{{ route('clients.create')}}" type="button" class="btn btn-primary mb-5" >
+                            Ajouter un Client
                         </a>
                     </div>
 
@@ -42,7 +42,7 @@
                                 <td>{{$client->email}}</td>
                                 <td>{{$client->telephone}}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{ route('details_client',$client->id) }}">
+                                    <a class="btn btn-primary" href="{{ route('clients.show',$client->id) }}">
                                         Détails <i class="fa-solid fa-eye ml-3"></i>
                                     </a>
                                 </td>

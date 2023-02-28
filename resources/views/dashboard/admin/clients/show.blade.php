@@ -10,7 +10,7 @@
             @endif
             <div class="row">
                 <div class="col-lg-7">
-                    <button class="btn btn-primary"><a href="{{route('liste_clients')}}" style="color : white; text-decoration : none">Retour</a></button>
+                    <button class="btn btn-primary"><a href="{{route('clients.index')}}" style="color : white; text-decoration : none">Retour</a></button>
 
                     </div>
                 <div class="col-lg-5">

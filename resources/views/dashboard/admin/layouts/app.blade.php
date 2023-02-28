@@ -31,6 +31,7 @@
                     <!-- <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <span><i class="fa-solid fa-bars"></i></span>
                     </button> -->
+
                     <ul class="navbar-nav navbar-nav-right">
 
                         <!-- DECONNEXION -->
@@ -151,13 +152,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/dashboard/depot">
                             <i class="fa-regular fa-user mr-3"></i>
                             <span class="menu-title">Dépôts</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="dashboard/retrait">
                             <i class="fa-regular fa-user mr-3"></i>
                             <span class="menu-title">Retraits</span>
                         </a>

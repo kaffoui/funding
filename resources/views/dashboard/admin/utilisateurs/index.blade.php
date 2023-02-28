@@ -19,6 +19,7 @@
                     <div class="col-lg-3">
                         <a href="{{ route('employes.create')}}" type="button" class="btn btn-primary mb-5" >
                             Ajouter un utilisateur
+                        </a>
 </a>
                     </div>
 
