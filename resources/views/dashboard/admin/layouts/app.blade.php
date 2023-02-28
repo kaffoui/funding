@@ -158,7 +158,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard/retrait">
+                        <a class="nav-link" href="/dashboard/retrait">
                             <i class="fa-regular fa-user mr-3"></i>
                             <span class="menu-title">Retraits</span>
                         </a>
