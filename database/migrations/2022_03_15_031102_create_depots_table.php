@@ -17,7 +17,7 @@ class CreateDepotsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('numero');
-            $table->string('montant');
+            $table->integer('montant');
             $table->double('frais');
             $table->double('taux_from');
             $table->double('taux_to');

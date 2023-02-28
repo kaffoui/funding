@@ -26,13 +26,16 @@
                       <input type="text" name="numero" class="form-control"  placeholder="0">
 
                     </div>
+                  </div>
 
                     <div class="form-group">
                         <label for="youSend">Montant</label>
                         <div class="input-group">
                             <div class="input-group-prepend"> <span class="input-group-text">{{auth()->user()->pays->symbole_monnaie}}</span> </div>
+
                         <input type="text" name="montant" class="form-control" data-bv-field="youSend" id="amountToSend" placeholder="0">
 
+                    </div>
                     </div>
 
                   <p class="text-muted mt-4">Frais de transactions<span class="float-right d-flex align-items-center">
