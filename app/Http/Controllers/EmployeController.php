@@ -177,10 +177,8 @@ class EmployeController extends Controller
 
         $update_employes->nom = $request->get('nom');
         $update_employes->prenoms = $request->get('prenoms');
-        $update_employes->code_postal = $request->get('code_postal');
         $update_employes->pays_id = $request->get('pays_id');
         $update_employes->ville = $request->get('ville');
-        $update_employes->role = $request->get('role');
         $update_employes->telephone = $request->get('telephone');
 
         $update_employes->update();

@@ -25,7 +25,12 @@
                             </ul>
                         </div>
                     @endif
-                    
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                        </div>
+                    @endif
+
                     <div class="col-lg-12">
                         <form method="POST" action="{{route('employes.update',$employes->id)}}">
                             @csrf
@@ -50,7 +55,7 @@
                                 <label for="pays">Pays</label>
 
 
-                                    <select class="form-control" name="pays" id="">
+                                    <select class="form-control" name="pays_id" id="">
                                     @foreach ($payss as $pays)
                                         <option value="{{ $pays->id }}" name="pays_id"> {{ $pays->nom }} </option>
                                         @endforeach
