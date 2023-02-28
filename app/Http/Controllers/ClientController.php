@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 
 
 

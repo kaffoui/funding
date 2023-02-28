@@ -165,7 +165,7 @@ class EmployeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'plats_id' => 'required',
+
         ]);
 
         $input = $request->all();
@@ -182,10 +182,10 @@ class EmployeController extends Controller
         $update_employes->ville = $request->get('ville');
         $update_employes->role = $request->get('role');
         $update_employes->telephone = $request->get('telephone');
-        
+
         $update_employes->update();
 
-        
+
 
 
 
