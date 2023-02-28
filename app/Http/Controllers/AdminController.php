@@ -12,7 +12,9 @@ use App\Models\CarteCredit;
 use App\Models\Departement;
 use Illuminate\Support\Str;
 use App\Models\CompteBanque;
+use App\Models\Depot;
 use App\Models\Distributeur;
+use App\Models\Retrait;
 use Illuminate\Http\Request;
 use App\Notifications\EmployeCree;
 use Illuminate\Routing\Controller;
@@ -28,7 +30,13 @@ class AdminController extends Controller
 
     public function index() {
 
-        return view('dashboard.admin.statistiques');
+        $nb_clients = Client::get()->count();
+        $nb_employes = Employe::get()->count();
+        $depot = Depot::get()->count();
+        $retrait = Retrait::get()->count();
+        $nb_transactions = $depot + $retrait; // Nombre
+        $nb_distributeurs = Distributeur::get()->count();
+        return view('dashboard.admin.statistiques', compact('nb_clients', 'nb_employes', 'nb_transactions','nb_distributeurs'));
 
     }
 

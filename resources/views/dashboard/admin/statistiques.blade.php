@@ -29,7 +29,7 @@
                             <div class="card card-tale">
                             <div class="card-body">
                                 <p class="mb-4">Nombre de clients</p>
-                                <p class="fs-30 mb-2">4006</p>
+                                <p class="fs-30 mb-2">{{$nb_clients}}</p>
                             </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                             <div class="card card-dark-blue">
                             <div class="card-body">
                                 <p class="mb-4">Nombre de Distributeurs</p>
-                                <p class="fs-30 mb-2">614</p>
+                                <p class="fs-30 mb-2">{{$nb_distributeurs}}</p>
                             </div>
                             </div>
                         </div>
@@ -48,22 +48,22 @@
                             <div class="card card-light-blue">
                                 <div class="card-body">
                                     <p class="mb-4">Nombre de Transactions</p>
-                                    <p class="fs-30 mb-2">34040</p>
+                                    <p class="fs-30 mb-2">{{$nb_transactions}}</p>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6 stretch-card transparent">
                             <div class="card card-light-danger">
                                 <div class="card-body">
                                     <p class="mb-4">Nombre d'employés
-                                    <p class="fs-30 mb-2">33</p>
+                                    <p class="fs-30 mb-2">{{$nb_employes}}</p>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
 
                 </div>
             </div>

@@ -25,6 +25,11 @@
 
                 </div>
                 <div class="row">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                        </div>
+                    @endif
                     <div class="col-lg-12">
                         <table id="client_datatable" class="display expandable-table dataTable no-footer" style="width: 100%;" role="grid">
                             <thead>
@@ -46,7 +51,7 @@
                                     @foreach ($employes as $employe)
                                         <tr>
                                             <td>{{ $num++ }} </td>
-                                            <td>{{$employe->nom}} {{$employe->prenom}}</td>
+                                            <td>{{$employe->nom}} {{$employe->prenoms}}</td>
                                             <td>{{$employe->email}}</td>
                                             <td>{{$employe->pays->nom}}</td>
                                             <td></td>
