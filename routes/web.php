@@ -181,8 +181,8 @@ Route::get('/', [AdminController::class, 'index'])->middleware('auth')->name('da
 // Action de l'administrateur
 Route::prefix('dashboard')->middleware(['auth', 'role:Administrateur',])->group(function() {
 
-    Route::resource('/employes', EmployeController::class); // Employes
     Route::resource('/clients', ClientController::class);  // Clients
+    Route::resource('/employes', EmployeController::class); // Employes
 
     Route::get('/liste_marchands', [AdminController::class, 'liste_marchands'])->name('liste_marchands');
     Route::get('/liste_distributeurs', [AdminController::class, 'liste_distributeurs'])->name('liste_distributeurs');
@@ -194,8 +194,8 @@ Route::prefix('dashboard')->middleware(['auth', 'role:Administrateur',])->group(
 // Action de l'agent
 Route::prefix('dashboard')->middleware(['auth', 'role:Agent',])->group(function() {
     // Client
-    Route::get('/clients', [ClientController::class, 'index']);
-    Route::get('/clients/create', [ClientController::class,'create']);
+    // Route::get('/clients', [ClientController::class, 'index']);
+    // Route::get('/clients/create', [ClientController::class,'create']);
 
     // Depot
     Route::resource('/depot', DepotController::class);

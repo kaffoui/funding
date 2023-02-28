@@ -17,7 +17,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <form id="" method="POST" action="{{route('employes.update',$employes->id)}}">
+                        <form method="POST" action="{{route('employes.update',$employes->id)}}">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -28,13 +28,13 @@
                             <div class="form-group">
                                 <label for="prenoms">Prénoms</label>
                                 <input type="text" class="form-control" name="prenoms" required
-                                    placeholder="Entrez le prénom" value="{{ $employes->nom }}">
+                                    placeholder="Entrez le prénom" value="{{ $employes->prenoms }}">
                             </div>
                           <div class="row">
                             <div class="form-group col-6">
                                 <label for="code_postal">Code postal</label>
-                                <input type="text" class="form-control" name="code_postal" required
-                                    placeholder="Ex : 0000" value="{{ $employes->nom }}">
+                                <input type="text" class="form-control" name="code_postal"
+                                    placeholder="Ex : 0000" value="{{ $employes->code_postal }}">
                             </div>
                             <div class="form-group">
                                 <label for="pays">Pays</label>
@@ -49,13 +49,13 @@
                             <div class="form-group col-6">
                                 <label for="ville">Ville</label>
                                 <input type="text" class="form-control" name="ville" required
-                                    placeholder="Ville de résidence" value="{{ $employes->nom }}">
+                                    placeholder="Ville de résidence" value="{{ $employes->ville }}">
                             </div>
                           </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" name="email" required
-                                    placeholder="Entrez l'adresse email" value="{{ $employes->nom }}" disabled>
+                                    placeholder="Entrez l'adresse email" value="{{ $employes->email }}" disabled>
                             </div>
 
                             <div class="form-group">
@@ -69,27 +69,17 @@
                                     </select>
                             </div>
 
-                            <!-- <div class="form-group">
-                                <label for="permissions">Permissions</label>
-
-
-                                <select multiple data-live-search="true" multiple="multiple" class="form-control selectpicker" name="permissions[]" id="permissions">
-                                @foreach ($permissions as $permission)
-                                        <option value="{{ $permission->name }}"> {{ $permission->name }} </option>
-                                        @endforeach
-                                        </select>
-                            </div> -->
 
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label for="indicatif">Indicatif</label>
                                     <input type="text" class="form-control" name="indicatif" required
-                                        placeholder="Ex : +33" value="{{ $employes->nom }}" >
+                                        placeholder="Ex : +33" value="{{ $employes->indicatif }}" >
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="telephone">Téléphone</label>
                                     <input type="text" class="form-control" name="telephone" required
-                                        placeholder="Entrez le numéro de téléphone (Ex : 00000000)" value="{{ $employes->nom }}">
+                                        placeholder="Entrez le numéro de téléphone (Ex : 00000000)" value="{{ $employes->telephone }}">
                                 </div>
                             </div>
 
