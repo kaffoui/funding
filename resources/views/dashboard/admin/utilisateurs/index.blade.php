@@ -8,16 +8,16 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-harder">
-                            
+
                         </div>
                     <div class="card-body">
-                       
+
 
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9"> <p class="card-title mb-0"> <label for="">Liste des utilisateurs</label> </p><br><br></div>
                     <div class="col-lg-3">
-                        <a href="{{ route('ajout_employe')}}" type="button" class="btn btn-primary mb-5" >
+                        <a href="{{ route('employes.create')}}" type="button" class="btn btn-primary mb-5" >
                             Ajouter un utilisateur
 </a>
                     </div>
@@ -50,22 +50,15 @@
                                             <td>{{$employe->pays->nom}}</td>
                                             <td></td>
 
-                                            <td>
-                                                <form action="{{ route('modification_employe', $employe->id) }}" method="GET">
+                                            <td><a class="btn btn-primary" href="{{ route('employes.edit',$employe->id) }}">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a></td>
 
-                                                    @csrf
-                                                    
-                                                    <button type="submit" class="btn ">
-                                                        <i class="fa-solid fa-edit" style="color: green;"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            
                                             <td>
                                             <form
-                                                                
+
                                                                 method="POST"
-                                                                action="{{ route('suppression_employe', $employe->id) }}"
+                                                                action="{{ route('employes.destroy', $employe->id) }}"
                                                                 onsubmit="return confirm('Etes vous sur de vouloir supprimer ?');">
                                                                 @csrf
                                                                 @method('DELETE')

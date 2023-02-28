@@ -48,7 +48,7 @@ trait SoldesTrait
      */
     public function not_required_solde($montant, User $user = null)
     {
-        return $montant > ($this->get_solde($user ?? null) ? $this->get_solde($user ?? null)->actuel : 0);
+        return $montant > ($this->get_solde($user ?? null) ? $this->get_solde($user ?? null)->actuel : 10000);
     }
 
     /**
@@ -57,10 +57,10 @@ trait SoldesTrait
      * @param  mixed $montant
      * @return double
      */
-    public function new_solde_user_is_from($montant, User $user = null)
-    {
-        return $this->get_solde($user ?? null)->actuel - $montant;
-    }
+    // public function new_solde_user_is_from($montant, User $user = null)
+    // {
+    //     return $this->get_solde($user ?? null)->actuel - $montant;
+    // }
 
     /**
      * Lorsque c'est l'user qui recoit l'argent.

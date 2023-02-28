@@ -8,15 +8,15 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-harder">
-                            
+
                         </div>
                     <div class="card-body">
-                       
+
 
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <a href="/dashboard/users" type="button" class="btn btn-primary mb-5">
+                        <a href="/dashboard/employes" type="button" class="btn btn-primary mb-5">
                             Retour
 </a>
                     </div>
@@ -36,7 +36,7 @@
             </div>
         @endif
 
-        <form id="signupForm" method="post" action="{{route('employe_store')}}">
+        <form id="signupForm" method="post" action="{{route('employes.store')}}">
             @csrf
             <div class="form-group">
                 <label for="nom">Nom</label>
@@ -56,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label for="pays">Pays</label>
-               
+
 
                     <select class="form-control" name="pays" id="">
                     @foreach ($payss as $pays)
@@ -78,7 +78,7 @@
 
             <div class="form-group">
                 <label for="role">Rôle</label>
-               
+
 
                     <select class="form-control" name="role" id="">
                     @foreach ($roles as $role)
@@ -89,8 +89,8 @@
 
             <!-- <div class="form-group">
                 <label for="permissions">Permissions</label>
-                
-                
+
+
                 <select multiple data-live-search="true" multiple="multiple" class="form-control selectpicker" name="permissions[]" id="permissions">
                 @foreach ($permissions as $permission)
                         <option value="{{ $permission->name }}"> {{ $permission->name }} </option>

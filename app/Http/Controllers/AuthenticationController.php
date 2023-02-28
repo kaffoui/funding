@@ -166,6 +166,7 @@ class AuthenticationController extends Controller
 
 
 
+
         if (Auth::user()->hasRole('Administrateur')) {
 
             return redirect()->route('dashboard');

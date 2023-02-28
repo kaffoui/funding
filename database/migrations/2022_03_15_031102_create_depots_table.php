@@ -15,20 +15,17 @@ class CreateDepotsTable extends Migration
     {
         Schema::create('depots', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id_from')->unsigned()->index();
-            $table->bigInteger('user_id_to')->unsigned()->index();
-            $table->double('montant');
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->string('numero');
+            $table->string('montant');
             $table->double('frais');
             $table->double('taux_from');
             $table->double('taux_to');
             $table->string('pays_from');
             $table->string('pays_to');
-            $table->string('ip_from');
-            $table->string('ip_to');
             $table->timestamps();
 
-            $table->foreign('user_id_from')->references('id')->on('users');
-            $table->foreign('user_id_to')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

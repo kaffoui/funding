@@ -5,26 +5,29 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DepotController;
+use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\RetraitController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleAdminController;
+
 use App\Http\Controllers\TransfertController;
+use App\Http\Controllers\ClientController;
+
 use App\Http\Controllers\UserAdminController;
 
-use App\Http\Controllers\API\ClientController;
 use App\Http\Controllers\IndexAdminController;
 use App\Http\Controllers\CarteCreditController;
-
 use App\Http\Controllers\UtilisateurController;
+
+
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CompteBancaireController;
 
 
 use App\Http\Controllers\PermissionAdminController;
 use App\Http\Controllers\UserPaymentMethodController;
-
-
 use App\Http\Controllers\UserPaymentAccountController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 
@@ -172,42 +175,37 @@ Route::middleware(['auth', 'ip.valid'])->group(function () {
 // ROUTES ADMIN
 
 
-Route::prefix('dashboard')->middleware(['auth', 'ip.valid',])->group(function() {
 
-    Route::get('/', [AdminController::class, 'statistiques'])->name('dashboard');
+// Action de l'administrateur
+Route::prefix('dashboard')->middleware(['auth', 'role:Administrateur',])->group(function() {
 
-    // Route::resource('/roles', RoleAdminController::class);
-    // Route::post('/roles/{role}/permissions', [RoleAdminController::class, 'givePermission'])->name('roles.permissions');
-    // Route::delete('/roles/{role}/permissions/{permission}', [RoleAdminController::class, 'revokePermission'])->name('roles.permissions.revoke');
-    // Route::resource('/permissions', PermissionAdminController::class);
-    // Route::post('/permissions/{permission}/roles', [PermissionAdminController::class, 'assignRole'])->name('permissions.roles');
-    // Route::delete('/permissions/{permission}/roles/{role}', [PermissionAdminController::class, 'removeRole'])->name('permissions.roles.remove');
-    // Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
-    // Route::get('/users/create', [UserAdminController::class, 'create'])->name('users.create');
-    // Route::post('/users/create', [UserAdminController::class, 'store'])->name('users.store');
-    // Route::get('/users/{user}', [UserAdminController::class, 'show'])->name('users.show');
-    // Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('users.destroy');
-    // Route::post('/users/{user}/roles', [UserAdminController::class, 'assignRole'])->name('users.roles');
-    // Route::delete('/users/{user}/roles/{role}', [UserAdminController::class, 'removeRole'])->name('users.roles.remove');
-    // Route::post('/users/{user}/permissions', [UserAdminController::class, 'givePermission'])->name('users.permissions');
-    // Route::delete('/users/{user}/permissions/{permission}', [UserAdminController::class, 'revokePermission'])->name('users.permissions.revoke');
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::resource('/employes', EmployeController::class); // Employes
+    Route::resource('/clients', ClientController::class);  // Clients
+
+    Route::get('/liste_marchands', [AdminController::class, 'liste_marchands'])->name('liste_marchands');
+    Route::get('/liste_distributeurs', [AdminController::class, 'liste_distributeurs'])->name('liste_distributeurs');
+    Route::get('/liste_agences', [AdminController::class, 'liste_agences'])->name('liste_agences');
+
+});
 
 
 
-    Route::get('/liste_clients', [AdminController::class, 'liste_clients'])->name('liste_clients');
-    Route::get('/liste_clients/create', [AdminController::class, 'client_create']);
-    Route::post('/liste_clients/create', [AdminController::class, 'client_store'])->name('store_clients');
-    Route::get('/details_client/{id}', [AdminController::class, 'details_client'])->name('details_client');
+// Action de l'agent
+Route::prefix('dashboard')->middleware(['auth', 'role:Agent',])->group(function() {
 
-    Route::get('/liste_employes', [AdminController::class, 'liste_employes'])->name('liste_employes')->middleware(['role:Administrateur']);
-    Route::get('/ajout_employe', [AdminController::class, 'ajout_employe'])->name('ajout_employe')->middleware(['role:Administrateur']);
-    Route::post('/employe_store', [AdminController::class, 'employe_store'])->name('employe_store')->middleware(['role:Administrateur']);
-    Route::get('/modification_employe/{id}', [AdminController::class, 'modification_employe'])->name('modification_employe')->middleware(['role:Administrateur']);
-    Route::get('/suppression_employe/{id}', [AdminController::class, 'suppression_employe'])->name('suppression_employe')->middleware(['role:Administrateur']);
+    Route::post('/depot', [DepotController::class, 'store']);
 
-    Route::get('/liste_marchands', [AdminController::class, 'liste_marchands'])->name('liste_marchands')->middleware(['role:Administrateur']);
-    Route::get('/liste_distributeurs', [AdminController::class, 'liste_distributeurs'])->name('liste_distributeurs')->middleware(['role:Administrateur']);
-    Route::get('/liste_agences', [AdminController::class, 'liste_agences'])->name('liste_agences')->middleware(['role:Administrateur']);
+    Route::get('/depot', function(){
+        return view('dashboard.agents.depot');
+    });
+
+});
+
+
+// Action du distributeur
+Route::prefix('dashboard')->middleware(['auth', 'role:Distributeur',])->group(function() {
 
 
 });

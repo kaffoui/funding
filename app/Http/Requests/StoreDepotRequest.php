@@ -32,10 +32,8 @@ class StoreDepotRequest extends FormRequest
     public function rules()
     {
         return [
-            "client_id"       => ['required', 'exists:users,id'],
-            "client_montant"  => ['required', 'numeric'],
+            "users_id"       => ['required', 'exists:users,id'],
             "montant"         => ['required', 'numeric', 'min:1'],
-            "code_validation" => ['required']
         ];
     }
 
@@ -64,15 +62,15 @@ class StoreDepotRequest extends FormRequest
                 $validator->errors()->add('exeption_error', "<p>Désolé vous ne pouvez pas effectuer cette opération.</p> <p>Si vous pensez qu'il s'agit d'une erreur contacter le service client.</p>");
             }
 
-            if (Gate::forUser($client)->denies('is-client'))
-            {
-                $validator->errors()->add('client_id', "Impossible de faire le dépôt pour ce client.");
-            }
+            // if (Gate::forUser($client)->denies('is-client'))
+            // {
+            //     $validator->errors()->add('users_id', "Impossible de faire le dépôt pour ce client.");
+            // }
 
-            if (!Hash::check($this->code_validation, auth()->user()->code_validation))
-            {
-                $validator->errors()->add('code_validation', 'Code de validation incorrect.');
-            }
+            // if (!Hash::check($this->code_validation, auth()->user()->code_validation))
+            // {
+            //     $validator->errors()->add('code_validation', 'Code de validation incorrect.');
+            // }
         });
     }
 }

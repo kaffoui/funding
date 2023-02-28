@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-   
+
 
 </head>
 <body>
@@ -104,7 +104,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/liste_clients" aria-expanded="false" aria-controls="auth">
+                        <a class="nav-link" href="/dashboard/clients" aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-users mr-3"></i>
                             <span class="menu-title">Clients</span>
                         </a>
@@ -112,14 +112,14 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/liste_employes" aria-expanded="false" aria-controls="auth">
+                        <a class="nav-link" href="/dashboard/employes" aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-users mr-3"></i>
                             <span class="menu-title">Utilisateurs</span>
                         </a>
 
                     </li>
-                   
-                   
+
+
 
 
                     <li class="nav-item">
@@ -199,7 +199,7 @@
                 $('#client_datatable').DataTable();
             } );
 
-           
+
     $(document).ready(function() {
         $('.selectpicker').selectpicker();
     });

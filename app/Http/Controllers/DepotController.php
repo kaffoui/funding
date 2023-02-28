@@ -17,10 +17,10 @@ class DepotController extends Controller
 {
     use SoldesTrait, TauxTrait, LocalisationTrait, FraisTrait;
 
-    public function __construct()
-    {
-        $this->middleware('code.confirmation')->only(['create', 'store']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('code.confirmation')->only(['create', 'store']);
+    // }
 
     /**
     * Display a listing of the resource.
@@ -50,7 +50,7 @@ class DepotController extends Controller
     */
     public function store(StoreDepotRequest $request)
     {
-        $client = User::find($request->client_id);
+        $client = User::find($request->users_id);
 
         $taux_to = $this->taux_fetch_one(auth()->user()->pays->symbole_monnaie, $client->pays->symbole_monnaie);
 
@@ -67,9 +67,9 @@ class DepotController extends Controller
 
         $depot = Depot::create([
             'reference'   => Str::random(10),
-            'user_id_from' => auth()->user()->id,
-            'user_id_to' => $client->id,
+            'user_id' => auth()->user()->id,
             'montant'    => $request->montant,
+            'numero'       =>$request->numero,
             'frais'      => 0,
             'taux_from'  => 1,
             'taux_to'    => $taux_to,
@@ -81,9 +81,9 @@ class DepotController extends Controller
 
         if ($depot)
         {
-            $this->set_solde(auth()->user(), $depot->id, Depot::class, $this->new_solde_user_is_from($request->montant));
+            //$this->set_solde(auth()->user(), $depot->id, Depot::class, $this->new_solde_user_is_from($request->montant));
 
-            $this->set_solde($client, $depot->id, Depot::class, $this->new_solde_user_is_to($client, $montant));
+           // $this->set_solde($client, $depot->id, Depot::class, $this->new_solde_user_is_to($client, $montant));
 
             auth()->user()->commissions()->create([
                 'operation_type' => Depot::class,
@@ -92,7 +92,7 @@ class DepotController extends Controller
             ]);
         }
 
-        $message = 'Vous venez de faire un dépôt de '.format_number_french($request->montant, 2).' '.auth()->user()->pays->symbole_monnaie.' à '.$client->noms().' via '.env('APP_NAME').'.<br><br> Votre nouveau  solde : '.format_number_french(auth()->user()->soldes->last()->actuel, 2).' '.auth()->user()->pays->symbole_monnaie.'.<br><br>'.env('APP_NAME').' vous remercie pour votre collaboration.';
+        $message = 'Vous venez de faire un dépôt de '.format_number_french($request->montant, 2).env('APP_NAME').' vous remercie pour votre collaboration.';
 
         /**
          * On retourne le message parce que la redirection se fait en JS apre la requete AJAX, ce qui fait la session flashé ne passe vue qu'il fait la redirection comme si on a cliqué sur un lien
