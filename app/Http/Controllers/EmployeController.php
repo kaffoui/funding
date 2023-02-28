@@ -147,9 +147,12 @@ class EmployeController extends Controller
      */
     public function edit($id)
     {
-        $employe = Employe::findOrFail($id);
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $payss = Pays::orderBy('nom', 'asc')->get();
+        $employes = Employe::findOrFail($id);
 
-        return view('dashboard.admin.utilisateurs.edit', compact('employe'));
+        return view('dashboard.admin.utilisateurs.edit', compact('employes','roles','permissions','payss'));
     }
 
     /**
@@ -161,74 +164,32 @@ class EmployeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nom'                    => ['required', 'string', 'max:255'],
-            'prenoms'                => ['required', 'string', 'max:255'],
-            'code_postal'                  => ['required', 'string', 'max:255'],
-            'indicatif' => ['required', 'string', 'max:255'],
-            'telephone' => ['required', 'string', 'max:255'],
-            'pays'                   => ['required', 'integer', 'exists:pays,id'],
-            'ville'                  => ['required', 'string', 'max:255'],
-            'email'                => ['required', 'string', 'max:255'],
-            'role'                => ['required', 'string', 'max:255'],
-
+        $request->validate([
+            'plats_id' => 'required',
         ]);
 
+        $input = $request->all();
+
+        //$validator = Validator::make($request->all());
 
 
-        $validator->after(function ($validator) use ($request) {
+        $update_employes = Employe::findOrFail($id);
 
-            $pays = Pays::find($request->pays);
+        $update_employes->nom = $request->get('nom');
+        $update_employes->prenoms = $request->get('prenoms');
+        $update_employes->code_postal = $request->get('code_postal');
+        $update_employes->pays_id = $request->get('pays_id');
+        $update_employes->ville = $request->get('ville');
+        $update_employes->role = $request->get('role');
+        $update_employes->telephone = $request->get('telephone');
+        
+        $update_employes->update();
 
-            $telephone = $pays->indicatif.$request->telephone;
-
-            if (str_starts_with($request->telephone, '00') || str_starts_with($request->telephone, '+'))
-            {
-                $validator->errors()->add('telephone', "La valeur du champ doit être saisi sans l'indicatif du pays.");
-            }
-
-            if (User::where('telephone', $telephone)->exists() || Employe::where('telephone', $telephone)->exists())
-            {
-                $validator->errors()->add('telephone', 'La valeur du champ est déjà utilisée.');
-            }
-
-        });
-
-        if ($validator->fails())
-        {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        
 
 
 
-        $pays = Pays::find($request->pays);
-
-
-            $user = User::create([
-                'pays_register_id' => $request->pays,
-                'ip_register'      => '127.0.0.1',
-                'email'            => strtolower($request->email),
-                'telephone'        => str_replace(' ', '', $pays->indicatif.$request->telephone),
-                'recent_ip'        => '127.0.0.1',
-                'password'         => Hash::make($request->password),
-            ])->assignRole($request->role);
-
-
-
-
-
-
-        $employe = Employe::create([
-            'user_id'                => isset($user) ? $user->id : null,
-            'pays_id'                => $request->pays,
-            'nom'                    => ucfirst(strtolower($request->nom)),
-            'prenoms'                => ucfirst(strtolower($request->prenoms)),
-            'telephone'              => str_replace(' ', '', $pays->indicatif.$request->telephone),
-            'email'                  => strtolower($request->email),
-            'ville'                  => ucfirst(strtolower($request->ville)),
-        ]);
-
-        return redirect()->route('employes.index')->with('message', 'Utilisateur créé avec succès.');
+        return redirect()->route('employes.index')->with('message', 'Utilisateur mis à jour avec succès.');
     }
 
     /**

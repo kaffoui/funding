@@ -17,88 +17,94 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <form method="POST" action="{{ route('employes.update',$employe->id) }}" enctype="multipart/form-data" >
+                        <form id="" method="POST" action="{{route('employes.update',$employes->id)}}">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="">Nom</label>
-                                <input type="text" name="nom" value="{{$employe->nom}}">
+                                <label for="nom">Nom</label>
+                                <input type="text" class="form-control" id="nom" required
+                                    placeholder="Entrez le nom" name="nom" value="{{ $employes->nom }}">
                             </div>
                             <div class="form-group">
-                                <label for="">Prenoms</label>
-                                <input type="text" name="prenoms" value="{{$employe->prenoms}}">
+                                <label for="prenoms">Prénoms</label>
+                                <input type="text" class="form-control" name="prenoms" required
+                                    placeholder="Entrez le prénom" value="{{ $employes->nom }}">
+                            </div>
+                          <div class="row">
+                            <div class="form-group col-6">
+                                <label for="code_postal">Code postal</label>
+                                <input type="text" class="form-control" name="code_postal" required
+                                    placeholder="Ex : 0000" value="{{ $employes->nom }}">
                             </div>
                             <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="text" name="nom" value="{{$employe->email}}">
+                                <label for="pays">Pays</label>
+
+
+                                    <select class="form-control" name="pays" id="">
+                                    @foreach ($payss as $pays)
+                                        <option value="{{ $pays->id }}" name="pays_id"> {{ $pays->nom }} </option>
+                                        @endforeach
+                                    </select>
                             </div>
+                            <div class="form-group col-6">
+                                <label for="ville">Ville</label>
+                                <input type="text" class="form-control" name="ville" required
+                                    placeholder="Ville de résidence" value="{{ $employes->nom }}">
+                            </div>
+                          </div>
                             <div class="form-group">
-                                <label for="">Nom</label>
-                                <input type="text" name="nom" value="{{$employe->pays->nom}}">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" required
+                                    placeholder="Entrez l'adresse email" value="{{ $employes->nom }}" disabled>
                             </div>
-                            <div class="row mb-0 mt-3">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Mettre à jour') }}
-                                    </button>
-                                    <a  href="{{route('employes.index')}}" class="btn btn-danger">
-                                        {{ __('Retour') }}
-                                    </a>
+
+                            <div class="form-group">
+                                <label for="role">Rôle</label>
+
+
+                                    <select class="form-control" name="role" id="">
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->name }}"> {{ $role->name }} </option>
+                                        @endforeach
+                                    </select>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label for="permissions">Permissions</label>
+
+
+                                <select multiple data-live-search="true" multiple="multiple" class="form-control selectpicker" name="permissions[]" id="permissions">
+                                @foreach ($permissions as $permission)
+                                        <option value="{{ $permission->name }}"> {{ $permission->name }} </option>
+                                        @endforeach
+                                        </select>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="indicatif">Indicatif</label>
+                                    <input type="text" class="form-control" name="indicatif" required
+                                        placeholder="Ex : +33" value="{{ $employes->nom }}" >
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="telephone">Téléphone</label>
+                                    <input type="text" class="form-control" name="telephone" required
+                                        placeholder="Entrez le numéro de téléphone (Ex : 00000000)" value="{{ $employes->nom }}">
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="password">Mot de passe</label>
+                                <input type="password" class="form-control" name="password" required
+                                    placeholder="Entrez un mot de passe" minlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label for="password_confirmation">Confirmez votre mot de passe</label>
+                                <input type="password" class="form-control" name="password_confirmation" required
+                                    placeholder="Tapez à nouveau le mot de passe" minlength="8">
+                            </div>
+                            <button class="btn btn-primary btn-block my-4" type="submit">Enregistrer</button>
                         </form>
-                       {{--  <table id="client_datatable" class="display expandable-table dataTable no-footer" style="width: 100%;" role="grid">
-                            <thead>
-                                <tr role="row">
-                                    <th class="select-checkbox sorting_disabled" rowspan="1" colspan="1" aria-label="Quote#" >#</th>
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending">Nom & Prénoms</th>
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1">Email</th>
-                                    <!-- <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1">Fonction</th> -->
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Pays</th>
-                                    <!-- <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Pays</th> -->
-                                    <!-- <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Code Postal</th> -->
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;">Rôle</th>
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Modifier</th>
-                                    <th  tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 79px;">Supprimer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $num=1 @endphp
-                                    @foreach ($employes as $employe)
-                                        <tr>
-                                            <td>{{ $num++ }} </td>
-                                            <td>{{$employe->nom}} {{$employe->prenom}}</td>
-                                            <td>{{$employe->email}}</td>
-                                            <td>{{$employe->pays->nom}}</td>
-                                            <td></td>
-
-                                            <td>
-                                                <form action="{{ route('modification_employe', $employe->id) }}" method="GET">
-
-                                                    @csrf
-
-                                                    <button type="submit" class="btn ">
-                                                        <i class="fa-solid fa-edit" style="color: green;"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-
-                                            <td>
-                                            <form
-
-                                                                method="POST"
-                                                                action="{{ route('suppression_employe', $employe->id) }}"
-                                                                onsubmit="return confirm('Etes vous sur de vouloir supprimer ?');">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button class="btn " type="submit"><i class="fa-solid fa-trash" style="color: red;"></i></button>
-                                                            </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                            </tbody>
-                        </table> --}}
-                        <!-- Button trigger modal -->
 
                         </div>
                     </div>
