@@ -104,7 +104,7 @@ class DepotController extends Controller
 
         $request->session()->flash('message', $message);
 
-        return redirect(route('depot.index'))->with('success', 'Transaction effectué avec succès');
+        return redirect(route('depot.index'))->with('success', 'Transaction effectuée avec succès');
     }
 
     /**

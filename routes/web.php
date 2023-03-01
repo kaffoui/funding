@@ -181,6 +181,10 @@ Route::get('/', [AdminController::class, 'index'])->middleware('auth')->name('da
 // Action de l'administrateur
 Route::prefix('dashboard')->middleware(['auth', 'role:Administrateur',])->group(function() {
 
+    Route::get('/dashboard', function(){
+        return view('dashboard.admin.statistiques');
+    });
+
     Route::resource('/clients', ClientController::class);  // Clients
     Route::resource('/employes', EmployeController::class); // Employes
 

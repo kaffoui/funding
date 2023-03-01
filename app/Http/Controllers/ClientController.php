@@ -53,6 +53,18 @@ class ClientController extends Controller
         // Localisation curent user
         $adress_datas = $this->get_geolocation();
 
+        // La validation
+        $request->validate([
+            'nom'         => ['required', 'string', 'max:255'],
+            'prenoms'     => ['required', 'string', 'max:255'],
+            'code_postal' => ['required', 'string', 'max:255'],
+            'indicatif'   => ['required', 'string', 'max:255'],
+            'email'       => ['required', 'email', 'max:255', 'unique:clients'],
+            'ville'       => ['required', 'string', 'max:255'],
+            'telephone'   => ['required', 'string', 'unique:users,telephone'],
+            'password'    => ['required', 'min:8', 'confirmed'],
+        ]);
+        
         // recuperation pays user via code pour avoir l'identifiant du pays
         $paysUser = Pays::where('code', $adress_datas['country_code2'])->first();
 
@@ -60,21 +72,9 @@ class ClientController extends Controller
             'telephone' => $paysUser->indicatif.$request->telephone,
         ]);
 
-        // La validation
-        $validator = Validator::make($request->all(), [
-            'nom'         => ['required', 'string', 'max:255'],
-            'prenoms'     => ['required', 'string', 'max:255'],
-            'code_postal' => ['required', 'string', 'max:255'],
-            'email'       => ['required', 'email', 'max:255', 'unique:clients'],
-            'ville'       => ['required', 'string', 'max:255'],
-            'telephone'   => ['required', 'string', 'unique:users,telephone'],
-            'password'    => ['required', 'min:8', 'confirmed'],
-        ]);
 
-        if ($validator->fails())
-        {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+
+
         // nouvel user pour les infos de connexion
         $user = User::create([
             'pays_register_id' => $paysUser->id,
@@ -98,10 +98,8 @@ class ClientController extends Controller
 
         ])->assignRole("Client");
 
-        // user token
-        $token = $user->createToken('API Token Login')->plainTextToken;
-        event(new Registered($user));
-        // Return new client JSON
+
+
         return redirect()->route('clients.index')->with('message', 'Client créé avec succès.');
 
     }

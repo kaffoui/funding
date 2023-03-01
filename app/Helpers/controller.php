@@ -152,7 +152,7 @@ if (! function_exists('send_sms'))
             ]
         );
         return ($message->sid) ? true : false;
-        
+
         //return true;
     }
 }
@@ -167,7 +167,7 @@ if (! function_exists('send_mail'))
             "title" => $title,
             "body" => $message
         ];
-    
+
         Mail::to($email)->send(new MailSender($details));
         return true;
     }
@@ -201,9 +201,9 @@ if (! function_exists('send_password_reset_link'))
         $toCrypted = Crypt::encryptString($to);
         $message = "Veuillez cliquer sur le bouton suivant pour réinitialiser votre mot de passe\n\n".
             "<a class='btn btn-primary' href='https://lisocash.com/resetPassword/$toCrypted'>Réinitialiser</a>";
-        
+
         return send_mail($to, $title, $message);
-      
+
     }
 }
 
