@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Twilio\Rest\Client;
 
 if (!function_exists('storage_file'))
 {
@@ -143,7 +144,9 @@ if (! function_exists('send_sms'))
     {
         $sid = "AC0eb1f3ee29c7daca888c18ee0cd0958e"; //"AC3d2d2372864d1443bfe49913f631ea69"; // Your Account SID from www.twilio.com/console
         $token = "1882c59e69d6bfb8af39ff239e0bf320"; // "a173587e2b4cbd2640bde0690737a4b5"; //"8892bb69e27ad4b729a28f5454e27dcd"; // Your Auth Token from www.twilio.com/console
-        $client = new Twilio\Rest\Client($sid, $token);
+        //$client = new Twilio\Rest\Client($sid, $token);
+
+       $client = new Client($sid, $token);
         $message = $client->messages->create(
             $telephone, // Text this number
             [

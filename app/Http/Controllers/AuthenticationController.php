@@ -144,14 +144,15 @@ class AuthenticationController extends Controller
             // Please try again']);
         }
 
-        if (!auth()->user()->is_email_valid) {
-            auth()->user()->tokens()->delete();
-            return redirect()->back()->with(["success" => false, "message" => "Vous devez valider votre email"], 403);
-        }
+
         if (!auth()->user()->is_phone_valid) {
             auth()->user()->tokens()->delete();
             return redirect()->back()->with(["success" => false, "message" => "Vous devez valider votre numéro de téléphone"], 403);
         }
+        // if (!auth()->user()->is_email_valid) {
+        //     auth()->user()->tokens()->delete();
+        //     return redirect()->back()->with(["success" => false, "message" => "Vous devez valider votre email"], 403);
+        // }
 
         $token = auth()->user()->createToken('API Token Login')->plainTextToken;
 
@@ -200,13 +201,20 @@ class AuthenticationController extends Controller
         ]);
     }
 
+    public function showEmailValidationForm(Request $request){
+        $email = $request->get('email');
+        return view('emailform')->with([
+            "email" => $email
+        ]);
+    }
 
-    public function validateCode(Request $request,$codeDetails)
+
+    public function validateCode(Request $request)
     {
         if ($request->isMethod('get')) {
-            if (isset($request->emailCode) && isset($request->email)) {
-                $user = User::where('email', $request->email)->get()->first();
-                if ($user["email_code"] == $request->emailCode) {
+            if (isset($request->emailCode) && isset($request->email_code)) {
+                $user = User::where('email', $request->email_code)->get()->first();
+                if ($user["email_code"] == $request->email_code) {
                     $user->update([
                         "is_email_valid" => true,
                     ]);
@@ -232,7 +240,7 @@ class AuthenticationController extends Controller
             }
         } else if ($request->isMethod('post')) {
             $data = $request->all();
-            $user = User::where('email', $data["email"])->get()->first();
+            $user = User::where('sms_code', $data["smsCode"])->get()->first();
             if (isset($data["smsCode"])) {
                 if ($user->sms_code == $data["smsCode"]) {
                     $user->update([
@@ -246,6 +254,7 @@ class AuthenticationController extends Controller
         }
         // Return new client JSON
     }
+
 
 
     public function showResetPasswordForm(Request $request){

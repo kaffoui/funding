@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 <link href="images/favicon.png" rel="icon" />
-<title>Vérification de code SMS</title>
+<title>Vérification de code Email</title>
 <meta name="description" content="">
 <meta name="author" content="OFIELD GROUP">
 
@@ -35,11 +35,11 @@
     <div class="row no-gutters h-100">
       <div class="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4 m-auto">
         <div class="logo mb-4 text-center"> <a href="/" title="Lisocash"><img src="images/logo.png" alt="Lisocash"></a> </div>
-        <form id="smsVerificationForm" method="post" action="/validateSms">
+        <form id="EmailVerificationForm" method="post" action="/validateEmail">
             @csrf
           <div class="vertical-input-group">
             <div class="input-group">
-              <input type="text" class="form-control" name="smsCode" required placeholder="Entrez le code reçu sur votre numéro">
+              <input type="text" class="form-control" name="email_code" required placeholder="Entrez le code reçu par mail">
             </div>
           </div>
           <button class="btn btn-primary btn-block shadow-none my-4" type="submit">Vérifier</button>

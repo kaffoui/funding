@@ -59,7 +59,15 @@ Route::post('/signup', [AuthenticationController::class, 'register']);
 Route::get('/login', [WelcomeController::class, 'login'])->name('login');
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+
+
+
+//Firewall
 Route::get('/validateSms', [AuthenticationController::class, 'showSmsValidationForm'])->name('validateSmsCodeForm');
+Route::post('/validateSms', [AuthenticationController::class, 'validateCode'])->name('validateSmsCode');
+Route::get('/validateEmail', [AuthenticationController::class, 'validateCode'])->name('validateEmailCodeForm');
+//Route::post('/validateEmail', [AuthenticationController::class, 'validateCode'])->name('validateEmailCode');
+
 
 
 //Official for code validation
