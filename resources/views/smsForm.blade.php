@@ -7,7 +7,7 @@
 <link href="images/favicon.png" rel="icon" />
 <title>Vérification de code SMS</title>
 <meta name="description" content="">
-<meta name="author" content="OFIELD GROUP">
+<meta name="author" content="FIREWALL AGENCY">
 
 
 <!-- Web Fonts

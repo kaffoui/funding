@@ -6,6 +6,9 @@ use App\Models\Pays;
 use App\Models\User;
 use App\Models\Employe;
 use Illuminate\Http\Request;
+use App\Notifications\EmployeCree;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -150,6 +153,10 @@ class EmployeController extends Controller
         $roles = Role::all();
         $permissions = Permission::all();
         $payss = Pays::orderBy('nom', 'asc')->get();
+
+
+      
+
         $employes = Employe::findOrFail($id);
 
         return view('dashboard.admin.utilisateurs.edit', compact('employes','roles','permissions','payss'));

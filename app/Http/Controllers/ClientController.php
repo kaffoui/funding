@@ -26,7 +26,16 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        // Afficher les clients qui ont verifié leur compte par SMS
+        $clients = DB::table('clients')
+            ->join('users', 'users.id', '=', 'clients.user_id')
+            ->select('users.*', 'clients.*')
+            ->where('is_phone_valid', '=', '1')
+            ->get();
+
+
+        // Afficher tout les clients
+       // $clients = Client::get();
 
         return view('dashboard.admin.clients.index', compact('clients'));
     }
@@ -64,7 +73,7 @@ class ClientController extends Controller
             'telephone'   => ['required', 'string', 'unique:users,telephone'],
             'password'    => ['required', 'min:8', 'confirmed'],
         ]);
-        
+
         // recuperation pays user via code pour avoir l'identifiant du pays
         $paysUser = Pays::where('code', $adress_datas['country_code2'])->first();
 
